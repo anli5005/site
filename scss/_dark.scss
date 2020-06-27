@@ -1,0 +1,70 @@
+@mixin dark-interface {
+  background-color: $dark-bg;
+  color: $dark-text;
+
+  --link-color: #{$dark-link};
+  --link-color-hover: #{darken($dark-link, 10%)};
+
+  .btn-primary { // TODO: Remove
+    color: white;
+  }
+
+  .navbar-anli {
+    background-color: $dark;
+
+    .navbar-nav {
+      .nav-link {
+        text-transform: uppercase;
+        color: rgba($dark-text, 0.4);
+
+        &:hover, &:active {
+          color: rgba($dark-text, 0.7);
+        }
+
+        &:focus {
+          color: rgba($dark-text, 0.9);
+        }
+      }
+
+      .nav-item.active .nav-link {
+        color: $dark-text;
+      }
+    }
+  }
+
+  .navbar-social a {
+    color: rgba($dark-text, 0.5);
+
+    &:hover, &:active {
+      color: rgba($dark-text, 0.7);
+    }
+
+    &:focus {
+      color: rgba($dark-text, 0.9);
+    }
+  }
+
+  .jumbo-header {
+    background-color: $dark;
+    color: $dark-link;
+  }
+
+  .project {
+    background-color: $text;
+    color: $dark-text;
+
+    &:hover {
+      color: $dark-text;
+    }
+  }
+
+  .shadow-hover:not(:hover) {
+    box-shadow: $box-shadow-sm;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @include dark-interface;
+  }
+}

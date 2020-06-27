@@ -1,0 +1,39 @@
+$bg: #edf4ff;
+$secondary: #737c98;
+$light: #d0e1ff;
+$primary: #337bed;
+$text: #0f2d5b;
+$dark: #25416c;
+
+$dark-bg: #111c35;
+$dark-text: $light;
+$dark-link: #6b9eed;
+
+$theme-colors: (
+  "bg": $bg,
+  "text": $text,
+  "dark-bg": $dark-bg,
+  "dark-text": $dark-text,
+  "dark-link": $dark-link,
+  "github": #333
+);
+
+$body-bg: $bg;
+$body-color: $text;
+
+$jumbotron-bg: $light;
+
+$footer-bg: $dark;
+$footer-color: white;
+
+$font-family-base: "Adelle", adelle, "Roboto Slab", "Times New Roman", serif;
+
+$h1-font-size: 4rem;
+$headings-font-family: "Europa", europa, "Helvetica Neue", "Helvetica", arial, sans-serif;
+$headings-font-weight: 700;
+
+$navbar-social-link-height: 30px;
+
+$box-shadow-lg: 0 0.6rem 1rem rgba(black, .33);
+
+$fancy-link-width: 250px;

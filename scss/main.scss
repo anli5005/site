@@ -1,0 +1,99 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import 'safearea';
+
+:root {
+  --link-color: #{$link-color};
+  --link-color-hover: #{$link-hover-color};
+}
+
+html, body {
+  min-height: 100%;
+}
+
+a {
+  color: var(--link-color);
+
+  &:hover, &:active, &:focus {
+    color: var(--link-color-hover);
+  }
+}
+
+.pointer-events-none {
+  pointer-events: none !important;
+}
+
+.list-style-none {
+  list-style: none !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.footer {
+  background-color: $footer-bg;
+  color: $footer-color;
+
+  a {
+    color: $footer-color;
+    text-decoration: underline;
+
+    &:hover, &:active, &:focus {
+      color: rgba($footer-color, 0.8);
+    }
+  }
+}
+
+#main-navbar.sticky-top {
+  .navbar-brand {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .navbar-nav {
+    right: $navbar-brand-height + $navbar-padding-x;
+    transition: right 0.5s;
+  }
+
+  &.showing-brand {
+    .navbar-brand {
+      opacity: 1;
+    }
+
+    .navbar-nav {
+      right: 0;
+    }
+  }
+}
+
+@include media-breakpoint-up("md") {
+  #main-navbar.sticky-top .navbar-nav {
+    position: relative;
+  }
+}
+
+.sticky-top {
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    position: -webkit-sticky;
+    top: 0;
+    z-index: $zindex-sticky;
+  }
+}
+
+.heading-muted {
+  text-transform: uppercase;
+  font-size: $font-size-base;
+  letter-spacing: 1px;
+}
+
+.shadow-hover {
+  box-shadow: $box-shadow;
+  transition: box-shadow 0.2s, background-color 0.2s;
+
+  &:hover, &:focus {
+     box-shadow: $box-shadow-lg;
+  }
+}
+
+@import 'dark';

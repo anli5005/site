@@ -1,0 +1,22 @@
+// Safe Area Margin and Padding - taken from Bootstrap
+@each $prop, $abbrev in (margin: m, padding: p) {
+  .#{$abbrev}-sa {
+    #{$prop}-left: env(safe-area-inset-left) !important;
+    #{$prop}-right: env(safe-area-inset-right) !important;
+    #{$prop}-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  .#{$abbrev}r-sa,
+  .#{$abbrev}x-sa {
+    #{$prop}-right: env(safe-area-inset-right) !important;
+  }
+
+  .#{$abbrev}b-sa {
+    #{$prop}-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  .#{$abbrev}l-sa,
+  .#{$abbrev}x-sa {
+    #{$prop}-left: env(safe-area-inset-left) !important;
+  }
+}
