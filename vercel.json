@@ -1,5 +1,7 @@
 {
-    "env": {
-        "FONTAWESOME_NPM_AUTH_TOKEN": "@fa-token"
+    "build": {
+        "env": {
+            "FONTAWESOME_NPM_AUTH_TOKEN": "@fa-token"
+        }
     }
 }
