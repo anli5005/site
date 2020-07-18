@@ -1,0 +1,5 @@
+{
+    "env": {
+        "FONTAWESOME_NPM_AUTH_TOKEN": "@fa-token"
+    }
+}
