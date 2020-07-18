@@ -35,6 +35,12 @@ const theme = {
         md: "1rem",
         lg: "1.5rem",
         xl: "3rem"
+    }, 
+    breakpoints: {
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200
     }
 };
 
