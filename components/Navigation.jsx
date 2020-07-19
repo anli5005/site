@@ -22,6 +22,14 @@ const CustomNavbar = styled.nav`
     }
 `;
 
+const PrimaryNav = styled(Nav)`
+    padding-left: 0.5rem;
+
+    @media (min-width: ${props => props.theme.breakpoints.sm}px) {
+        padding-left: 0.75rem;
+    }
+`;
+
 const SecondaryNav = styled(Nav)`
     @media (max-width: ${props => props.theme.breakpoints.md - 1}px) {
         background-color: ${props => darken(0.1, props.theme.colors.light.secondaryBackground)};
@@ -77,7 +85,7 @@ function NavigationLink({href, as, children, icon, compact}) {
     let inner;
 
     if (compact) {
-        inner = <CustomNavLink className="d-flex flex-column flex-sm-row align-items-center py-0">
+        inner = <CustomNavLink className="d-flex flex-column flex-sm-row align-items-center py-2">
             <LinkIcon><FontAwesomeIcon icon={icon} /></LinkIcon>
             <LinkText>{children}</LinkText>
         </CustomNavLink>;
@@ -98,11 +106,11 @@ export default function Navigation() {
 
     return <CustomNavbar className="shadow">
         <Link href="/"><BrandLink><Logo size={56} /></BrandLink></Link>
-        <Nav className="flex-grow-1 flex-md-grow-0">
+        <PrimaryNav className="flex-grow-1 flex-md-grow-0">
             <NavigationLink icon={faInfoCircle} href="/[page]" as="/about" compact>About</NavigationLink>
             <NavigationLink icon={faComment} href="/blog" compact>Blog</NavigationLink>
             <NavigationLink icon={faBrowser} href="/projects" compact>Portfolio</NavigationLink>
-        </Nav>
+        </PrimaryNav>
         {typeof window !== undefined && <a className="d-block d-md-none pr-2 pr-sm-3" href="#" onClick={(e) => {
             e.preventDefault();
             setSecondaryNavVisible(!secondaryNavVisible);

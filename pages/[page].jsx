@@ -9,7 +9,7 @@ export default function PagePage({title, errorCode, content}) {
 
     const html = content;
 
-    return <Page>
+    return <Page title={title}>
         <h1>{title}</h1>
         <div className="page-content" dangerouslySetInnerHTML={{__html: html}} onClick={(e) => {
             const link = e.target.closest(".page-content a");

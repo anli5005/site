@@ -3,6 +3,7 @@ import Navigation from "./Navigation";
 import { Fragment } from "react";
 import styled from "styled-components";
 import { transparentize } from "polished";
+import Head from "next/head";
 
 const CustomContainer = styled(Container)`
     margin-top: 96px;
@@ -24,8 +25,11 @@ const GradientBox = styled(NavigationBox)`
     }
 `;
 
-export default function Page({children}) {
+export default function Page({children, title}) {
     return <Fragment>
+        <Head>
+            {title && <title>{title} - Anthony Li</title>}
+        </Head>
         <GradientBox className="fixed-top" />
         <NavigationBox className="fixed-top">
             <Container className="px-3">

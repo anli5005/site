@@ -1,7 +1,12 @@
 import { Fragment } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Logo from 'components/Logo';
 import styled from 'styled-components';
+import Head from 'next/head';
+import { faInfoCircle, faArrowRight as falArrowRight, faComment, faBrowser, faAddressBook } from '@fortawesome/pro-light-svg-icons';
+import { faArrowRight, faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 
 const HalfOpacity = styled.span`
     opacity: 0.5;
@@ -21,8 +26,63 @@ const SomewhatDeemphasizedText = styled.p`
     color: ${props => props.theme.colors.link};
 `;
 
+const LinksContainer = styled.div`
+    padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+    width: 100%;
+
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
+        padding: ${props => props.theme.spacing.lg};
+        width: auto;
+        min-width: 280px;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+`;
+
+const LinksTitle = styled.a`
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: ${props => props.theme.spacing.xs};
+    display: inline-block;
+
+    & > svg:first-child {
+        width: 1em;
+    }
+`;
+
+const LinksList = styled.ul`
+    margin-bottom: 0;
+    list-style: none;
+    padding-left: 1.7em;
+
+    & > li {
+        font-size: 0.9em;
+    }
+`;
+
+function Links({icon, title, links, href, as}) {
+    return <LinksContainer>
+        <div>
+            <Link href={href} as={as} passHref><LinksTitle><FontAwesomeIcon className="mr-2" icon={icon} />{title}<FontAwesomeIcon className="ml-2" icon={falArrowRight} /></LinksTitle></Link>
+            {links && <LinksList>
+                {links.map(({content, href, as, type}, index) => {
+                    const inner = <Fragment>{content}</Fragment>
+
+                    return <li key={index}>
+                        {type === "external" ? <a href={href}>{inner}</a> : <Link href={href} as={as}><a>{inner}</a></Link>}
+                    </li>;
+                })}
+            </LinksList>}
+        </div>
+    </LinksContainer>;
+}
+
 export default function Home() {
     return <Fragment>
+        <Head>
+            <title>Anthony Li (anli) - Developer, Designer, Entrepreneur</title>
+        </Head>
         <Container className="px-3 my-3 my-sm-5">
             <BigRoundedBox className="py-5 px-5 px-lg-3 d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <Logo className="flex-grow-0 flex-shrink-0" size={150} circle />
@@ -32,6 +92,19 @@ export default function Home() {
                     <p>I make random stuff. Some of said stuff might be helpful or entertaining. BCA ATCS '22</p>
                 </div>
             </BigRoundedBox>
+        </Container>
+        <Container className="mb-5 px-0">
+            <div className="d-flex w-100 flex-wrap justify-content-center">
+                <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
+                    {content: "Resumé", href: "/[page]", as: "/resume"}
+                ]} />
+                <Links icon={faComment} title="Blog" href="/blog" />
+                <Links icon={faBrowser} title="Portfolio" href="/projects" />
+                <Links icon={faAddressBook} title="Contact" href="/[page]" as="/contact" links={[
+                    {content: "Email", href: "mailto:me@anli.dev", type: "external"}
+                ]} />
+                <Links icon={faEllipsisH} title="More" href="/more" />
+            </div>
         </Container>
     </Fragment>;
 }
