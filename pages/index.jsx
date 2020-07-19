@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Container } from 'react-bootstrap';
 import Logo from 'components/Logo';
-import styled from 'styled-components';
+import styled, { useTheme, ThemeContext } from 'styled-components';
 import Head from 'next/head';
 import { faInfoCircle, faArrowRight as falArrowRight, faComment, faBrowser, faAddressBook } from '@fortawesome/pro-light-svg-icons';
 import { faArrowRight, faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
@@ -45,9 +45,20 @@ const LinksTitle = styled.a`
     display: block;
     margin-bottom: ${props => props.theme.spacing.xs};
     display: inline-block;
+    ${({gradient, theme}) => gradient ? `
+        color: ${theme.colors.primaryBackground};
+        background-image: linear-gradient(to right, ${gradient.join(",")});
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    ` : ""}
 
     & > svg:first-child {
         width: 1em;
+        ${props => props.gradient ? `color: ${props.gradient[0]};` : ""}
+    }
+
+    & > svg:last-child {
+        ${props => props.gradient ? `color: ${props.gradient[1]};` : ""}
     }
 `;
 
@@ -61,10 +72,10 @@ const LinksList = styled.ul`
     }
 `;
 
-function Links({icon, title, links, href, as}) {
+function Links({icon, title, links, href, as, gradient}) {
     return <LinksContainer>
         <div>
-            <Link href={href} as={as} passHref><LinksTitle><FontAwesomeIcon className="mr-2" icon={icon} />{title}<FontAwesomeIcon className="ml-2" icon={falArrowRight} /></LinksTitle></Link>
+            <Link href={href} as={as} passHref><LinksTitle gradient={gradient}><FontAwesomeIcon className="mr-2" icon={icon} />{title}<FontAwesomeIcon className="ml-2" icon={falArrowRight} /></LinksTitle></Link>
             {links && <LinksList>
                 {links.map(({content, href, as, type}, index) => {
                     const inner = <Fragment>{content}</Fragment>
@@ -79,6 +90,8 @@ function Links({icon, title, links, href, as}) {
 }
 
 export default function Home() {
+    const {colors} = useTheme(ThemeContext);
+    
     return <Fragment>
         <Head>
             <title>Anthony Li (anli) - Developer, Designer, Entrepreneur</title>
@@ -97,13 +110,13 @@ export default function Home() {
             <div className="d-flex w-100 flex-wrap justify-content-center">
                 <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
                     {content: "Resumé", href: "/[page]", as: "/resume"}
-                ]} />
-                <Links icon={faComment} title="Blog" href="/blog" />
-                <Links icon={faBrowser} title="Portfolio" href="/projects" />
+                ]} gradient={[colors.aboutGradientStart, colors.aboutGradientEnd]} />
+                <Links icon={faComment} title="Blog" href="/blog" gradient={[colors.blogGradientStart, colors.blogGradientEnd]} />
+                <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={[colors.portfolioGradientStart, colors.portfolioGradientEnd]} />
                 <Links icon={faAddressBook} title="Contact" href="/[page]" as="/contact" links={[
                     {content: "Email", href: "mailto:me@anli.dev", type: "external"}
-                ]} />
-                <Links icon={faEllipsisH} title="More" href="/more" />
+                ]} gradient={[colors.contactGradientStart, colors.contactGradientEnd]} />
+                <Links icon={faEllipsisH} title="More" href="/more" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} />
             </div>
         </Container>
     </Fragment>;
