@@ -26,7 +26,11 @@ const theme = {
             ["darkBackground", "site-dark-bg"]
         ],
         primary: "#337bed",
-        secondary: "#737c98"
+        secondary: "#737c98",
+        contactAccent: "#ff0000",
+        blogAccent: "#ed930c",
+        moreAccent: "#aaaaaa",
+        portfolioAccent: "#79beef"
     },
     spacing: {
         none: "0",

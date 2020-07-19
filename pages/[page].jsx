@@ -4,12 +4,12 @@ import Router from 'next/router';
 
 import { stringify } from 'querystring';
 
-export default function PagePage({title, errorCode, content}) {
+export default function PagePage({title, errorCode, content, logoAccent}) {
     if (errorCode) return <Error statusCode={errorCode} />;
 
     const html = content;
 
-    return <Page title={title}>
+    return <Page title={title} logoAccent={logoAccent}>
         <h1>{title}</h1>
         <div className="page-content" dangerouslySetInnerHTML={{__html: html}} onClick={(e) => {
             const link = e.target.closest(".page-content a");
@@ -41,7 +41,7 @@ export default function PagePage({title, errorCode, content}) {
 export async function getServerSideProps({params: {page}, res}) {
     const query = {
         slug: page,
-        _fields: "title,content,meta,featured_media"
+        _fields: "title,content,meta,featured_media,anli_logo_accent_color"
     };
 
     const url = "https://wp.anli.dev/wp-json/wp/v2/pages?" + stringify(query);
@@ -55,6 +55,7 @@ export async function getServerSideProps({params: {page}, res}) {
 
     return {props: {
         title: data[0].title.rendered,
-        content: data[0].content.rendered
+        content: data[0].content.rendered,
+        logoAccent: data[0].anli_logo_accent_color
     }};
-} 
+}

@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import Logo from './Logo';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { transparentize, darken } from "polished";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronDown, faInfoCircle, faComment, faBrowser, faAddressBook, faEllipsisH } from "@fortawesome/pro-regular-svg-icons";
+import { faChevronRight, faChevronDown } from "@fortawesome/pro-regular-svg-icons";
+import { faInfoCircle, faComment, faBrowser, faAddressBook, faEllipsisH } from "@fortawesome/pro-light-svg-icons";
+import { faInfoCircle as fasInfoCircle, faComment as fasComment, faBrowser as fasBrowser, faAddressBook as fasAddressBook, faEllipsisH as fasEllipsisH } from "@fortawesome/pro-solid-svg-icons";
 import { Nav } from 'react-bootstrap';
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 const CustomNavbar = styled.nav`
     background-color: ${props => transparentize(0.2, props.theme.colors.light.secondaryBackground)};
@@ -79,19 +83,24 @@ const CustomNavLink = styled(Nav.Link)`
         padding-left: 1rem;
         padding-right: 1rem;
     }
+
+    &.active {
+        font-weight: bold;
+    }
 `;
 
-function NavigationLink({href, as, children, icon, compact}) {
+function NavigationLink({href, as, children, icon, compact, active, activeIcon}) {
     let inner;
+    const effectiveIcon = (active && activeIcon) || icon;
 
     if (compact) {
-        inner = <CustomNavLink className="d-flex flex-column flex-sm-row align-items-center py-2">
-            <LinkIcon><FontAwesomeIcon icon={icon} /></LinkIcon>
+        inner = <CustomNavLink className="d-flex flex-column flex-sm-row align-items-center py-2" active={active}>
+            <LinkIcon><FontAwesomeIcon icon={effectiveIcon} /></LinkIcon>
             <LinkText>{children}</LinkText>
         </CustomNavLink>;
     } else {
-        inner = <CustomNavLink>
-            <FontAwesomeIcon className="mr-1" icon={icon} />
+        inner = <CustomNavLink active={active}>
+            <FontAwesomeIcon className="mr-1" icon={effectiveIcon} />
             {children}
         </CustomNavLink>;
     }
@@ -101,23 +110,30 @@ function NavigationLink({href, as, children, icon, compact}) {
     </Link>;
 }
 
-export default function Navigation() {
+export default function Navigation({accent}) {
     const [secondaryNavVisible, setSecondaryNavVisible] = useState(false);
+    const {query, pathname} = useRouter();
+    const theme = useContext(ThemeContext);
+
+    let accentColor;
+    if (accent && typeof theme.colors[accent] === "string") {
+        accentColor = transparentize(0.2, theme.colors[accent]);
+    }
 
     return <CustomNavbar className="shadow">
-        <Link href="/"><BrandLink><Logo size={56} /></BrandLink></Link>
+        <Link href="/"><BrandLink><Logo size={56} accent={accentColor} /></BrandLink></Link>
         <PrimaryNav className="flex-grow-1 flex-md-grow-0">
-            <NavigationLink icon={faInfoCircle} href="/[page]" as="/about" compact>About</NavigationLink>
-            <NavigationLink icon={faComment} href="/blog" compact>Blog</NavigationLink>
-            <NavigationLink icon={faBrowser} href="/projects" compact>Portfolio</NavigationLink>
+            <NavigationLink icon={faInfoCircle} activeIcon={fasInfoCircle} href="/[page]" as="/about" active={pathname === "/[page]" && query.page === "about"} compact>About</NavigationLink>
+            <NavigationLink icon={faComment} activeIcon={fasComment} href="/blog" active={pathname === "/blog"} compact>Blog</NavigationLink>
+            <NavigationLink icon={faBrowser} activeIcon={fasBrowser} href="/projects" active={pathname === "/projects"} compact>Portfolio</NavigationLink>
         </PrimaryNav>
         {typeof window !== undefined && <a className="d-block d-md-none pr-2 pr-sm-3" href="#" onClick={(e) => {
             e.preventDefault();
             setSecondaryNavVisible(!secondaryNavVisible);
         }}><FontAwesomeIcon icon={secondaryNavVisible ? faChevronDown : faChevronRight} /></a>}
         <SecondaryNav visible={secondaryNavVisible}>
-            <NavigationLink icon={faAddressBook} href="/[page]" as="/contact">Contact</NavigationLink>
-            <NavigationLink icon={faEllipsisH} href="/more">More</NavigationLink>
+            <NavigationLink icon={faAddressBook} activeIcon={fasAddressBook} href="/[page]" as="/contact" active={pathname === "/[page]" && query.page === "contact"}>Contact</NavigationLink>
+            <NavigationLink icon={faEllipsisH} activeIcon={fasEllipsisH} href="/more" active={pathname === "/more"}>More</NavigationLink>
         </SecondaryNav>
     </CustomNavbar>
 }

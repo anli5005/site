@@ -25,7 +25,7 @@ const GradientBox = styled(NavigationBox)`
     }
 `;
 
-export default function Page({children, title}) {
+export default function Page({children, title, logoAccent}) {
     return <Fragment>
         <Head>
             {title && <title>{title} - Anthony Li</title>}
@@ -33,7 +33,7 @@ export default function Page({children, title}) {
         <GradientBox className="fixed-top" />
         <NavigationBox className="fixed-top">
             <Container className="px-3">
-                <Navigation />
+                <Navigation accent={logoAccent} />
             </Container>
         </NavigationBox>
         <CustomContainer className="px-3 mb-5">
