@@ -34,12 +34,12 @@ const PrimaryNav = styled(Nav)`
     }
 `;
 
-const SecondaryNav = styled(Nav)`
+const SecondaryNav = styled(({children, isVisible, ...rest}) => <Nav {...rest}>{children}</Nav>)`
     @media (max-width: ${props => props.theme.breakpoints.md - 1}px) {
         background-color: ${props => darken(0.1, props.theme.colors.light.secondaryBackground)};
         width: 100%;
         flex-direction: column;
-        display: ${props => props.visible ? "flex" : "none"};
+        display: ${props => props.isVisible ? "flex" : "none"};
     }
 
     @media (max-width: ${props => props.theme.breakpoints.md - 1}px) and (prefers-color-scheme: dark) {
@@ -57,8 +57,14 @@ const BrandLink = styled.a`
 `;
 
 const LinkIcon = styled.span`
-    font-size: 1.5em;
-    line-height: 0.6;
+    ${props => props.compact ? `
+        font-size: 1.5em;
+        line-height: 0.6;
+    ` : `
+        margin-right: ${props.theme.spacing.xs};
+    `}
+
+    height: 1em;
 
     @media (min-width: ${props => props.theme.breakpoints.sm}px) {
         margin-right: ${props => props.theme.spacing.xs};
@@ -68,8 +74,7 @@ const LinkIcon = styled.span`
 `;
 
 const LinkText = styled.span`
-    font-size: 0.7em;
-
+    ${props => props.compact ? "font-size: 0.7em;" : ""}
     @media (min-width: ${props => props.theme.breakpoints.sm}px) {
         font-size: 1em;
     }
@@ -87,21 +92,39 @@ const CustomNavLink = styled(Nav.Link)`
     &.active {
         font-weight: bold;
     }
+
+    ${({theme, gradient}) => gradient ? `
+        &.active > ${LinkText}, &:hover > ${LinkText} {
+            background-image: linear-gradient(to right, ${gradient.join(",")});
+            color: ${theme.colors.primaryBackground};
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ${LinkIcon}, &:hover ${LinkIcon} {
+            color: ${gradient[0]};
+        }
+    ` : ""}
 `;
 
-function NavigationLink({href, as, children, icon, compact, active, activeIcon}) {
+const NavExpandLink = styled.a`
+    height: 56px;
+    line-height: 56px;
+`;
+
+function NavigationLink({href, as, children, icon, compact, active, activeIcon, gradient}) {
     let inner;
     const effectiveIcon = (active && activeIcon) || icon;
 
     if (compact) {
-        inner = <CustomNavLink className="d-flex flex-column flex-sm-row align-items-center py-2" active={active}>
-            <LinkIcon><FontAwesomeIcon icon={effectiveIcon} /></LinkIcon>
-            <LinkText>{children}</LinkText>
+        inner = <CustomNavLink className="d-flex flex-column flex-sm-row align-items-center py-2" compact active={active} gradient={gradient}>
+            <LinkIcon compact><FontAwesomeIcon icon={effectiveIcon} /></LinkIcon>
+            <LinkText compact>{children}</LinkText>
         </CustomNavLink>;
     } else {
-        inner = <CustomNavLink active={active}>
-            <FontAwesomeIcon className="mr-1" icon={effectiveIcon} />
-            {children}
+        inner = <CustomNavLink active={active} gradient={gradient}>
+            <LinkIcon><FontAwesomeIcon icon={effectiveIcon} /></LinkIcon>
+            <LinkText>{children}</LinkText>
         </CustomNavLink>;
     }
     
@@ -123,17 +146,62 @@ export default function Navigation({accent}) {
     return <CustomNavbar className="shadow">
         <Link href="/"><BrandLink><Logo size={56} accent={accentColor} /></BrandLink></Link>
         <PrimaryNav className="flex-grow-1 flex-md-grow-0">
-            <NavigationLink icon={faInfoCircle} activeIcon={fasInfoCircle} href="/[page]" as="/about" active={pathname === "/[page]" && query.page === "about"} compact>About</NavigationLink>
-            <NavigationLink icon={faComment} activeIcon={fasComment} href="/blog" active={pathname === "/blog"} compact>Blog</NavigationLink>
-            <NavigationLink icon={faBrowser} activeIcon={fasBrowser} href="/projects" active={pathname === "/projects"} compact>Portfolio</NavigationLink>
+            <NavigationLink
+                icon={faInfoCircle}
+                activeIcon={fasInfoCircle}
+                href="/[page]"
+                as="/about"
+                active={pathname === "/[page]" && query.page === "about"}
+                compact
+                gradient={[theme.colors.aboutGradientStart, theme.colors.aboutGradientEnd]}
+            >
+                About
+            </NavigationLink>
+            <NavigationLink
+                icon={faComment}
+                activeIcon={fasComment}
+                href="/blog"
+                active={pathname === "/blog"}
+                compact
+                gradient={[theme.colors.blogGradientStart, theme.colors.blogGradientEnd]}
+            >
+                Blog
+            </NavigationLink>
+            <NavigationLink
+                icon={faBrowser}
+                activeIcon={fasBrowser}
+                href="/projects"
+                active={pathname === "/projects"}
+                compact
+                gradient={[theme.colors.portfolioGradientStart, theme.colors.portfolioGradientEnd]}
+            >
+                Portfolio
+            </NavigationLink>
         </PrimaryNav>
-        {typeof window !== undefined && <a className="d-block d-md-none pr-2 pr-sm-3" href="#" onClick={(e) => {
+        {typeof window !== undefined && <NavExpandLink className="d-block d-md-none px-2 px-sm-3" href="#" onClick={(e) => {
             e.preventDefault();
             setSecondaryNavVisible(!secondaryNavVisible);
-        }}><FontAwesomeIcon icon={secondaryNavVisible ? faChevronDown : faChevronRight} /></a>}
-        <SecondaryNav visible={secondaryNavVisible}>
-            <NavigationLink icon={faAddressBook} activeIcon={fasAddressBook} href="/[page]" as="/contact" active={pathname === "/[page]" && query.page === "contact"}>Contact</NavigationLink>
-            <NavigationLink icon={faEllipsisH} activeIcon={fasEllipsisH} href="/more" active={pathname === "/more"}>More</NavigationLink>
+        }}><FontAwesomeIcon icon={secondaryNavVisible ? faChevronDown : faChevronRight} /></NavExpandLink>}
+        <SecondaryNav isVisible={secondaryNavVisible}>
+            <NavigationLink
+                icon={faAddressBook}
+                activeIcon={fasAddressBook}
+                href="/[page]" 
+                as="/contact"
+                active={pathname === "/[page]" && query.page === "contact"}
+                gradient={[theme.colors.contactGradientStart, theme.colors.contactGradientEnd]}
+            >
+                Contact
+            </NavigationLink>
+            <NavigationLink
+                icon={faEllipsisH}
+                activeIcon={fasEllipsisH}
+                href="/more"
+                active={pathname === "/more"}
+                gradient={[theme.colors.moreGradientStart, theme.colors.moreGradientEnd]}
+            >
+                More
+            </NavigationLink>
         </SecondaryNav>
     </CustomNavbar>
 }
