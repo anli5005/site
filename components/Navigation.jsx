@@ -27,22 +27,20 @@ const CustomNavbar = styled.nav`
 `;
 
 const PrimaryNav = styled(Nav)`
-    padding-left: 0.5rem;
-
-    @media (min-width: ${props => props.theme.breakpoints.sm}px) {
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
         padding-left: 0.75rem;
     }
 `;
 
 const SecondaryNav = styled(({children, isVisible, ...rest}) => <Nav {...rest}>{children}</Nav>)`
-    @media (max-width: ${props => props.theme.breakpoints.md - 1}px) {
-        background-color: ${props => darken(0.1, props.theme.colors.light.secondaryBackground)};
+    @media (max-width: ${props => props.theme.breakpoints.sm - 1}px) {
+        background-color: ${props => props.theme.colors.light.secondaryBackground};
         width: 100%;
         flex-direction: column;
         display: ${props => props.isVisible ? "flex" : "none"};
     }
 
-    @media (max-width: ${props => props.theme.breakpoints.md - 1}px) and (prefers-color-scheme: dark) {
+    @media (max-width: ${props => props.theme.breakpoints.sm - 1}px) and (prefers-color-scheme: dark) {
         background-color: ${props => darken(0.1, props.theme.colors.dark.secondaryBackground)};
     }
 `;
@@ -66,7 +64,7 @@ const LinkIcon = styled.span`
 
     height: 1em;
 
-    @media (min-width: ${props => props.theme.breakpoints.sm}px) {
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
         margin-right: ${props => props.theme.spacing.xs};
         font-size: 1em;
         line-height: 1;
@@ -75,7 +73,7 @@ const LinkIcon = styled.span`
 
 const LinkText = styled.span`
     ${props => props.compact ? "font-size: 0.7em;" : ""}
-    @media (min-width: ${props => props.theme.breakpoints.sm}px) {
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
         font-size: 1em;
     }
 `;
@@ -84,7 +82,7 @@ const CustomNavLink = styled(Nav.Link)`
     padding-left: 0.75rem;
     padding-right: 0.75rem;
 
-    @media (min-width: ${props => props.theme.breakpoints.sm}px) {
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
         padding-left: 1rem;
         padding-right: 1rem;
     }
@@ -117,9 +115,9 @@ function NavigationLink({href, as, children, icon, compact, active, activeIcon, 
     const effectiveIcon = (active && activeIcon) || icon;
 
     if (compact) {
-        inner = <CustomNavLink className="d-flex flex-column flex-sm-row align-items-center py-2" compact active={active} gradient={gradient}>
-            <LinkIcon compact><FontAwesomeIcon icon={effectiveIcon} /></LinkIcon>
-            <LinkText compact>{children}</LinkText>
+        inner = <CustomNavLink className="d-flex flex-column flex-md-row align-items-center py-2" compact={1} active={active} gradient={gradient}>
+            <LinkIcon compact={1}><FontAwesomeIcon icon={effectiveIcon} /></LinkIcon>
+            <LinkText compact={1}>{children}</LinkText>
         </CustomNavLink>;
     } else {
         inner = <CustomNavLink active={active} gradient={gradient}>
@@ -145,7 +143,7 @@ export default function Navigation({accent}) {
 
     return <CustomNavbar className="shadow">
         <Link href="/"><BrandLink><Logo size={56} accent={accentColor} /></BrandLink></Link>
-        <PrimaryNav className="flex-grow-1 flex-md-grow-0">
+        <PrimaryNav className="flex-grow-1 flex-sm-grow-0">
             <NavigationLink
                 icon={faInfoCircle}
                 activeIcon={fasInfoCircle}
@@ -178,7 +176,7 @@ export default function Navigation({accent}) {
                 Portfolio
             </NavigationLink>
         </PrimaryNav>
-        {typeof window !== undefined && <NavExpandLink className="d-block d-md-none px-2 px-sm-3" href="#" onClick={(e) => {
+        {typeof window !== undefined && <NavExpandLink className="d-block d-sm-none px-2 px-sm-3" href="#" onClick={(e) => {
             e.preventDefault();
             setSecondaryNavVisible(!secondaryNavVisible);
         }}><FontAwesomeIcon icon={secondaryNavVisible ? faChevronDown : faChevronRight} /></NavExpandLink>}
@@ -189,6 +187,7 @@ export default function Navigation({accent}) {
                 href="/[page]" 
                 as="/contact"
                 active={pathname === "/[page]" && query.page === "contact"}
+                compact
                 gradient={[theme.colors.contactGradientStart, theme.colors.contactGradientEnd]}
             >
                 Contact
@@ -196,11 +195,12 @@ export default function Navigation({accent}) {
             <NavigationLink
                 icon={faEllipsisH}
                 activeIcon={fasEllipsisH}
-                href="/more"
-                active={pathname === "/more"}
+                href="/misc"
+                active={pathname === "/misc"}
+                compact
                 gradient={[theme.colors.moreGradientStart, theme.colors.moreGradientEnd]}
             >
-                More
+                Misc
             </NavigationLink>
         </SecondaryNav>
     </CustomNavbar>

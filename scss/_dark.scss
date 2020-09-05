@@ -4,6 +4,7 @@
 
   --link-color: #{$dark-link};
   --link-color-hover: #{darken($dark-link, 10%)};
+  --pre-color: #{darken($light, 10%)};
 
   .btn-primary { // TODO: Remove
     color: white;

@@ -67,8 +67,10 @@ const LinksList = styled.ul`
     list-style: none;
     padding-left: 1.7em;
 
-    & > li {
-        font-size: 0.9em;
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
+        & > li {
+            font-size: 0.9em;
+        }
     }
 `;
 
@@ -116,7 +118,7 @@ export default function Home() {
                 <Links icon={faAddressBook} title="Contact" href="/[page]" as="/contact" links={[
                     {content: "Email", href: "mailto:me@anli.dev", type: "external"}
                 ]} gradient={[colors.contactGradientStart, colors.contactGradientEnd]} />
-                <Links icon={faEllipsisH} title="More" href="/more" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} />
+                <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} />
             </div>
         </Container>
     </Fragment>;

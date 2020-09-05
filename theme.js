@@ -73,6 +73,10 @@ const theme = {
         md: 768,
         lg: 992,
         xl: 1200
+    },
+    fonts: {
+        heading: '"Europa", europa, "Helvetica Neue", "Helvetica", arial, sans-serif',
+        body: '"Adelle", adelle, "Roboto Slab", "Times New Roman", serif'
     }
 };
 

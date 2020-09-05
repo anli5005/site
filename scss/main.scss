@@ -8,6 +8,8 @@
 :root {
   --link-color: #{$link-color};
   --link-color-hover: #{$link-hover-color};
+
+  --pre-color: #{$pre-color};
 }
 
 html, body {
@@ -20,6 +22,10 @@ a {
   &:hover, &:active, &:focus {
     color: var(--link-color-hover);
   }
+}
+
+pre {
+  color: var(--pre-color);
 }
 
 .pointer-events-none {
