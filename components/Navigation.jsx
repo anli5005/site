@@ -36,7 +36,7 @@ const SecondaryNav = styled(({children, isVisible, ...rest}) => <Nav {...rest}>{
     @media (max-width: ${props => props.theme.breakpoints.sm - 1}px) {
         background-color: ${props => props.theme.colors.light.secondaryBackground};
         width: 100%;
-        flex-direction: column;
+        flex-direction: row;
         display: ${props => props.isVisible ? "flex" : "none"};
     }
 
