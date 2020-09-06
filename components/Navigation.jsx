@@ -142,7 +142,7 @@ export default function Navigation({accent}) {
     }
 
     return <CustomNavbar className="shadow">
-        <Link href="/"><BrandLink><Logo size={56} accent={accentColor} /></BrandLink></Link>
+        <Link href="/" passHref><BrandLink><Logo size={56} accent={accentColor} /></BrandLink></Link>
         <PrimaryNav className="flex-grow-1 flex-sm-grow-0">
             <NavigationLink
                 icon={faInfoCircle}
