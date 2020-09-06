@@ -3,8 +3,10 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Error from 'next/error';
 import { lighten } from "polished";
-
 import { stringify } from 'querystring';
+import { Pagination } from 'react-bootstrap';
+import { PostDate } from 'components/ComponentVarients';
+import range from 'lodash/range';
 import PostContent from 'components/PostContent';
 
 const Post = styled.article`
@@ -25,15 +27,26 @@ const PostTitle = styled.h2`
     margin-bottom: 0;
 `;
 
-const PostDate = styled.p`
+const CustomPagination = styled(Pagination)`
     font-family: ${props => props.theme.fonts.heading};
-    text-transform: uppercase;
-    font-weight: bold;
-    opacity: 0.8;
-    font-size: 1.3rem;
+    margin-top: ${props => props.theme.spacing.xl};
 `;
 
-export default function Blog({posts, errorCode, total, totalPages}) {
+function urlForPage(page) {
+    if (page === 1) {
+        return "/blog";
+    } else {
+        return `?page=${page}`;
+    }
+}
+
+function BlogPaginationItem({page, currentPage}) {
+    return <Link href={urlForPage(page)} passHref>
+        <Pagination.Item active={currentPage === page}>{page}</Pagination.Item>
+    </Link>
+}
+
+export default function Blog({posts, errorCode, total, totalPages, page}) {
     if (errorCode) return <Error statusCode={errorCode} />;
 
     return <Page title="Blog" logoAccent="blogAccent">
@@ -56,7 +69,15 @@ export default function Blog({posts, errorCode, total, totalPages}) {
                 <PostContent html={content} />
             </Post>
         })}
-        {/* <p className="mt-5">{total} records over {totalPages} pages</p> */}
+        {totalPages > 1 && <CustomPagination>
+            {page > 1 ? <Link href={urlForPage(page - 1)} passHref><Pagination.Prev /></Link> : <Pagination.Prev disabled />}
+            <BlogPaginationItem page={1} currentPage={page} />
+            {page > 3 && <Pagination.Ellipses disabled />}
+            {range(Math.max(2, page - 2), Math.min(page + 3, totalPages)).map(destination => <BlogPaginationItem key={destination} page={destination} currentPage={page} />)}
+            {page < totalPages - 2 && <Pagination.Ellipses disabled />}
+            <BlogPaginationItem page={totalPages} currentPage={page} />
+            {page < totalPages ? <Link href={urlForPage(page + 1)} passHref><Pagination.Next /></Link> : <Pagination.Next disabled />}
+        </CustomPagination>}
     </Page>;
 }
 

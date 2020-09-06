@@ -91,7 +91,7 @@ function Links({icon, title, links, href, as, gradient}) {
     </LinksContainer>;
 }
 
-export default function Home() {
+export default function Home({posts}) {
     const {colors} = useTheme(ThemeContext);
     
     return <Fragment>
@@ -113,7 +113,11 @@ export default function Home() {
                 <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
                     {content: "Resumé", href: "/[page]", as: "/resume"}
                 ]} gradient={[colors.aboutGradientStart, colors.aboutGradientEnd]} />
-                <Links icon={faComment} title="Blog" href="/blog" gradient={[colors.blogGradientStart, colors.blogGradientEnd]} />
+                <Links icon={faComment} title="Blog" href="/blog" gradient={[colors.blogGradientStart, colors.blogGradientEnd]} links={posts.map(post => ({
+                    content: post.title,
+                    href: "/blog/[id]/[slug]",
+                    as: `/blog/${post.id}/${post.slug}`
+                }))} />
                 <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={[colors.portfolioGradientStart, colors.portfolioGradientEnd]} />
                 <Links icon={faAddressBook} title="Contact" href="/[page]" as="/contact" links={[
                     {content: "Email", href: "mailto:me@anli.dev", type: "external"}
@@ -122,4 +126,20 @@ export default function Home() {
             </div>
         </Container>
     </Fragment>;
+}
+
+export async function getServerSideProps(ctx) {
+    const url = "https://wp.anli.dev/wp-json/wp/v2/posts?_fields=id,slug,title&per_page=3";
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const props = {
+        posts: data.map(postData => ({
+            id: postData.id,
+            slug: postData.slug,
+            title: postData.title.rendered,
+        }))
+    };
+
+    return {props};
 }

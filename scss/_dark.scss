@@ -62,6 +62,32 @@
   .shadow-hover:not(:hover) {
     box-shadow: $box-shadow-sm;
   }
+
+  .page-link {
+    background-color: $dark-bg;
+    border-color: $dark;
+    color: $dark-text;
+
+    &:hover {
+      background-color: lighten($dark-bg, 10%);
+      border-color: $dark;
+      color: $dark-link;
+    }
+  }
+
+  .page-item.disabled .page-link {
+    background-color: $dark-bg;
+    border-color: $dark;
+    color: lighten($dark-bg, 40%);
+  }
+
+  .breadcrumb {
+    background-color: lighten($dark-bg, 5%);
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before, .breadcrumb-item.active {
+    color: rgba($dark-text, 0.4);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
