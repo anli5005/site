@@ -137,8 +137,12 @@ export default function Navigation({accent}) {
     const theme = useContext(ThemeContext);
 
     let accentColor;
-    if (accent && typeof theme.colors[accent] === "string") {
-        accentColor = transparentize(0.2, theme.colors[accent]);
+    if (accent) {
+        if (typeof theme.colors[accent] === "string") {
+            accentColor = transparentize(0.2, theme.colors[accent]);
+        } else {
+            accentColor = accent;
+        }
     }
 
     return <CustomNavbar className="shadow">

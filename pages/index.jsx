@@ -91,7 +91,7 @@ function Links({icon, title, links, href, as, gradient}) {
     </LinksContainer>;
 }
 
-export default function Home({posts}) {
+export default function Home({posts, projects}) {
     const {colors} = useTheme(ThemeContext);
     
     return <Fragment>
@@ -118,7 +118,11 @@ export default function Home({posts}) {
                     href: "/blog/[id]/[slug]",
                     as: `/blog/${post.id}/${post.slug}`
                 }))} />
-                <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={[colors.portfolioGradientStart, colors.portfolioGradientEnd]} />
+                <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={[colors.portfolioGradientStart, colors.portfolioGradientEnd]} links={projects.map(project => ({
+                    content: project.title,
+                    href: "projects/[slug]",
+                    as: `/projects/${project.slug}`
+                }))} />
                 <Links icon={faAddressBook} title="Contact" href="/[page]" as="/contact" links={[
                     {content: "Email", href: "mailto:me@anli.dev", type: "external"}
                 ]} gradient={[colors.contactGradientStart, colors.contactGradientEnd]} />
@@ -129,15 +133,21 @@ export default function Home({posts}) {
 }
 
 export async function getServerSideProps(ctx) {
-    const url = "https://wp.anli.dev/wp-json/wp/v2/posts?_fields=id,slug,title&per_page=3";
-    const response = await fetch(url);
-    const data = await response.json();
+    const postURL = "https://wp.anli.dev/wp-json/wp/v2/posts?_fields=id,slug,title&per_page=3";
+    const projectURL = "https://wp.anli.dev/wp-json/wp/v2/project?_fields=slug,title&per_page=3"
+    const [postResponse, projectResponse] = await Promise.all([fetch(postURL), fetch(projectURL)]);
+    const postData = await postResponse.json();
+    const projectData = await projectResponse.json();
 
     const props = {
-        posts: data.map(postData => ({
-            id: postData.id,
-            slug: postData.slug,
-            title: postData.title.rendered,
+        posts: postData.map(post => ({
+            id: post.id,
+            slug: post.slug,
+            title: post.title.rendered,
+        })),
+        projects: projectData.map(project => ({
+            slug: project.slug,
+            title: project.title.rendered
         }))
     };
 
