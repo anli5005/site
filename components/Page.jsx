@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import Navigation from "./Navigation";
-import Footer from "./footer";
+import Footer from "./Footer";
 import { Fragment } from "react";
 import styled from "styled-components";
 import { transparentize } from "polished";
