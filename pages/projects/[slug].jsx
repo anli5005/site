@@ -3,8 +3,6 @@ import { Breadcrumb } from 'react-bootstrap';
 import Error from 'next/error';
 import Link from 'next/link';
 import PostContent from 'components/PostContent';
-import { PostDate } from 'components/ComponentVarients';
-import styled from 'styled-components';
 
 export default function SingleProject({errorCode, project}) {
     if (errorCode) return <Error statusCode={errorCode} />;

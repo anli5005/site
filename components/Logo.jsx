@@ -38,7 +38,7 @@ export default function Logo({className, style, angle, primary, primaryOpacity, 
             <text style={{font: "400px 'Fira Mono', monospace", fill: textColor || "rgba(255, 255, 255, 0.5)"}} textAnchor="middle">
                 {(text || defaultText).map((line, index) => <tspan key={index} x="1024" y={(index + 0.9) * textHeight}>{line}</tspan>)}
             </text>
-            <text alignmentBaseline="middle" textAnchor="middle" x="1024" y="1024" style={{font: "bold 2000px europa, sans-serif", fill: aColor || "white"}}>{a || "a"}</text>
+            <text textAnchor="middle" x="1024" y="1500" style={{font: "bold 2000px europa, sans-serif", fill: aColor || "white"}}>{a || "a"}</text>
         </g>
     </svg>;
 }
