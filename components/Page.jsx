@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import Navigation from "./Navigation";
+import Footer from "./footer";
 import { Fragment } from "react";
 import styled from "styled-components";
 import { transparentize } from "polished";
@@ -39,5 +40,6 @@ export default function Page({children, title, logoAccent}) {
         <CustomContainer className="px-3 mb-5">
             {children}
         </CustomContainer>
+        <Footer />;
     </Fragment>
 };

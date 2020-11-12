@@ -7,6 +7,8 @@ import { faInfoCircle, faArrowRight as falArrowRight, faComment, faBrowser, faAd
 import { faArrowRight, faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import Footer from 'components/Footer';
+import QuickLinks from 'components/QuickLinks';
 
 const HalfOpacity = styled.span`
     opacity: 0.5;
@@ -129,6 +131,8 @@ export default function Home({posts, projects}) {
                 <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} />
             </div>
         </Container>
+        <QuickLinks />
+        <Footer />
     </Fragment>;
 }
 
