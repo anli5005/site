@@ -40,6 +40,6 @@ export default function Page({children, title, logoAccent}) {
         <CustomContainer className="px-3 mb-5">
             {children}
         </CustomContainer>
-        <Footer />;
+        <Footer />
     </Fragment>
 };

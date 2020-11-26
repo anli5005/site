@@ -1,11 +1,10 @@
 import Page from 'components/Page';
 import { Breadcrumb } from 'react-bootstrap';
-import Error from 'next/error';
 import Link from 'next/link';
 import PostContent from 'components/PostContent';
 
 export default function SingleProject({errorCode, project}) {
-    if (errorCode) return <Error statusCode={errorCode} />;
+    if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     return <Page logoAccent={project.brand.bg || "portfolioAccent"} title={project.title}>
         <Breadcrumb>

@@ -1,11 +1,11 @@
 import Page from 'components/Page';
-import Error from 'next/error';
 import PostContent from 'components/PostContent';
 
 import { stringify } from 'querystring';
+import { ErrorComponent } from './_error';
 
 export default function PagePage({title, errorCode, content, logoAccent}) {
-    if (errorCode) return <Error statusCode={errorCode} />;
+    if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     const html = content;
 

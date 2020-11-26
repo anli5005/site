@@ -2,8 +2,6 @@ import Page from 'components/Page';
 import Link from 'next/link';
 import { Breadcrumb } from 'react-bootstrap';
 
-// TODO: Implement _error.jsx properly
-
 export default function OhNoPageIsNotFoundWhatAreWeGoingToDo() {
     return <Page title="404 Not Found">
         <Breadcrumb>
@@ -14,4 +12,8 @@ export default function OhNoPageIsNotFoundWhatAreWeGoingToDo() {
         <p>The requested page could not be found.</p>
         <p>Go back to the <Link href="/">homepage</Link>?</p>
     </Page>;
+}
+
+export function NotFound() {
+    return <OhNoPageIsNotFoundWhatAreWeGoingToDo />;
 }

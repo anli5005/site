@@ -1,6 +1,5 @@
 import Page from 'components/Page';
 import { Breadcrumb } from 'react-bootstrap';
-import Error from 'next/error';
 import Link from 'next/link';
 import PostContent from 'components/PostContent';
 import { PostDate } from 'components/ComponentVarients';
@@ -11,7 +10,7 @@ const CustomPostDate = styled(PostDate)`
 `;
 
 export default function SinglePost({errorCode, post}) {
-    if (errorCode) return <Error statusCode={errorCode} />;
+    if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     const dateStr = new Date(post.date).toLocaleDateString(undefined, {
         month: "long",
@@ -25,7 +24,7 @@ export default function SinglePost({errorCode, post}) {
             <Link href="/blog" passHref><Breadcrumb.Item>Blog</Breadcrumb.Item></Link>
             <Breadcrumb.Item active>{post.title}</Breadcrumb.Item>
         </Breadcrumb>
-        <h1>{post.title}</h1>
+        <h1 className="mt-5">{post.title}</h1>
         <CustomPostDate>{dateStr}</CustomPostDate>
         <PostContent html={post.content} />
     </Page>;
