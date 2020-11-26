@@ -1,13 +1,13 @@
 import Page from 'components/Page';
 import Link from 'next/link';
 import styled from 'styled-components';
-import Error from 'next/error';
 import { lighten } from "polished";
 import { stringify } from 'querystring';
 import { Pagination } from 'react-bootstrap';
 import { PostDate } from 'components/ComponentVarients';
 import range from 'lodash/range';
 import PostContent from 'components/PostContent';
+import { ErrorComponent } from '../_error';
 
 const Post = styled.article`
     margin-top: ${props => props.theme.spacing.xl};
@@ -27,7 +27,7 @@ const PostTitle = styled.h2`
     margin-bottom: 0;
 `;
 
-const CustomPagination = styled(Pagination)`
+export const CustomPagination = styled(Pagination)`
     font-family: ${props => props.theme.fonts.heading};
     margin-top: ${props => props.theme.spacing.xl};
 `;
@@ -40,14 +40,14 @@ function urlForPage(page) {
     }
 }
 
-function BlogPaginationItem({page, currentPage}) {
+export function BlogPaginationItem({page, currentPage}) {
     return <Link href={urlForPage(page)} passHref>
         <Pagination.Item active={currentPage === page}>{page}</Pagination.Item>
     </Link>
 }
 
 export default function Blog({posts, errorCode, total, totalPages, page}) {
-    if (errorCode) return <Error statusCode={errorCode} />;
+    if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     return <Page title="Blog" logoAccent="blogAccent">
         <h1>Blog</h1>
@@ -103,6 +103,14 @@ export async function getServerSideProps(ctx) {
     const total = parseInt(response.headers.get("x-wp-total"));
     const totalPages = parseInt(response.headers.get("x-wp-totalpages"));
     const data = await response.json();
+
+    if (!data.map) { // TODO: Actually consider type
+        return {
+            props: {
+                errorCode: 404
+            }
+        };
+    }
 
     const props = {
         posts: data.map(postData => ({

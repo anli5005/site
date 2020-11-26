@@ -3,6 +3,7 @@ const theme = {
         light: {
             primaryBackground: "#edf4ff",
             secondaryBackground: "#d0e1ff",
+            cardBackground: "white",
             secondary: "#737c98",
             primary: "#337bed",
             link: "#337bed",
@@ -22,6 +23,7 @@ const theme = {
         dark: {
             primaryBackground: "#111c35",
             secondaryBackground: "#25416c",
+            cardBackground: "#0f2d5b",
             secondary: "#737c98",
             primary: "#337bed",
             link: "#6b9eed",
@@ -41,6 +43,7 @@ const theme = {
         names: [
             ["primaryBackground", "site-bg"],
             ["secondaryBackground", "site-bg2"],
+            ["cardBackground", "site-card-bg"],
             ["link", "site-link"],
             ["text", "site-text"],
             ["textMuted", "site-text-muted"],

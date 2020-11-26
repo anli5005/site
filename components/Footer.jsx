@@ -9,6 +9,9 @@ const FooterContainer = styled(Container)`
     flex-direction: column;
     color: ${props => props.theme.colors.textMuted};
 
+    padding-top: ${props => props.theme.spacing.md};
+    padding-bottom: ${props => props.theme.spacing.md};
+
     @media (min-width: ${props => props.theme.breakpoints.lg}px) {
         flex-direction: row;
         justify-content: space-between;
@@ -24,7 +27,7 @@ const FooterList = styled.ul`
 
     & > li {
         display: inline;
-        border-right: 2px solid ${props => props.theme.colors.textMuted};
+        border-right: 1px solid ${props => props.theme.colors.textMuted};
         padding-right: 8px;
         padding-left: 8px;
     }
@@ -44,7 +47,7 @@ export default function Footer() {
         <FooterContainer>
             <FooterList>
                 <li><a href="https://github.com/anli5005/site">Made with <FontAwesomeIcon icon={faHeart} /></a><span className="sr-only">love</span></li>
-                <li>&copy; 2020 Anthony Li under <a href="https://github.com/anli5005/anli5005.github.io/blob/master/LICENSE">MIT License</a></li>
+                <li>&copy; 2020 Anthony Li</li>
             </FooterList>
             <FooterList>
                 <li><Link href="/[page]" as="/about"><a>About</a></Link></li>
