@@ -114,7 +114,6 @@ export async function getServerSideProps(ctx) {
         perPage,
         page
     };
-    console.log(props.projects);
 
     if (!Number.isNaN(total)) {
         props.total = total;
