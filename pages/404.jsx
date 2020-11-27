@@ -10,7 +10,7 @@ export default function OhNoPageIsNotFoundWhatAreWeGoingToDo() {
         <h1>404</h1>
         <p><strong>Page not found :(</strong></p>
         <p>The requested page could not be found.</p>
-        <p>Go back to the <Link href="/">homepage</Link>?</p>
+        <p>Go back to the <Link href="/"><a>homepage</a></Link>?</p>
     </Page>;
 }
 

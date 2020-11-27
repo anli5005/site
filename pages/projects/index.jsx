@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { BlogPaginationItem, CustomPagination } from '../blog/index';
 import { ErrorComponent } from '../_error';
+import ProjectButton from 'components/ProjectButton';
 
 function urlForPage(page) {
     if (page === 1) {
@@ -19,11 +20,18 @@ const Project = styled.a`
     background-color: ${props => props.theme.colors.cardBackground};
     color: ${props => props.theme.colors.text};
     height: 100%;
+    padding-bottom: 4.75rem;
 
-    &:hover {
+    &:hover, &:active {
         text-decoration: none;
         color: ${props => props.theme.colors.text};
     }
+`;
+
+const ProjectButtonContainer = styled.div`
+    position: absolute;
+    left: ${props => props.theme.spacing.md};
+    bottom: ${props => props.theme.spacing.md};
 `;
 
 export default function Portfolio({projects, page, errorCode, totalPages}) {
@@ -32,15 +40,18 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
     return <Page title="Portfolio" logoAccent="portfolioAccent">
         <h1>Portfolio</h1>
 
-        <Row className="pl-3 pl-sm-0">
-            {projects.map(({slug, title, shortDescription}) => {
-                return <div class="col-12 col-md-6 mb-3 position-relative pl-0">
-                    <Link href="/projects/[slug]" as={`/projects/${slug}`} passHref>
-                        <Project className="shadow rounded p-3">
-                            <h2>{title}</h2>
-                            <p>{shortDescription}</p>
+        <Row className="pl-3">
+            {projects.map(project => {
+                return <div class="col-12 col-md-6 mb-3 position-relative pl-0" key={project.slug}>
+                    <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
+                        <Project className="shadow rounded px-3 pt-3">
+                            <h2>{project.title}</h2>
+                            <p>{project.shortDescription}</p>
                         </Project>
                     </Link>
+                    {project.url && <ProjectButtonContainer>
+                        <ProjectButton project={project} />
+                    </ProjectButtonContainer>}
                 </div>;
             })}
         </Row>
@@ -69,7 +80,7 @@ export async function getServerSideProps(ctx) {
     }
 
     const query = {
-        _fields: "slug,title,short_description",
+        _fields: "slug,title,short_description,project_url,project_domain,brand_bg,brand_fg",
         per_page: perPage,
         page
     };
@@ -92,11 +103,18 @@ export async function getServerSideProps(ctx) {
         projects: data.map(postData => ({
             slug: postData.slug,
             title: postData.title.rendered,
-            shortDescription: postData.short_description
+            shortDescription: postData.short_description || null,
+            url: postData.project_url || null,
+            domain: postData.project_domain || null,
+            brand: {
+                bg: postData.brand_bg || null,
+                fg: postData.brand_fg || null
+            }
         })),
         perPage,
         page
     };
+    console.log(props.projects);
 
     if (!Number.isNaN(total)) {
         props.total = total;
