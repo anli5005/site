@@ -131,7 +131,9 @@ export default function Home({posts, projects}) {
                 <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} />
             </div>
         </Container>
-        <QuickLinks />
+        <div className="mb-5">
+            <QuickLinks />
+        </div>
         <Footer />
     </Fragment>;
 }
