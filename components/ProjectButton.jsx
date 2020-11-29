@@ -7,7 +7,7 @@ const CustomButton = styled.a.attrs({className: "btn btn-primary"})`
     ${props => props.bg && `background-color: ${props.bg}; border-color: ${props.bg};`}
     ${props => props.fg && `color: ${props.fg};`}
 
-    &:hover {
+    &:hover, &:active {
         ${props => props.bg && `background-color: ${darken(0.05, props.bg)}; border-color: ${darken(0.05, props.bg)};`}
     }
 `;
