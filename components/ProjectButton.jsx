@@ -7,8 +7,12 @@ const CustomButton = styled.a.attrs({className: "btn btn-primary"})`
     ${props => props.bg && `background-color: ${props.bg}; border-color: ${props.bg};`}
     ${props => props.fg && `color: ${props.fg};`}
 
-    &:hover, &:active {
+    &:hover {
         ${props => props.bg && `background-color: ${darken(0.05, props.bg)}; border-color: ${darken(0.05, props.bg)};`}
+    }
+
+    &:not(:disabled):not(.disabled):active {
+        ${props => props.bg && `background-color: ${darken(0.1, props.bg)}; border-color: ${darken(0.1, props.bg)};`}
     }
 `;
 

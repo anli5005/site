@@ -16,10 +16,10 @@ export default function SingleProject({errorCode, project, technologies}) {
         </Breadcrumb>
         <h1>{project.title}</h1>
         {project.technologies.length > 0 && <p>{project.technologies.map(({id, name}) =>
-            <Badge variant="secondary" key={id}>{decode(name)}</Badge>
+            <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
         )}</p>}
         <p class="lead">{project.shortDescription}</p>
-        {project.url && <p><ProjectButton project={project} /></p>}
+        {project.url && <p className="mb-5"><ProjectButton project={project} /></p>}
         <PostContent html={project.content} />
     </Page>;
 }

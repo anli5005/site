@@ -113,7 +113,7 @@ export default function Home({posts, projects}) {
         <Container className="mb-5 px-0">
             <div className="d-flex w-100 flex-wrap justify-content-center">
                 <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
-                    {content: "Resumé", href: "/[page]", as: "/resume"}
+                    // {content: "Resumé", href: "/[page]", as: "/resume"}
                 ]} gradient={[colors.aboutGradientStart, colors.aboutGradientEnd]} />
                 <Links icon={faComment} title="Blog" href="/blog" gradient={[colors.blogGradientStart, colors.blogGradientEnd]} links={posts.map(post => ({
                     content: post.title,
