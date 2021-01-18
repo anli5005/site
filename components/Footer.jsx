@@ -47,7 +47,7 @@ export default function Footer() {
         <FooterContainer>
             <FooterList>
                 <li><a href="https://github.com/anli5005/site">Made with <FontAwesomeIcon icon={faHeart} /></a><span className="sr-only">love</span></li>
-                <li>&copy; 2020 Anthony Li</li>
+                <li>&copy; 2021 Anthony Li</li>
             </FooterList>
             <FooterList>
                 <li><Link href="/[page]" as="/about"><a>About</a></Link></li>

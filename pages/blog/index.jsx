@@ -5,7 +5,7 @@ import { lighten } from "polished";
 import { stringify } from 'querystring';
 import { Pagination } from 'react-bootstrap';
 import { PostDate } from 'components/ComponentVarients';
-import range from 'lodash/range';
+import range from 'lodash.range';
 import PostContent from 'components/PostContent';
 import { ErrorComponent } from '../_error';
 

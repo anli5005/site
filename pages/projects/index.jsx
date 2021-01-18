@@ -42,7 +42,7 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
 
         <Row className="pl-3">
             {projects.map(project => {
-                return <div class="col-12 col-md-6 mb-3 position-relative pl-0" key={project.slug}>
+                return <div className="col-12 col-md-6 mb-3 position-relative pl-0" key={project.slug}>
                     <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
                         <Project className="shadow rounded px-3 pt-3">
                             <h2>{project.title}</h2>

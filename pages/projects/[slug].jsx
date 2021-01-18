@@ -3,8 +3,10 @@ import { Breadcrumb } from 'react-bootstrap';
 import Link from 'next/link';
 import PostContent from 'components/PostContent';
 import ProjectButton from 'components/ProjectButton';
+import { Badge } from 'react-bootstrap';
+import { decode } from 'he';
 
-export default function SingleProject({errorCode, project}) {
+export default function SingleProject({errorCode, project, technologies}) {
     if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     return <Page logoAccent={project.brand.bg || "portfolioAccent"} title={project.title}>
@@ -13,6 +15,9 @@ export default function SingleProject({errorCode, project}) {
             <Breadcrumb.Item active>{project.title}</Breadcrumb.Item>
         </Breadcrumb>
         <h1>{project.title}</h1>
+        {project.technologies.length > 0 && <p>{project.technologies.map(({id, name}) =>
+            <Badge variant="secondary" key={id}>{decode(name)}</Badge>
+        )}</p>}
         <p class="lead">{project.shortDescription}</p>
         {project.url && <p><ProjectButton project={project} /></p>}
         <PostContent html={project.content} />
@@ -29,7 +34,7 @@ export async function getServerSideProps({params}) {
         };
     }
 
-    const url = "https://wp.anli.dev/wp-json/wp/v2/project/?slug=" + encodeURIComponent(slug) + "&_fields=title,content,short_description,project_url,project_domain,brand_bg,brand_fg";
+    const url = "https://wp.anli.dev/wp-json/wp/v2/project/?slug=" + encodeURIComponent(slug) + "&_fields=id,title,content,short_description,project_url,project_domain,brand_bg,brand_fg";
     const response = await fetch(url);
     const data = await response.json();
 
@@ -39,6 +44,12 @@ export async function getServerSideProps({params}) {
 
     if (data.length === 0) {
         return {props: {errorCode: 404}};
+    }
+
+    const technologiesResponse = await fetch("https://wp.anli.dev/wp-json/wp/v2/technologies?post=" + encodeURIComponent(data[0].id.toString()) + "&_fields=id,name");
+    let technologies = await technologiesResponse.json();
+    if (!technologies.length) {
+        technologies = [];
     }
 
     const props = {
@@ -51,7 +62,8 @@ export async function getServerSideProps({params}) {
             brand: {
                 bg: data[0].brand_bg || null,
                 fg: data[0].brand_fg || null
-            }
+            },
+            technologies
         }
     };
 
