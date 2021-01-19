@@ -1,0 +1,100 @@
+/* Reset */
+* {
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+
+/* Common Elements */
+body {
+	font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
+	padding: 1em 1em 1em 1em;
+	margin-top: 2.5em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 200;
+}
+
+a {
+	color: #0099FF;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #0055FF;
+}
+
+a.button:visited {
+	color: #0099FF;
+}
+
+a:hover, a:active, a:focus,
+a.button:hover, a.button:active, a.button:focus {
+	color: #00CCFF;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+table, tr, td {
+	border: none;
+	padding: 0.25em 0.25em 0.25em 0.25em;
+}
+
+table thead tr td {
+	font-weight: bold;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	display: block;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+select {
+	width: 100%;
+	border: none;
+	border-radius: 0px;
+	background-image: none;
+	background-color: black;
+	color: white;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	min-height: 2em;
+	
+}
+
+input, select {
+	font-size: 1em;
+	font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+input[type="submit"], input[type="reset"], button {
+	font-size: 1em;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 0.25em 0.25em 0.25em 0.25em;
+	border: none;
+	cursor: pointer;
+	font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+	font-size: 1em;
+	background-color: rgba(0, 0, 0, 0.25);
+	color: white;
+	padding: 0.25em 0.25em 0.25em 0.25em;
+	border: none;
+}
+
+select.large-select {
+	padding: 0.75em 0.75em 0.75em 0.75em;
+	min-height: 3em;
+	font-size: 1.5em;
+	font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+input.bold {
+	font-weight: bold;
+}
+

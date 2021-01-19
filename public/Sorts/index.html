@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sorts</title>
+		<link href="css/Sorts.css" rel="stylesheet" type="text/css">
+		<script src="apis/jQuery.js" type="text/javascript"></script>
+		<script src="apis/Sorts.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var all = Sorts.getAllSorts();
+				function rowForSortNum(num) {
+					var meta = Sorts.SortMeta.metaForSort(num);
+					if (meta) {
+						var cell1 = "<td>"+meta.name+"</td>";
+						var cell2 = "<td><a href='sort/?s="+num.toString()+"' class='button'>Open</a></td>";
+						return ($("<tr>"+cell1+cell2+"</tr>"));
+					}
+				}
+				if (all.parseData) {
+					for (var num in all.parseData) {
+						if (rowForSortNum(num)) {
+							$("#sorts").append(rowForSortNum(num));
+						}
+					}
+				} else if (all.error) {
+					$("#sorts").append("<tr><td colspan='2'>No Sorts</td></tr>");
+					Sorts.Log.logError(all.error);
+				} else {
+					$("#sorts").append("<tr><td colspan='2'>No Sorts</td></tr>");
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<header><h1>Sorts</h1></header>
+		<section><h2>Your Sorts</h2>
+		<table>
+			<thead>
+				<tr><td>Sort Name</td><td>Open</td></tr>
+			</thead>
+			<tbody id="sorts">
+				<tr><td><a href="sort/edit/" class="button" colspan='2'>Create New Sort</a></td></tr>
+			</tbody>
+		</table></section>
+	</body>
+</html>

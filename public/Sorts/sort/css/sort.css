@@ -1,0 +1,31 @@
+@import url("../../css/Sorts.css");
+
+body {
+	margin-top: 3.5em;
+}
+
+td.term {
+	border: 2px solid black;
+}
+
+td.term.bold-term {
+	font-weight: bold
+}
+
+table.sort-table thead tr td {
+	border: 2px solid black;
+}
+
+table.sort-table {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.sort-table input {
+	border: none;
+}
+
+table.sort-table tr td {
+	padding: 0.5em 0.5em 0.5em 0.5em;
+}

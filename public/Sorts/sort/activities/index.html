@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../css/sort.css" type="text/css">
+		<title>Sort</title>
+		
+		<script src="../../apis/jQuery.js" type="text/javascript"></script>
+		<script src="../../apis/Sorts.js" type="text/javascript"></script>
+		<script>
+			$(document).ready(function () {
+				var g = Sorts.parseParams(window.location.search);
+				if (g.parseData.s) {
+					var n = parseInt(g.parseData.s);
+					if (isNaN(n)) {
+						window.location.href = "../";
+					} else {
+						var s = Sorts.Sort.getSort(n);
+						window.sort = s;
+						if (!window.sort) {
+							window.location.href = "../";
+						}
+					}
+				} else {
+					// Redirect
+					window.location.href = "../";
+				}
+				if (!g.parseData.a) {
+					// Redirect
+					window.location.href = "../";
+				}
+				$.get("a.json", function (data) {
+					var p = Sorts.JSON.parse(data);
+					if (p.parseData && window.sort) {
+						var a = p.parseData;
+						var k;
+						for (var t in a) {
+							if (a[t].id == g.parseData.a) {
+								k = t;
+								break;
+							}
+						}
+						$("h1").text(window.sort.meta.name+" - "+a[k].name);
+						$("title").text(window.sort.meta.name+" - "+a[k].name);
+						$("#back-link").attr("href", "../?s="+window.sort.sortNumber.toString());
+						$.get("source/"+a[k].id+".html", function (data) {
+							$("body").append(data);
+						});
+					} else if (window.sort) {
+						window.location.href = "../?s"+window.sort.sortNumber;
+					} else {
+						window.location.href = "../";
+					}
+				}, "text");
+			});
+		</script>
+	</head>
+	<body>
+		<header>
+			<p><a href="../" class="button" id="back-link">&lt; Back to Sort</a>
+			<h1>Sort Activity</h1>
+		</header>
+	</body>
+</html>
