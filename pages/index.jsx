@@ -23,6 +23,12 @@ const BigRoundedBox = styled.div`
     }
 `;
 
+const NameHeader = styled.h1`
+    @media (max-width: ${props => props.theme.breakpoints.md - 1}px) {
+        font-size: 2.5rem;
+    }
+`;
+
 const SomewhatDeemphasizedText = styled.p`
     color: ${props => props.theme.colors.link};
 `;
@@ -111,10 +117,10 @@ export default function Home({posts, projects}) {
             url: "https://anli.dev"
         }} description="I make random stuff. Some of said stuff might be helpful or entertaining. BCA ATCS '22" />
         <Container className="px-3 my-3 my-sm-5">
-            <BigRoundedBox className="py-5 px-5 px-lg-3 d-flex flex-column flex-md-row align-items-center justify-content-center">
+            <BigRoundedBox className="py-4 py-sm-5 px-3 px-md-5 px-lg-3 d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <Logo className="flex-grow-0 flex-shrink-0" size={150} circle />
                 <div className="ml-md-5 mt-3 mt-md-0 text-center text-md-left">
-                    <h1 className="mb-0">Anthony Li</h1>
+                    <NameHeader className="mb-0">Anthony Li</NameHeader>
                     <SomewhatDeemphasizedText className="h4 mb-4">anli<HalfOpacity>5005</HalfOpacity></SomewhatDeemphasizedText>
                     <p>I make random stuff. Some of said stuff might be helpful or entertaining. BCA ATCS '22</p>
                     <FooterList>
