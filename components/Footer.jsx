@@ -12,7 +12,7 @@ const FooterContainer = styled(Container)`
     padding-top: ${props => props.theme.spacing.md};
     padding-bottom: ${props => props.theme.spacing.md};
 
-    @media (min-width: ${props => props.theme.breakpoints.lg}px) {
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
         flex-direction: row;
         justify-content: space-between;
         padding-top: ${props => props.theme.spacing.xl};
@@ -20,7 +20,7 @@ const FooterContainer = styled(Container)`
     }
 `;
 
-const FooterList = styled.ul`
+export const FooterList = styled.ul`
     list-style-type: none;
     display: block;
     padding: 0;
@@ -52,6 +52,7 @@ export default function Footer() {
             <FooterList>
                 <li><Link href="/[page]" as="/about"><a>About</a></Link></li>
                 <li><Link href="/[page]" as="/attribution"><a>Attribution</a></Link></li>
+                <li><a href="https://github.com/anli5005">GitHub</a></li>
                 <li><a href="https://anli5005.github.io">Old site</a></li>
             </FooterList>
         </FooterContainer>

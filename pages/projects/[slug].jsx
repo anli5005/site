@@ -14,7 +14,7 @@ export default function SingleProject({errorCode, project}) {
             <Link href="/projects" passHref><Breadcrumb.Item>Portfolio</Breadcrumb.Item></Link>
             <Breadcrumb.Item active>{project.title}</Breadcrumb.Item>
         </Breadcrumb>
-        <h1>{project.title}</h1>
+        <h1>{project.title}{project.year && <> <small className="text-secondary">{project.year}</small></>}</h1>
         {project.tags.length > 0 && <p>{project.tags.map(({id, name}) =>
             <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
         )}</p>}
@@ -34,7 +34,7 @@ export async function getServerSideProps({params}) {
         };
     }
 
-    const url = "https://wp.anli.dev/wp-json/wp/v2/project/?slug=" + encodeURIComponent(slug) + "&_fields=id,title,content,short_description,project_url,project_domain,brand_bg,brand_fg";
+    const url = "https://wp.anli.dev/wp-json/wp/v2/project/?slug=" + encodeURIComponent(slug) + "&_fields=id,title,content,short_description,project_url,project_domain,brand_bg,brand_fg,year";
     const response = await fetch(url);
     const data = await response.json();
 
@@ -63,7 +63,8 @@ export async function getServerSideProps({params}) {
                 bg: data[0].brand_bg || null,
                 fg: data[0].brand_fg || null
             },
-            tags
+            tags,
+            year: data[0].year || null
         }
     };
 

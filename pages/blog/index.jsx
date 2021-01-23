@@ -8,6 +8,7 @@ import { PostDate } from 'components/ComponentVarients';
 import range from 'lodash.range';
 import PostContent from 'components/PostContent';
 import { ErrorComponent } from '../_error';
+import { DateTime } from 'luxon';
 
 const Post = styled.article`
     margin-top: ${props => props.theme.spacing.xl};
@@ -18,7 +19,8 @@ const PostLink = styled.a`
         color: ${props => lighten(0.1, props.theme.colors.dark.link)};
 
         &:hover {
-            color: ${props => lighten(0.2, props.theme.colors.dark.link)};
+            color: ${props => props.theme.colors.dark.link};
+            text-decoration: none;
         }
     }
 `;
@@ -52,11 +54,10 @@ export default function Blog({posts, errorCode, total, totalPages, page}) {
     return <Page title="Blog" logoAccent="blogAccent">
         <h1>Blog</h1>
         {posts.map(({id, slug, date, title, content}) => {
-            const dateStr = new Date(date).toLocaleDateString(undefined, {
+            const dateStr = DateTime.fromISO(date, { zone: "utc" }).setZone(typeof window === "undefined" ? "America/New_York" : "local").toLocaleString({
                 month: "long",
                 day: "numeric",
                 year: "numeric",
-                timeZone: typeof window === "undefined" ? "America/New_York" : undefined
             });
             return <Post key={id} className={`post post-${id} post-${slug}`}>
                 <Link href="/blog/[id]/[slug]" as={`/blog/${id}/${slug}`} passHref>
@@ -93,7 +94,7 @@ export async function getServerSideProps(ctx) {
     }
 
     const query = {
-        _fields: "id,slug,title,content,date,meta,featured_media,_links",
+        _fields: "id,slug,title,content,date_gmt,meta,featured_media,_links",
         per_page: perPage,
         page
     };
@@ -116,7 +117,7 @@ export async function getServerSideProps(ctx) {
         posts: data.map(postData => ({
             id: postData.id,
             slug: postData.slug,
-            date: postData.date,
+            date: postData.date_gmt,
             title: postData.title.rendered,
             content: postData.content.rendered
         })),

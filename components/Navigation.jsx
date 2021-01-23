@@ -3,8 +3,7 @@ import Logo from './Logo';
 import styled, { ThemeContext } from 'styled-components';
 import { transparentize, darken } from "polished";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronDown } from "@fortawesome/pro-regular-svg-icons";
-import { faInfoCircle, faComment, faBrowser, faAddressBook, faEllipsisH } from "@fortawesome/pro-light-svg-icons";
+import { faChevronRight, faChevronDown, faInfoCircle, faComment, faBrowser, faAddressBook, faEllipsisH } from "@fortawesome/pro-regular-svg-icons";
 import { faInfoCircle as fasInfoCircle, faComment as fasComment, faBrowser as fasBrowser, faAddressBook as fasAddressBook, faEllipsisH as fasEllipsisH } from "@fortawesome/pro-solid-svg-icons";
 import { Nav } from 'react-bootstrap';
 import { useState } from 'react';
@@ -91,15 +90,17 @@ const CustomNavLink = styled(Nav.Link)`
         font-weight: bold;
     }
 
-    ${({theme, gradient}) => gradient ? `
+    color: ${props => props.theme.colors.textSecondary};
+
+    ${({gradient}) => gradient ? `
         &.active > ${LinkText}, &:hover > ${LinkText} {
             background-image: linear-gradient(to right, ${gradient.join(",")});
-            color: ${theme.colors.primaryBackground};
+            color: ${gradient[0]};
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        ${LinkIcon}, &:hover ${LinkIcon} {
+        &.active ${LinkIcon}, &:hover ${LinkIcon} {
             color: ${gradient[0]};
         }
     ` : ""}

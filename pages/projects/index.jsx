@@ -20,12 +20,19 @@ const Project = styled.a`
     display: block;
     background-color: ${props => props.theme.colors.cardBackground};
     color: ${props => props.theme.colors.text};
+    box-shadow: ${props => props.theme.shadows.md};
     height: 100%;
     padding-bottom: 4.75rem;
+    transition: background-color 0.2s, box-shadow 0.2s;
 
     &:hover, &:active {
         text-decoration: none;
         color: ${props => props.theme.colors.text};
+        box-shadow: ${props => props.theme.shadows.lg};
+
+        @media (prefers-color-scheme: dark) {
+            background-color: ${props => props.theme.colors.darkBackground};
+        }
     }
 `;
 
@@ -46,8 +53,8 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
             {projects.map(project => {
                 return <div className="col-12 col-md-6 mb-3 position-relative pl-0" key={project.slug}>
                     <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
-                        <Project className="shadow rounded px-4 pt-4">
-                            <h2>{project.title}</h2>
+                        <Project className="rounded px-4 pt-4">
+                            <h2>{project.title}{project.year && <> <small className="text-secondary">{project.year}</small></>}</h2>
                             {project.tags.length > 0 && <p>{project.tags.map(({ id, name }) =>
                                 <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
                             )}</p>}
@@ -85,7 +92,7 @@ export async function getServerSideProps(ctx) {
     }
 
     const query = {
-        _fields: "slug,title,short_description,project_url,project_domain,brand_bg,brand_fg,tags",
+        _fields: "slug,title,short_description,project_url,project_domain,brand_bg,brand_fg,tags,year",
         per_page: perPage,
         page
     };
@@ -124,7 +131,8 @@ export async function getServerSideProps(ctx) {
                 bg: postData.brand_bg || null,
                 fg: postData.brand_fg || null
             },
-            tags: (postData.tags || []).map(id => tags.get(id)).filter(tag => tag)
+            tags: (postData.tags || []).map(id => tags.get(id)).filter(tag => tag),
+            year: postData.year || null
         })),
         perPage,
         page

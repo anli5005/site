@@ -3,11 +3,10 @@ import { Container } from 'react-bootstrap';
 import Logo from 'components/Logo';
 import styled, { useTheme, ThemeContext } from 'styled-components';
 import Head from 'next/head';
-import { faInfoCircle, faArrowRight as falArrowRight, faComment, faBrowser, faAddressBook } from '@fortawesome/pro-light-svg-icons';
-import { faArrowRight, faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
+import { faInfoCircle, faArrowRight, faComment, faBrowser, faAddressBook, faEllipsisH, faExternalLink } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import Footer from 'components/Footer';
+import Footer, { FooterList } from 'components/Footer';
 import QuickLinks from 'components/QuickLinks';
 
 const HalfOpacity = styled.span`
@@ -48,7 +47,7 @@ const LinksTitle = styled.a`
     margin-bottom: ${props => props.theme.spacing.xs};
     display: inline-block;
     ${({gradient, theme}) => gradient ? `
-        color: ${theme.colors.primaryBackground};
+        color: ${theme.colors.text};
         background-image: linear-gradient(to right, ${gradient.join(",")});
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -61,6 +60,16 @@ const LinksTitle = styled.a`
 
     & > svg:last-child {
         ${props => props.gradient ? `color: ${props.gradient[1]};` : ""}
+    }
+
+    &:hover {
+        ${props => props.gradient ? `
+            @media (prefers-color-scheme: dark) {
+                -webkit-text-fill-color: rgba(255, 255, 255, 0.4);
+            }
+
+            -webkit-text-fill-color: rgba(0, 0, 0, 0.2);
+        ` : ""}
     }
 `;
 
@@ -79,7 +88,7 @@ const LinksList = styled.ul`
 function Links({icon, title, links, href, as, gradient}) {
     return <LinksContainer>
         <div>
-            <Link href={href} as={as} passHref><LinksTitle gradient={gradient}><FontAwesomeIcon className="mr-2" icon={icon} />{title}<FontAwesomeIcon className="ml-2" icon={falArrowRight} /></LinksTitle></Link>
+            <Link href={href} as={as} passHref><LinksTitle gradient={gradient}><FontAwesomeIcon className="mr-2" icon={icon} />{title}<FontAwesomeIcon className="ml-2" icon={faArrowRight} /></LinksTitle></Link>
             {links && <LinksList>
                 {links.map(({content, href, as, type}, index) => {
                     const inner = <Fragment>{content}</Fragment>
@@ -107,6 +116,17 @@ export default function Home({posts, projects}) {
                     <h1 className="mb-0">Anthony Li</h1>
                     <SomewhatDeemphasizedText className="h4 mb-4">anli<HalfOpacity>5005</HalfOpacity></SomewhatDeemphasizedText>
                     <p>I make random stuff. Some of said stuff might be helpful or entertaining. BCA ATCS '22</p>
+                    <FooterList>
+                        <li>
+                            <a href="https://github.com/anli5005">GitHub<FontAwesomeIcon className="ml-2" icon={faExternalLink} /></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/anli5005">Twitter<FontAwesomeIcon className="ml-2" icon={faExternalLink} /></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/anlidev/">LinkedIn<FontAwesomeIcon className="ml-2" icon={faExternalLink} /></a>
+                        </li>
+                    </FooterList>
                 </div>
             </BigRoundedBox>
         </Container>

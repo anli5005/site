@@ -8,17 +8,18 @@ const theme = {
             primary: "#337bed",
             link: "#337bed",
             text: "#0f2d5b",
+            textSecondary: "rgba(15, 45, 91, 0.5)",
             textMuted: "rgba(15, 45, 91, 0.5)",
-            aboutGradientStart: "#1db673",
+            aboutGradientStart: "#12945b",
             aboutGradientEnd: "#1b7d52",
-            blogGradientStart: "#ed930c",
+            blogGradientStart: "#c4801a",
             blogGradientEnd: "#b57007",
-            portfolioGradientStart: "#0a9aff",
+            portfolioGradientStart: "#0b82d6",
             portfolioGradientEnd: "#0367ad",
-            contactGradientStart: "#ff0000",
+            contactGradientStart: "#cc0000",
             contactGradientEnd: "#911d32",
-            moreGradientStart: "#aaaaaa",
-            moreGradientEnd: "#555555"
+            moreGradientStart: "#555555",
+            moreGradientEnd: "#333333"
         },
         dark: {
             primaryBackground: "#111c35",
@@ -26,8 +27,9 @@ const theme = {
             cardBackground: "#0f2d5b",
             secondary: "#737c98",
             primary: "#337bed",
-            link: "#6b9eed",
+            link: "#82b4ff",
             text: "#d0e1ff",
+            textSecondary: "rgba(208, 255, 255, 0.5)",
             textMuted: "rgba(208, 225, 255, 0.5)",
             aboutGradientStart: "#0ee386",
             aboutGradientEnd: "#1db673",
@@ -38,7 +40,7 @@ const theme = {
             contactGradientStart: "#ff596f",
             contactGradientEnd: "#ff4444",
             moreGradientStart: "#bbbbbb",
-            moreGradientEnd: "#888888"
+            moreGradientEnd: "#999999"
         },
         names: [
             ["primaryBackground", "site-bg"],
@@ -46,6 +48,7 @@ const theme = {
             ["cardBackground", "site-card-bg"],
             ["link", "site-link"],
             ["text", "site-text"],
+            ["textSecondary", "site-text-secondary"],
             ["textMuted", "site-text-muted"],
             ["aboutGradientStart", "about-0"],
             ["aboutGradientEnd", "about-1"],
@@ -83,6 +86,10 @@ const theme = {
     fonts: {
         heading: '"Europa", europa, "Helvetica Neue", "Helvetica", arial, sans-serif',
         body: '"Adelle", adelle, "Roboto Slab", "Times New Roman", serif'
+    },
+    shadows: {
+        md: "0 .5rem 1rem rgba(0,0,0,.15)",
+        lg: "0 1rem 3rem rgba(0,0,0,.175)"
     }
 };
 

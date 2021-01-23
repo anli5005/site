@@ -7,7 +7,7 @@ import { transparentize } from "polished";
 import Head from "next/head";
 
 const CustomContainer = styled(Container)`
-    margin-top: 96px;
+    margin-top: 128px;
 `;
 
 const NavigationBox = styled.div`
