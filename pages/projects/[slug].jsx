@@ -6,7 +6,7 @@ import ProjectButton from 'components/ProjectButton';
 import { Badge } from 'react-bootstrap';
 import { decode } from 'he';
 
-export default function SingleProject({errorCode, project, technologies}) {
+export default function SingleProject({errorCode, project}) {
     if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     return <Page logoAccent={project.brand.bg || "portfolioAccent"} title={project.title}>
@@ -15,7 +15,7 @@ export default function SingleProject({errorCode, project, technologies}) {
             <Breadcrumb.Item active>{project.title}</Breadcrumb.Item>
         </Breadcrumb>
         <h1>{project.title}</h1>
-        {project.technologies.length > 0 && <p>{project.technologies.map(({id, name}) =>
+        {project.tags.length > 0 && <p>{project.tags.map(({id, name}) =>
             <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
         )}</p>}
         <p class="lead">{project.shortDescription}</p>
@@ -46,10 +46,10 @@ export async function getServerSideProps({params}) {
         return {props: {errorCode: 404}};
     }
 
-    const technologiesResponse = await fetch("https://wp.anli.dev/wp-json/wp/v2/technologies?post=" + encodeURIComponent(data[0].id.toString()) + "&_fields=id,name");
-    let technologies = await technologiesResponse.json();
-    if (!technologies.length) {
-        technologies = [];
+    const tagsResponse = await fetch("https://wp.anli.dev/wp-json/wp/v2/tags?post=" + encodeURIComponent(data[0].id.toString()) + "&_fields=id,name");
+    let tags = await tagsResponse.json();
+    if (!tags.length) {
+        tags = [];
     }
 
     const props = {
@@ -63,7 +63,7 @@ export async function getServerSideProps({params}) {
                 bg: data[0].brand_bg || null,
                 fg: data[0].brand_fg || null
             },
-            technologies
+            tags
         }
     };
 

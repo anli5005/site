@@ -48,7 +48,7 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
                     <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
                         <Project className="shadow rounded px-4 pt-4">
                             <h2>{project.title}</h2>
-                            {project.technologies.length > 0 && <p>{project.technologies.map(({ id, name }) =>
+                            {project.tags.length > 0 && <p>{project.tags.map(({ id, name }) =>
                                 <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
                             )}</p>}
                             <p>{project.shortDescription}</p>
@@ -85,23 +85,23 @@ export async function getServerSideProps(ctx) {
     }
 
     const query = {
-        _fields: "slug,title,short_description,project_url,project_domain,brand_bg,brand_fg,technologies",
+        _fields: "slug,title,short_description,project_url,project_domain,brand_bg,brand_fg,tags",
         per_page: perPage,
         page
     };
 
     const url = "https://wp.anli.dev/wp-json/wp/v2/project?" + stringify(query);
     const response = await fetch(url);
-    const technologiesPromise = fetch("https://wp.anli.dev/wp-json/wp/v2/technologies?_fields=id,name").then(res => res.json());
+    const tagsPromise = fetch("https://wp.anli.dev/wp-json/wp/v2/tags?_fields=id,name").then(res => res.json());
     const total = parseInt(response.headers.get("x-wp-total"));
     const totalPages = parseInt(response.headers.get("x-wp-totalpages"));
     const data = await response.json();
     
-    const technologies = new Map();
-    const technologiesResponse = await technologiesPromise;
-    if (technologiesResponse.forEach) {
-        technologiesResponse.forEach((tech) => {
-            technologies.set(tech.id, tech);
+    const tags = new Map();
+    const tagsResponse = await tagsPromise;
+    if (tagsResponse.forEach) {
+        tagsResponse.forEach((tag) => {
+            tags.set(tag.id, tag);
         });
     }
 
@@ -124,7 +124,7 @@ export async function getServerSideProps(ctx) {
                 bg: postData.brand_bg || null,
                 fg: postData.brand_fg || null
             },
-            technologies: (postData.technologies || []).map(id => technologies.get(id)).filter(tech => tech)
+            tags: (postData.tags || []).map(id => tags.get(id)).filter(tag => tag)
         })),
         perPage,
         page
