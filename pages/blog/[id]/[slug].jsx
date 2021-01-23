@@ -5,7 +5,7 @@ import PostContent from 'components/PostContent';
 import { PostDate } from 'components/ComponentVarients';
 import styled from 'styled-components';
 import { DateTime } from 'luxon';
-import { ErrorComponent } from '../_error';
+import { ErrorComponent } from '../../_error';
 
 const CustomPostDate = styled(PostDate)`
     margin-bottom: ${props => props.theme.spacing.xl};
