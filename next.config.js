@@ -20,6 +20,11 @@ module.exports = {
                 source: "/Sorts/sort/edit",
                 destination: "/Sorts/sort/edit/index.html",
                 permanent: true
+            },
+            {
+                source: "/hand-sanitizer-game",
+                destination: "https://code.anli.dev/hand-sanitizer-game",
+                permanent: true
             }
         ];
     }
