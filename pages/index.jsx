@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Container } from 'react-bootstrap';
 import Logo from 'components/Logo';
 import styled, { useTheme, ThemeContext } from 'styled-components';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { faInfoCircle, faArrowRight, faComment, faBrowser, faAddressBook, faEllipsisH, faExternalLink } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
@@ -106,9 +106,9 @@ export default function Home({posts, projects}) {
     const {colors} = useTheme(ThemeContext);
     
     return <Fragment>
-        <Head>
-            <title>Anthony Li (anli) - Developer, Designer, Entrepreneur</title>
-        </Head>
+        <NextSeo title="Anthony Li (anli) - Developer, Designer, Entrepreneur" openGraph={{
+            title: "Anthony Li (anli) - Developer, Designer, Entrepreneur"
+        }} description="I make random stuff. Some of said stuff might be helpful or entertaining. BCA ATCS '22" />
         <Container className="px-3 my-3 my-sm-5">
             <BigRoundedBox className="py-5 px-5 px-lg-3 d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <Logo className="flex-grow-0 flex-shrink-0" size={150} circle />

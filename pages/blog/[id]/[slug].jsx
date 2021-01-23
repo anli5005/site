@@ -19,7 +19,13 @@ export default function SinglePost({errorCode, post}) {
         year: "numeric",
     });
 
-    return <Page logoAccent="blogAccent" title={post.title}>
+    return <Page logoAccent="blogAccent" title={post.title} openGraph={{
+        type: "article",
+        article: {
+            publishedTime: post.date,
+            modifiedTime: post.modified
+        }
+    }}>
         <Breadcrumb>
             <Link href="/blog" passHref><Breadcrumb.Item>Blog</Breadcrumb.Item></Link>
             <Breadcrumb.Item active>{post.title}</Breadcrumb.Item>
@@ -40,7 +46,7 @@ export async function getServerSideProps({params}) {
         };
     }
 
-    const url = "https://wp.anli.dev/wp-json/wp/v2/posts/" + id + "?_fields=id,slug,title,content,date_gmt,meta,featured_media,_links";
+    const url = "https://wp.anli.dev/wp-json/wp/v2/posts/" + id + "?_fields=id,slug,title,content,date_gmt,modified_gmt,meta,featured_media,_links";
     const response = await fetch(url);
     const data = await response.json();
 
@@ -58,7 +64,8 @@ export async function getServerSideProps({params}) {
             slug: data.slug,
             date: data.date_gmt,
             title: data.title.rendered,
-            content: data.content.rendered
+            content: data.content.rendered,
+            modified: data.modified_gmt
         }
     };
 

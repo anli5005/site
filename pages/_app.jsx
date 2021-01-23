@@ -9,6 +9,7 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import theme from '../theme';
+import { DefaultSeo } from 'next-seo';
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 ["routeChangeComplete", "routeChangeError"].forEach(event => Router.events.on(event, () => NProgress.done()));
@@ -35,6 +36,17 @@ ${({theme: {colors: {dark, names}}}) => names.map(([key, value]) => {
 
 export default function App({Component, pageProps}) {
     return <ThemeProvider theme={theme}>
+        <DefaultSeo
+            openGraph={{
+                type: "website",
+                locale: "en_US",
+                site_name: "Anthony Li (anli)"
+            }}
+            twitter={{
+                site: "@anli5005",
+                cardType: "summary"
+            }}
+        />
         <GlobalStyle />
         <Component {...pageProps} />
     </ThemeProvider>;
