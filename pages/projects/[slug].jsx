@@ -5,6 +5,7 @@ import PostContent from 'components/PostContent';
 import ProjectButton from 'components/ProjectButton';
 import { Badge } from 'react-bootstrap';
 import { decode } from 'he';
+import { ErrorComponent } from '../_error';
 
 export default function SingleProject({errorCode, project}) {
     if (errorCode) return <ErrorComponent statusCode={errorCode} />;
@@ -24,9 +25,10 @@ export default function SingleProject({errorCode, project}) {
     </Page>;
 }
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps({params, res}) {
     const slug = params.slug;
     if (!slug) {
+        res.statusCode = 404;
         return {
             props: {
                 errorCode: 404
@@ -39,10 +41,12 @@ export async function getServerSideProps({params}) {
     const data = await response.json();
 
     if (data.data && data.data.status) {
+        res.statusCode = data.data.status;
         return {props: {errorCode: data.data.status}};
     }
 
     if (data.length === 0) {
+        res.statusCode = 404;
         return {props: {errorCode: 404}};
     }
 

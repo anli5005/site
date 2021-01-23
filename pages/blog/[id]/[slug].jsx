@@ -5,6 +5,7 @@ import PostContent from 'components/PostContent';
 import { PostDate } from 'components/ComponentVarients';
 import styled from 'styled-components';
 import { DateTime } from 'luxon';
+import { ErrorComponent } from '../_error';
 
 const CustomPostDate = styled(PostDate)`
     margin-bottom: ${props => props.theme.spacing.xl};
@@ -36,9 +37,10 @@ export default function SinglePost({errorCode, post}) {
     </Page>;
 }
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps({params, res}) {
     const id = params.id && params.id && parseInt(params.id);
     if (!id || Number.isNaN(id) || id < 1) {
+        res.statusCode = 404;
         return {
             props: {
                 errorCode: 404
@@ -51,10 +53,12 @@ export async function getServerSideProps({params}) {
     const data = await response.json();
 
     if (data.data && data.data.status) {
+        res.statusCode = data.data.status;
         return {props: {errorCode: data.data.status}};
     }
 
     if (data.slug !== params.slug) {
+        res.statusCode = 404;
         return {props: {errorCode: 404}};
     }
 

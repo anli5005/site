@@ -86,6 +86,7 @@ export async function getServerSideProps(ctx) {
     const perPage = 10;
     const page = (ctx.query && ctx.query.page && parseInt(ctx.query.page)) || 1;
     if (Number.isNaN(ctx.query.page) || page < 0) {
+        ctx.res.statusCode = 400;
         return {
             props: {
                 errorCode: 400
@@ -106,6 +107,7 @@ export async function getServerSideProps(ctx) {
     const data = await response.json();
 
     if (!data.map) { // TODO: Actually consider type
+        ctx.res.statusCode = 404;
         return {
             props: {
                 errorCode: 404

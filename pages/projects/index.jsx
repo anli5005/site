@@ -84,6 +84,7 @@ export async function getServerSideProps(ctx) {
     const perPage = 20;
     const page = (ctx.query && ctx.query.page && parseInt(ctx.query.page)) || 1;
     if (Number.isNaN(ctx.query.page) || page < 0) {
+        ctx.res.statusCode = 400;
         return {
             props: {
                 errorCode: 400
@@ -113,6 +114,7 @@ export async function getServerSideProps(ctx) {
     }
 
     if (!data.map) { // TODO: Actually consider type
+        ctx.res.statusCode = 502;
         return {
             props: {
                 errorCode: 502
