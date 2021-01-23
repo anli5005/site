@@ -107,7 +107,8 @@ export default function Home({posts, projects}) {
     
     return <Fragment>
         <NextSeo title="Anthony Li (anli) - Developer, Designer, Entrepreneur" openGraph={{
-            title: "Anthony Li (anli) - Developer, Designer, Entrepreneur"
+            title: "Anthony Li (anli) - Developer, Designer, Entrepreneur",
+            url: "https://anli.dev"
         }} description="I make random stuff. Some of said stuff might be helpful or entertaining. BCA ATCS '22" />
         <Container className="px-3 my-3 my-sm-5">
             <BigRoundedBox className="py-5 px-5 px-lg-3 d-flex flex-column flex-md-row align-items-center justify-content-center">

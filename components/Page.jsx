@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import styled from "styled-components";
 import { transparentize } from "polished";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
 
 const CustomContainer = styled(Container)`
     margin-top: 128px;
@@ -27,9 +28,12 @@ const GradientBox = styled(NavigationBox)`
 `;
 
 export default function Page({children, title, logoAccent, openGraph}) {
+    const router = useRouter();
+
     return <Fragment>
         <NextSeo title={title && `${title} - Anthony Li`} openGraph={{
             title,
+            url: "https://anli.dev" + (router.asPath || ""),
             ...openGraph
         }} />
         <GradientBox className="fixed-top" />
