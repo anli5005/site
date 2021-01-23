@@ -27,6 +27,10 @@ ${({theme: {colors: {dark, names}}}) => names.map(([key, value]) => {
 }).join("\n")}}
 }
 }
+
+.syntax-highlighted-code {
+    border-radius: 0.25rem;
+}
 `;
 
 export default function App({Component, pageProps}) {

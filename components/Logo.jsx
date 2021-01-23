@@ -35,7 +35,7 @@ export default function Logo({className, style, angle, primary, primaryOpacity, 
         </defs>
         <rect width="2048" height="2048" fill="url(#background)" />
         <g style={{mixBlendMode: "soft-light"}}>
-            <text style={{font: "400px 'Fira Mono', monospace", fill: textColor || "rgba(255, 255, 255, 0.5)"}} textAnchor="middle">
+            <text style={{font: "400px 'Fira Code', monospace", fill: textColor || "rgba(255, 255, 255, 0.5)", fontVariantLigatures: "none"}} textAnchor="middle">
                 {(text || defaultText).map((line, index) => <tspan key={index} x="1024" y={(index + 0.9) * textHeight}>{line}</tspan>)}
             </text>
             <text textAnchor="middle" x="1024" y="1500" style={{font: "bold 2000px europa, sans-serif", fill: aColor || "white"}}>{a || "a"}</text>

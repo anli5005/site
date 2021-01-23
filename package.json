@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "bootstrap": "^4.5.3",
     "he": "^1.2.0",
+    "html-to-react": "^1.4.5",
     "lodash": "^4.17.20",
     "lodash.range": "^3.2.0",
     "luxon": "^1.25.0",
@@ -25,6 +26,7 @@
     "react": "16.13.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "16.13.1",
+    "react-syntax-highlighter": "^15.4.3",
     "sanitize-html": "^1.27.5",
     "sass": "^1.32.4",
     "styled-components": "^5.2.1"
