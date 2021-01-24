@@ -25,7 +25,7 @@ ${({theme: {colors: {light, names}}}) => names.map(([key, value]) => {
 :root {
 ${({theme: {colors: {dark, names}}}) => names.map(([key, value]) => {
     return `--${value}: ${dark[key]};\n`;
-}).join("\n")}}
+}).join("\n")}
 }
 
 .dark-invert {
