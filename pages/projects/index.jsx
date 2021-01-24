@@ -45,7 +45,9 @@ const ProjectButtonContainer = styled.div`
 export default function Portfolio({projects, page, errorCode, totalPages}) {
     if (errorCode) return <ErrorComponent statusCode={errorCode} />;
     
-    return <Page title="Portfolio" logoAccent="portfolioAccent">
+    return <Page title="Portfolio" logoAccent="portfolioAccent" openGraph={{
+        description: "I've made many things. Here are some of them."
+    }}>
         <h1>Portfolio</h1>
         <p className="lead mb-5">I've made many things. Here are some of them.</p>
 

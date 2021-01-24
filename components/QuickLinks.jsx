@@ -50,8 +50,9 @@ const QuickLinkA = styled.a`
     position: relative;
     z-index: 1;
     min-width: 3rem;
-    display: block;
+    display: flex;
     margin-bottom: ${props => props.theme.spacing.md};
+    align-items: flex-start;
 
     &:last-child {
         margin-right: 0;
@@ -66,6 +67,7 @@ const QuickLinkA = styled.a`
     }
 
     @media (min-width: ${props => props.theme.breakpoints.md}px) {
+        display: block;
         margin-bottom: 0;
         margin-right: ${props => props.theme.spacing.md};
     }
@@ -94,6 +96,7 @@ const QuickLinkSymbol = styled.div`
 
 const QuickLinkDetail = styled.div`
     display: inline-block;
+    flex-grow: 1;
 
     @media (min-width: ${props => props.theme.breakpoints.md}px) {
         position: absolute;

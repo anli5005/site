@@ -10,7 +10,9 @@ import { ErrorComponent } from '../_error';
 export default function SingleProject({errorCode, project}) {
     if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
-    return <Page logoAccent={project.brand.bg || "portfolioAccent"} title={project.title}>
+    return <Page logoAccent={project.brand.bg || "portfolioAccent"} title={project.title} openGraph={{
+        description: project.shortDescription
+    }}>
         <Breadcrumb>
             <Link href="/projects" passHref><Breadcrumb.Item>Portfolio</Breadcrumb.Item></Link>
             <Breadcrumb.Item active>{project.title}</Breadcrumb.Item>

@@ -27,6 +27,10 @@ ${({theme: {colors: {dark, names}}}) => names.map(([key, value]) => {
     return `--${value}: ${dark[key]};\n`;
 }).join("\n")}}
 }
+
+.dark-invert {
+    filter: invert(1) hue-rotate(180deg);
+}
 }
 
 .syntax-highlighted-code {

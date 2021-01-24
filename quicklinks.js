@@ -42,7 +42,7 @@ export default [
         icon: faPumpSoap,
         description: "More relavent now than ever",
         url: "https://anli.dev/hand-sanitizer-game",
-        domain: "anli.dev",
+        domain: "code.anli.dev/hand-sanitizer-game",
         brand: {
             bg: "#fa3033"
         }
