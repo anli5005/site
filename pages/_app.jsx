@@ -44,7 +44,14 @@ export default function App({Component, pageProps}) {
             openGraph={{
                 type: "website",
                 locale: "en_US",
-                site_name: "Anthony Li (anli)"
+                site_name: "Anthony Li (anli)",
+                images: [
+                    {
+                        url: "https://anli.dev/images/logo.png",
+                        width: 128,
+                        height: 128
+                    }
+                ]
             }}
             twitter={{
                 site: "@anli5005",
