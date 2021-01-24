@@ -53,7 +53,6 @@ export default function Footer() {
                 <li><Link href="/[page]" as="/about"><a>About</a></Link></li>
                 <li><Link href="/[page]" as="/attribution"><a>Attribution</a></Link></li>
                 <li><a href="https://github.com/anli5005">GitHub</a></li>
-                <li><a href="https://anli5005.github.io">Old site</a></li>
             </FooterList>
         </FooterContainer>
     </footer>
