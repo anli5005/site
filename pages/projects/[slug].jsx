@@ -21,7 +21,7 @@ export default function SingleProject({errorCode, project}) {
         {project.tags.length > 0 && <p>{project.tags.map(({id, name}) =>
             <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
         )}</p>}
-        <p class="lead">{project.shortDescription}</p>
+        <p className="lead">{project.shortDescription}</p>
         {project.url && <p className="mb-5"><ProjectButton project={project} /></p>}
         <PostContent html={project.content} />
     </Page>;
