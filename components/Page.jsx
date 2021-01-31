@@ -31,7 +31,7 @@ export default function Page({children, title, logoAccent, openGraph}) {
     const router = useRouter();
 
     return <Fragment>
-        <NextSeo title={title && `${title} - Anthony Li`} openGraph={{
+        <NextSeo title={title && `${title} - Anthony Li (anli5005)`} openGraph={{
             title,
             url: "https://anli.dev" + (router.asPath || ""),
             ...openGraph
