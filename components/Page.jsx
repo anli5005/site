@@ -27,7 +27,7 @@ const GradientBox = styled(NavigationBox)`
     }
 `;
 
-export default function Page({children, title, logoAccent, openGraph}) {
+export default function Page({children, title, logoAccent, openGraph, noindex}) {
     const router = useRouter();
 
     return <Fragment>
@@ -35,7 +35,7 @@ export default function Page({children, title, logoAccent, openGraph}) {
             title,
             url: "https://anli.dev" + (router.asPath || ""),
             ...openGraph
-        }} />
+        }} noindex={noindex} />
         <GradientBox className="fixed-top" />
         <NavigationBox className="fixed-top">
             <Container className="px-3">
