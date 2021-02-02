@@ -40,7 +40,7 @@ export default [
         name: "Hand Sanitizer Game",
         short: "HSG",
         icon: faPumpSoap,
-        description: "More relavent now than ever",
+        description: "More relevant now than ever",
         url: "https://anli.dev/hand-sanitizer-game",
         domain: "code.anli.dev/hand-sanitizer-game",
         brand: {
