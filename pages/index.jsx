@@ -125,7 +125,7 @@ export default function Home({posts, projects}) {
                         <NameHeader className="mb-0">Anthony Li</NameHeader>
                         <SomewhatDeemphasizedText className="h4 mb-4">anli<HalfOpacity>5005</HalfOpacity></SomewhatDeemphasizedText>
                     </h1>
-                    <p>I make random stuff. Some of said stuff might be helpful or entertaining. BCA ATCS '22</p>
+                    <p>I'm a maker, programmer, and entrepreneur. Some of my stuff might be helpful or entertaining. BCA ATCS '22</p>
                     <FooterList>
                         <li>
                             <a href="https://github.com/anli5005">GitHub<FontAwesomeIcon className="ml-2" icon={faExternalLink} /></a>
