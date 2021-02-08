@@ -158,7 +158,9 @@ export default function Home({posts, projects}) {
                 <Links icon={faAddressBook} title="Contact" href="/[page]" as="/contact" links={[
                     {content: "Email", href: "mailto:me@anli.dev", type: "external"}
                 ]} gradient={[colors.contactGradientStart, colors.contactGradientEnd]} />
-                <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} />
+                <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} links={[
+                    {content: "Class Notes", href: "/classnotes"}
+                ]} />
             </div>
         </Container>
         <div className="mb-5">
