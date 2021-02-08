@@ -2,6 +2,17 @@ import Page from 'components/Page';
 import { stringify } from 'querystring';
 import Link from 'next/link';
 import { Breadcrumb } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const NotesFooter = styled.div`
+    width: 100%;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    opacity: 0.5;
+    font-size: 24px;
+    font-style: italic;
+`;
 
 function Course({ course: { slug, name, year, color } }) {
     return <p>
@@ -22,6 +33,9 @@ export default function ClassNotes({courses}) {
         {courses.map(course => (
             <Course key={course.id} course={course} /> 
         ))}
+        <NotesFooter>
+            <a href="https://genius.com/Porter-robinson-look-at-the-sky-lyrics">Stay hopeful.</a>
+        </NotesFooter>
     </Page>;
 }
 
