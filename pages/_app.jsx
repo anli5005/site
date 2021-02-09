@@ -33,6 +33,14 @@ ${({theme: {colors: {dark, names}}}) => names.map(([key, value]) => {
 }
 }
 
+.white-box {
+    border-radius: 0.25rem;
+    background-color: white;
+    width: auto;
+    padding: ${props => props.theme.spacing.sm};
+    display: inline-block;
+}
+
 .syntax-highlighted-code {
     border-radius: 0.25rem;
 }

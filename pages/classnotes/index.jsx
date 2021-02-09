@@ -29,7 +29,7 @@ const CourseLink = styled.a`
     ${props => props.color ? `
         background-color: ${props.color};
         color: ${readableColor(props.color)};
-        &:hover {
+        &:hover, &:focus, &:active {
             background-color: ${lighten(0.1, props.color)};
             text-decoration: none;
             color: ${readableColor(props.color)};
@@ -37,7 +37,7 @@ const CourseLink = styled.a`
     ` : `
         background-color: ${props.theme.colors.cardBackground};
         color: ${props.theme.colors.text};
-        &:hover {
+        &:hover, &:focus, &:active {
             text-decoration: none;
             color: ${readableColor(props.color)};
         }
@@ -47,7 +47,7 @@ const CourseLink = styled.a`
         }
     `}
 
-    &:hover {
+    &:hover, &:focus, &:active {
         box-shadow: ${props => props.theme.shadows.lg};
     }
 
@@ -57,7 +57,7 @@ const CourseLink = styled.a`
         transition: left 0.2s;
     }
 
-    &:hover .fa-arrow-right {
+    &:hover .fa-arrow-right, &:focus .fa-arrow-right, &:active .fa-arrow-right {
         left: ${props => props.theme.spacing.xs};
     }
 
@@ -66,7 +66,7 @@ const CourseLink = styled.a`
 `;
 
 function Course({ course: { slug, name, year, color } }) {
-    return <Col xs={12} sm={4}>
+    return <Col xs={12} sm={6} md={4} className="mb-3">
         <Link href="/classnotes/[course]" as={`/classnotes/${slug}`} passHref>
             <CourseLink className="rounded" color={color}>{name} <FontAwesomeIcon icon={faArrowRight} /></CourseLink>
         </Link>

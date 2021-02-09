@@ -4,8 +4,29 @@ import Link from 'next/link';
 import { Breadcrumb } from 'react-bootstrap';
 import { DateTime } from 'luxon';
 import PostContent from 'components/PostContent';
+import styled from 'styled-components';
+
+const NotesDate = styled.p`
+    font-weight: normal;
+    margin-bottom: 0;
+    margin-top: ${props => props.theme.spacing.lg};
+`;
+
+const NotesContent = styled.div`
+    & img {
+        max-width: 100%;
+        width: auto;
+        height: auto;
+    }
+`;
 
 export default function Notes({ courseName, courseSlug, title, date, content }) {
+    const dateStr = DateTime.fromISO(date, { zone: "utc" }).setZone(typeof window === "undefined" ? "America/New_York" : "local").toLocaleString({
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+
     return <Page title={title} logoAccent="moreAccent">
         <Breadcrumb>
             <Link href="/misc" passHref><Breadcrumb.Item>More Stuff</Breadcrumb.Item></Link>
@@ -13,8 +34,10 @@ export default function Notes({ courseName, courseSlug, title, date, content }) 
             <Link href="/classnotes/[course]" as={`/classnotes/${courseSlug}`} passHref><Breadcrumb.Item>{courseName}</Breadcrumb.Item></Link>
             <Breadcrumb.Item active>{title}</Breadcrumb.Item>
         </Breadcrumb>
-        <h1>{title}</h1>
-        <PostContent html={content} />
+        {title.length > 0 && <NotesDate className="h3">{dateStr}</NotesDate>}
+        <h1>{title.length === 0 ? dateStr : title}</h1>
+        <NotesContent><PostContent html={content} /></NotesContent>
+        <p><em><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5Sw69CWSVeZ3XDWdSoD0EIvBRbaZQ_MFOmg-kz1hbnyrtWw/viewform?usp=sf_link">Report an issue</a></em></p>
     </Page>;
 }
 
