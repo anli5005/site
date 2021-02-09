@@ -3,8 +3,11 @@ import { stringify } from 'querystring';
 import Link from 'next/link';
 import { Breadcrumb } from 'react-bootstrap';
 import { DateTime } from 'luxon';
+import { ErrorComponent } from '../../_error';
 
-export default function CourseNotes({name, slug, notes}) {
+export default function CourseNotes({name, slug, notes, errorCode}) {
+    if (errorCode) return <ErrorComponent statusCode={errorCode} />;
+
     return <Page title={name} logoAccent="moreAccent">
         <Breadcrumb>
             <Link href="/misc" passHref><Breadcrumb.Item>More Stuff</Breadcrumb.Item></Link>

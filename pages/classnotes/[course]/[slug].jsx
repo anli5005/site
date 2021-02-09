@@ -5,6 +5,7 @@ import { Breadcrumb } from 'react-bootstrap';
 import { DateTime } from 'luxon';
 import PostContent from 'components/PostContent';
 import styled from 'styled-components';
+import { ErrorComponent } from '../../_error';
 
 const NotesDate = styled.p`
     font-weight: normal;
@@ -20,14 +21,16 @@ const NotesContent = styled.div`
     }
 `;
 
-export default function Notes({ courseName, courseSlug, title, date, content }) {
+export default function Notes({ courseName, courseSlug, title, date, content, errorCode }) {
+    if (errorCode) return <ErrorComponent statusCode={errorCode} />;
+
     const dateStr = DateTime.fromISO(date, { zone: "utc" }).setZone(typeof window === "undefined" ? "America/New_York" : "local").toLocaleString({
         month: "long",
         day: "numeric",
         year: "numeric",
     });
 
-    return <Page title={title} logoAccent="moreAccent">
+    return <Page title={(title.length === 0 ? "" : `${title} - `) + dateStr} logoAccent="moreAccent">
         <Breadcrumb>
             <Link href="/misc" passHref><Breadcrumb.Item>More Stuff</Breadcrumb.Item></Link>
             <Link href="/classnotes" passHref><Breadcrumb.Item>Class Notes</Breadcrumb.Item></Link>

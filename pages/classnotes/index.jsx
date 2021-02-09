@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { lighten, readableColor } from 'polished';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
+import { ErrorComponent } from '../_error';
 
 const NotesFooter = styled.div`
     width: 100%;
@@ -73,7 +74,8 @@ function Course({ course: { slug, name, year, color } }) {
     </Col>
 }
 
-export default function ClassNotes({courses}) {
+export default function ClassNotes({courses, errorCode}) {
+    if (errorCode) return <ErrorComponent statusCode={errorCode} />;
     return <Page title="Class Notes" logoAccent="moreAccent">
         <Breadcrumb>
             <Link href="/misc" passHref><Breadcrumb.Item>More Stuff</Breadcrumb.Item></Link>
@@ -86,6 +88,7 @@ export default function ClassNotes({courses}) {
                 <Course key={course.id} course={course} />
             ))}
         </Row>
+        <p><em><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5Sw69CWSVeZ3XDWdSoD0EIvBRbaZQ_MFOmg-kz1hbnyrtWw/viewform?usp=sf_link">Report an issue</a></em></p>
         <NotesFooter>
             <a href="https://genius.com/Porter-robinson-look-at-the-sky-lyrics">Stay hopeful.</a>
         </NotesFooter>
