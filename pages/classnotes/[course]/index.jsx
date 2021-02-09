@@ -84,7 +84,7 @@ export async function getServerSideProps({ params, res }) {
             slug: notes.slug,
             title: notes.title.rendered,
             date: notes.date_gmt,
-            hideDate: !!notes.hide_date
+            hideDate: notes.hide_date === "1"
         }))
     };
 

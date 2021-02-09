@@ -96,7 +96,7 @@ export async function getServerSideProps({ params, res }) {
         title: notesData[0].title.rendered,
         date: notesData[0].date_gmt,
         content: notesData[0].content.rendered,
-        hideDate: !!notesData[0].hide_date
+        hideDate: notesData[0].hide_date === "1"
     };
 
     return { props };
