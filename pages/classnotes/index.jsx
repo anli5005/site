@@ -1,25 +1,76 @@
 import Page from 'components/Page';
 import { stringify } from 'querystring';
 import Link from 'next/link';
-import { Breadcrumb } from 'react-bootstrap';
+import { Breadcrumb, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import { lighten, readableColor } from 'polished';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
 
 const NotesFooter = styled.div`
     width: 100%;
     text-align: center;
     margin-top: 80px;
     margin-bottom: 80px;
-    opacity: 0.5;
+    opacity: 0.7;
     font-size: 24px;
     font-style: italic;
+
+    & a {
+        text-decoration: underline;
+    }
+`;
+
+const CourseLink = styled.a`
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-shadow: ${props => props.theme.shadows.md};
+    ${props => props.color ? `
+        background-color: ${props.color};
+        color: ${readableColor(props.color)};
+        &:hover {
+            background-color: ${lighten(0.1, props.color)};
+            text-decoration: none;
+            color: ${readableColor(props.color)};
+        }
+    ` : `
+        background-color: ${props.theme.colors.cardBackground};
+        color: ${props.theme.colors.text};
+        &:hover {
+            text-decoration: none;
+            color: ${readableColor(props.color)};
+        }
+
+        @media (prefers-color-scheme: dark) {
+            background-color: ${props.theme.colors.darkBackground};
+        }
+    `}
+
+    &:hover {
+        box-shadow: ${props => props.theme.shadows.lg};
+    }
+
+    & .fa-arrow-right {
+        position: relative;
+        left: 0;
+        transition: left 0.2s;
+    }
+
+    &:hover .fa-arrow-right {
+        left: ${props => props.theme.spacing.xs};
+    }
+
+    padding: ${props => props.theme.spacing.md};
+    transition: box-shadow 0.2s, background-color 0.2s;
 `;
 
 function Course({ course: { slug, name, year, color } }) {
-    return <p>
-        <Link href="/classnotes/[course]" as={`/classnotes/${slug}`}>
-            <a>{name}</a>
+    return <Col xs={12} sm={4}>
+        <Link href="/classnotes/[course]" as={`/classnotes/${slug}`} passHref>
+            <CourseLink className="rounded" color={color}>{name} <FontAwesomeIcon icon={faArrowRight} /></CourseLink>
         </Link>
-    </p>
+    </Col>
 }
 
 export default function ClassNotes({courses}) {
@@ -30,9 +81,11 @@ export default function ClassNotes({courses}) {
         </Breadcrumb>
         <h1>Notes for BCA Students</h1>
         <p>A collection of notes from various classes at BCA. No guarantees as to the quality or accuracy of these notes, but they're here in the off chance that they're helpful.</p>
-        {courses.map(course => (
-            <Course key={course.id} course={course} /> 
-        ))}
+        <Row>
+            {courses.map(course => (
+                <Course key={course.id} course={course} />
+            ))}
+        </Row>
         <NotesFooter>
             <a href="https://genius.com/Porter-robinson-look-at-the-sky-lyrics">Stay hopeful.</a>
         </NotesFooter>
