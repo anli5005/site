@@ -24,7 +24,7 @@ export default function CourseNotes({name, slug, notes, errorCode}) {
 
             return <p key={data.id}>
                 <Link href="/classnotes/[course]/[slug]" as={`/classnotes/${slug}/${data.slug}`}>
-                    <a>{data.title.length > 0 && `${data.title} • `}{dateStr}</a>
+                    <a>{data.title.length > 0 && `${data.title}${data.hideDate ? "" : " • "}`}{!data.hideDate && dateStr}</a>
                 </Link>
             </p>;
         })}
@@ -59,7 +59,7 @@ export async function getServerSideProps({ params, res }) {
 
     const notesURL = "https://wp.anli.dev/wp-json/wp/v2/classnotes?" + stringify({
         courses: data[0].id,
-        _fields: "id,date_gmt,slug,title",
+        _fields: "id,date_gmt,slug,title,hide_date",
         per_page: 25
     });
     const notesResponse = await fetch(notesURL);
@@ -83,7 +83,8 @@ export async function getServerSideProps({ params, res }) {
             id: notes.id,
             slug: notes.slug,
             title: notes.title.rendered,
-            date: notes.date_gmt
+            date: notes.date_gmt,
+            hideDate: !!notes.hide_date
         }))
     };
 

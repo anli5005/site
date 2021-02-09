@@ -21,7 +21,7 @@ const NotesContent = styled.div`
     }
 `;
 
-export default function Notes({ courseName, courseSlug, title, date, content, errorCode }) {
+export default function Notes({ courseName, courseSlug, title, date, content, errorCode, hideDate }) {
     if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     const dateStr = DateTime.fromISO(date, { zone: "utc" }).setZone(typeof window === "undefined" ? "America/New_York" : "local").toLocaleString({
@@ -30,14 +30,14 @@ export default function Notes({ courseName, courseSlug, title, date, content, er
         year: "numeric",
     });
 
-    return <Page title={(title.length === 0 ? "" : `${title} - `) + dateStr} logoAccent="moreAccent">
+    return <Page title={(title.length === 0 ? "" : `${title}${hideDate ? "" : " - "}`) + (hideDate ? "" : dateStr)} logoAccent="moreAccent">
         <Breadcrumb>
             <Link href="/misc" passHref><Breadcrumb.Item>More Stuff</Breadcrumb.Item></Link>
             <Link href="/classnotes" passHref><Breadcrumb.Item>Class Notes</Breadcrumb.Item></Link>
             <Link href="/classnotes/[course]" as={`/classnotes/${courseSlug}`} passHref><Breadcrumb.Item>{courseName}</Breadcrumb.Item></Link>
             <Breadcrumb.Item active>{title}</Breadcrumb.Item>
         </Breadcrumb>
-        {title.length > 0 && <NotesDate className="h3">{dateStr}</NotesDate>}
+        {(title.length > 0 && !hideDate) && <NotesDate className="h3">{dateStr}</NotesDate>}
         <h1>{title.length === 0 ? dateStr : title}</h1>
         <NotesContent><PostContent html={content} /></NotesContent>
         <p><em><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5Sw69CWSVeZ3XDWdSoD0EIvBRbaZQ_MFOmg-kz1hbnyrtWw/viewform?usp=sf_link">Report an issue</a></em></p>
@@ -73,7 +73,7 @@ export async function getServerSideProps({ params, res }) {
     const notesURL = "https://wp.anli.dev/wp-json/wp/v2/classnotes?" + stringify({
         courses: courseData[0].id,
         slug,
-        _fields: "id,date_gmt,slug,title,content"
+        _fields: "id,date_gmt,slug,title,content,hide_date"
     });
     const notesResponse = await fetch(notesURL);
     const notesData = await notesResponse.json();
@@ -95,7 +95,8 @@ export async function getServerSideProps({ params, res }) {
         slug: notesData[0].slug,
         title: notesData[0].title.rendered,
         date: notesData[0].date_gmt,
-        content: notesData[0].content.rendered
+        content: notesData[0].content.rendered,
+        hideDate: !!notesData[0].hide_date
     };
 
     return { props };
