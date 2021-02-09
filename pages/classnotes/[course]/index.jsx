@@ -59,7 +59,8 @@ export async function getServerSideProps({ params, res }) {
 
     const notesURL = "https://wp.anli.dev/wp-json/wp/v2/classnotes?" + stringify({
         courses: data[0].id,
-        _fields: "id,date_gmt,slug,title"
+        _fields: "id,date_gmt,slug,title",
+        per_page: 25
     });
     const notesResponse = await fetch(notesURL);
     const notesData = await notesResponse.json();
