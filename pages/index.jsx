@@ -9,10 +9,6 @@ import Link from 'next/link';
 import Footer, { FooterList } from 'components/Footer';
 import QuickLinks from 'components/QuickLinks';
 
-const HalfOpacity = styled.span`
-    opacity: 0.5;
-`;
-
 const BigRoundedBox = styled.div`
     border-radius: 32px;
     background-color: ${props => props.theme.colors.secondaryBackground};
@@ -123,7 +119,7 @@ export default function Home({posts, projects}) {
                 <div className="ml-md-5 mt-3 mt-md-0 text-center text-md-left">
                     <h1>
                         <NameHeader className="mb-0">Anthony Li</NameHeader>
-                        <SomewhatDeemphasizedText className="h4 mb-4">anli<HalfOpacity>5005</HalfOpacity></SomewhatDeemphasizedText>
+                        <SomewhatDeemphasizedText className="h4 mb-4">anli5005</SomewhatDeemphasizedText>
                     </h1>
                     <p>I'm a maker, programmer, and entrepreneur. Some of my stuff might be helpful or entertaining. BCA ATCS '22</p>
                     <FooterList>
