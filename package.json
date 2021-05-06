@@ -28,7 +28,7 @@
     "react-bootstrap": "^1.4.3",
     "react-dom": "16.13.1",
     "react-syntax-highlighter": "^15.4.3",
-    "sanitize-html": "^1.27.5",
+    "sanitize-html": "^2.3.2",
     "sass": "^1.32.4",
     "styled-components": "^5.2.1"
   }
