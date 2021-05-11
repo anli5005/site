@@ -17,7 +17,7 @@
     "bootstrap": "^4.5.3",
     "he": "^1.2.0",
     "html-to-react": "^1.4.5",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "lodash.range": "^3.2.0",
     "luxon": "^1.25.0",
     "next": "^10.0.5",
