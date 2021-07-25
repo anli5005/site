@@ -155,7 +155,8 @@ export default function Home({posts, projects}) {
                     {content: "Email", href: "mailto:me@anli.dev", type: "external"}
                 ]} gradient={[colors.contactGradientStart, colors.contactGradientEnd]} />
                 <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} links={[
-                    {content: "Class Notes", href: "/classnotes"}
+                    {content: "Class Notes", href: "/classnotes"},
+                    {content: "UNIX Timestamper", href: "/timestamper"}
                 ]} />
             </div>
         </Container>
