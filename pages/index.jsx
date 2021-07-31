@@ -139,7 +139,7 @@ export default function Home({posts, projects}) {
         <Container className="mb-5 px-0">
             <div className="d-flex w-100 flex-wrap justify-content-center">
                 <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
-                    // {content: "Resumé", href: "/[page]", as: "/resume"}
+                    {content: "Contact", href: "/[page]", as: "/about#contact"}
                 ]} gradient={[colors.aboutGradientStart, colors.aboutGradientEnd]} />
                 <Links icon={faComment} title="Blog" href="/blog" gradient={[colors.blogGradientStart, colors.blogGradientEnd]} links={posts.map(post => ({
                     content: post.title,
@@ -151,9 +151,6 @@ export default function Home({posts, projects}) {
                     href: "projects/[slug]",
                     as: `/projects/${project.slug}`
                 }))} />
-                <Links icon={faAddressBook} title="Contact" href="/[page]" as="/contact" links={[
-                    {content: "Email", href: "mailto:me@anli.dev", type: "external"}
-                ]} gradient={[colors.contactGradientStart, colors.contactGradientEnd]} />
                 <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} links={[
                     {content: "Class Notes", href: "/classnotes"},
                     {content: "UNIX Timestamper", href: "/timestamper"}

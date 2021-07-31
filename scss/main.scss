@@ -132,3 +132,9 @@ h1 {
 }
 
 @import 'dark';
+
+.anchor {
+  position: relative;
+  top: $anchor-offset;
+  visibility: hidden;
+}

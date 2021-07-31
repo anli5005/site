@@ -31,19 +31,6 @@ const PrimaryNav = styled(Nav)`
     }
 `;
 
-const SecondaryNav = styled(({children, isVisible, ...rest}) => <Nav {...rest}>{children}</Nav>)`
-    @media (max-width: ${props => props.theme.breakpoints.sm - 1}px) {
-        background-color: ${props => props.theme.colors.light.secondaryBackground};
-        width: 100%;
-        flex-direction: row;
-        display: ${props => props.isVisible ? "flex" : "none"};
-    }
-
-    @media (max-width: ${props => props.theme.breakpoints.sm - 1}px) and (prefers-color-scheme: dark) {
-        background-color: ${props => darken(0.1, props.theme.colors.dark.secondaryBackground)};
-    }
-`;
-
 const BrandLink = styled.a`
     text-decoration: none;
 
@@ -79,8 +66,8 @@ const LinkText = styled.span`
 `;
 
 const CustomNavLink = styled(Nav.Link)`
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
     transition: none;
 
     @media (min-width: ${props => props.theme.breakpoints.md}px) {
@@ -108,11 +95,6 @@ const CustomNavLink = styled(Nav.Link)`
     ` : ""}
 `;
 
-const NavExpandLink = styled.a`
-    height: 56px;
-    line-height: 56px;
-`;
-
 function NavigationLink({href, as, children, icon, compact, active, activeIcon, gradient}) {
     let inner;
     const effectiveIcon = (active && activeIcon) || icon;
@@ -135,7 +117,6 @@ function NavigationLink({href, as, children, icon, compact, active, activeIcon, 
 }
 
 export default function Navigation({accent}) {
-    const [secondaryNavVisible, setSecondaryNavVisible] = useState(false);
     const {query, pathname} = useRouter();
     const theme = useContext(ThemeContext);
 
@@ -182,23 +163,6 @@ export default function Navigation({accent}) {
             >
                 Portfolio
             </NavigationLink>
-        </PrimaryNav>
-        {typeof window !== undefined && <NavExpandLink className="d-block d-sm-none px-2 px-sm-3" href="#" onClick={(e) => {
-            e.preventDefault();
-            setSecondaryNavVisible(!secondaryNavVisible);
-        }}><FontAwesomeIcon icon={secondaryNavVisible ? faChevronDown : faChevronRight} /></NavExpandLink>}
-        <SecondaryNav isVisible={secondaryNavVisible}>
-            <NavigationLink
-                icon={faAddressBook}
-                activeIcon={fasAddressBook}
-                href="/[page]" 
-                as="/contact"
-                active={pathname === "/[page]" && query.page === "contact"}
-                compact
-                gradient={[theme.colors.contactGradientStart, theme.colors.contactGradientEnd]}
-            >
-                Contact
-            </NavigationLink>
             <NavigationLink
                 icon={faEllipsisH}
                 activeIcon={fasEllipsisH}
@@ -209,6 +173,6 @@ export default function Navigation({accent}) {
             >
                 Misc
             </NavigationLink>
-        </SecondaryNav>
+        </PrimaryNav>
     </CustomNavbar>
 }
