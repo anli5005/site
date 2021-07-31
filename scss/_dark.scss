@@ -88,6 +88,18 @@
   .breadcrumb-item + .breadcrumb-item::before, .breadcrumb-item.active {
     color: rgba($dark-text, 0.4);
   }
+
+  .form-control {
+    background-color: $dark;
+    border-color: $dark;
+    color: $dark-text;
+
+    &:focus {
+      background-color: lighten($dark, 5%);
+      color: $dark-text;
+      border-color: lighten($dark, 30%);
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
