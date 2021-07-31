@@ -25,6 +25,11 @@ module.exports = {
                 source: "/hand-sanitizer-game",
                 destination: "https://code.anli.dev/hand-sanitizer-game",
                 permanent: true
+            },
+            {
+                source: "/contact",
+                destination: "/about#contact",
+                permanent: true
             }
         ];
     }
