@@ -10,8 +10,8 @@ const TimestampOutput = styled.code`
     padding: 0 ${({theme}) => theme.spacing.xs};
 `;
 
-export default function Timestamper() {
-    const [input, setInput] = useState("now");
+export default function Timestamper({initialInput}) {
+    const [input, setInput] = useState(initialInput || "now");
     const date = parseDate(input);
 
     return <Page title="UNIX Timestamper" logoAccent="moreAccent">
@@ -19,9 +19,12 @@ export default function Timestamper() {
         <p className="lead">A small utility</p>
 
         <div className="form-group mt-5">
-            <label for="timestamper-input">Enter a date:</label>
-            <input type="text" class="form-control" id="timestamper-input" value={input} onChange={e => setInput(e.target.value)} />
-            <p className="mt-1" style={{opacity: 0.7}}><small>{date?.toString() || "Unable to parse"}</small></p>
+            <label for="timestamper-input">
+                <div>Enter a date:</div>
+                <div style={{opacity: 0.7}}><small><i>Examples: now, tomorrow, july 31, 8pm</i></small></div>
+            </label>
+            <input type="text" className="form-control" id="timestamper-input" value={input} onChange={e => setInput(e.target.value)} />
+            <p className="mt-1"><small>{date?.toString() || "Unable to parse"}</small></p>
         </div>
 
         <div className="mt-5">
@@ -29,4 +32,8 @@ export default function Timestamper() {
             <div>{date ? <TimestampOutput className="lead">{Math.floor(date.getTime() / 1000)}</TimestampOutput> : <span className="lead">???</span>}</div>
         </div>
     </Page>
+}
+
+export function getInitialProps() {
+    return {}; // Force the page to render SSO every time.
 }

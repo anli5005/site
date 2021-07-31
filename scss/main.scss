@@ -28,6 +28,12 @@ pre {
   color: var(--pre-color);
 }
 
+h1 {
+  @include media-breakpoint-down("sm") {
+    font-size: $h1-font-size-sm;
+  }
+}
+
 .pointer-events-none {
   pointer-events: none !important;
 }
