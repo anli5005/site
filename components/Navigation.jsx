@@ -45,8 +45,9 @@ const SecondaryNav = styled(({children, isVisible, ...rest}) => <Nav {...rest}>{
 `;
 
 const BrandLink = styled.a`
+    text-decoration: none;
+
     &:hover {
-        text-decoration: none;
         opacity: 0.6;
     }
 
@@ -80,6 +81,7 @@ const LinkText = styled.span`
 const CustomNavLink = styled(Nav.Link)`
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+    transition: none;
 
     @media (min-width: ${props => props.theme.breakpoints.md}px) {
         padding-left: 1rem;

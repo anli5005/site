@@ -19,7 +19,7 @@ export default function SingleProject({errorCode, project}) {
         </Breadcrumb>
         <h1>{project.title}{project.year && <> <small className="text-secondary">{project.year}</small></>}</h1>
         {project.tags.length > 0 && <p>{project.tags.map(({id, name}) =>
-            <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
+            <Badge bg="dark" key={id} className="mr-1">{decode(name)}</Badge>
         )}</p>}
         <p className="lead">{project.shortDescription}</p>
         {project.url && <p className="mb-5"><ProjectButton project={project} /></p>}

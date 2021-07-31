@@ -7,6 +7,7 @@ import { BlogPaginationItem, CustomPagination } from '../blog/index';
 import { ErrorComponent } from '../_error';
 import ProjectButton from 'components/ProjectButton';
 import { decode } from 'he';
+import { lighten } from 'polished';
 
 function urlForPage(page) {
     if (page === 1) {
@@ -24,14 +25,14 @@ const Project = styled.a`
     height: 100%;
     padding-bottom: 4.75rem;
     transition: background-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
 
     &:hover, &:active {
-        text-decoration: none;
         color: ${props => props.theme.colors.text};
         box-shadow: ${props => props.theme.shadows.lg};
 
         @media (prefers-color-scheme: dark) {
-            background-color: ${props => props.theme.colors.darkBackground};
+            background-color: ${props => lighten(0.02, props.theme.colors.dark.cardBackground)};
         }
     }
 `;
@@ -51,21 +52,23 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
         <h1>Portfolio</h1>
         <p className="lead mb-5">I've made many things. Here are some of them.</p>
 
-        <Row className="pl-3">
+        <Row>
             {projects.map(project => {
-                return <div className="col-12 col-md-6 mb-3 position-relative pl-0" key={project.slug}>
-                    <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
-                        <Project className="rounded px-4 pt-4">
-                            <h2>{project.title}{project.year && <> <small className="text-secondary">{project.year}</small></>}</h2>
-                            {project.tags.length > 0 && <p>{project.tags.map(({ id, name }) =>
-                                <Badge variant="dark" key={id} className="mr-1">{decode(name)}</Badge>
-                            )}</p>}
-                            <p>{project.shortDescription}</p>
-                        </Project>
-                    </Link>
-                    {project.url && <ProjectButtonContainer>
-                        <ProjectButton project={project} />
-                    </ProjectButtonContainer>}
+                return <div className="col-12 col-md-6 mb-3" key={project.slug}>
+                    <div className="position-relative">
+                        <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
+                            <Project className="rounded px-4 pt-4">
+                                <h2>{project.title}{project.year && <> <small className="text-secondary">{project.year}</small></>}</h2>
+                                {project.tags.length > 0 && <p>{project.tags.map(({ id, name }) =>
+                                    <Badge bg="dark" key={id} className="me-1">{decode(name)}</Badge>
+                                )}</p>}
+                                <p>{project.shortDescription}</p>
+                            </Project>
+                        </Link>
+                        {project.url && <ProjectButtonContainer>
+                            <ProjectButton project={project} />
+                        </ProjectButtonContainer>}
+                    </div>
                 </div>;
             })}
         </Row>

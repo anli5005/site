@@ -2,7 +2,7 @@ import Page from 'components/Page';
 import { Breadcrumb } from 'react-bootstrap';
 import Link from 'next/link';
 import PostContent from 'components/PostContent';
-import { PostDate } from 'components/ComponentVarients';
+import { PostDate } from 'components/ComponentVariants';
 import styled from 'styled-components';
 import { DateTime } from 'luxon';
 import { ErrorComponent } from '../../_error';
@@ -31,7 +31,7 @@ export default function SinglePost({errorCode, post}) {
             <Link href="/blog" passHref><Breadcrumb.Item>Blog</Breadcrumb.Item></Link>
             <Breadcrumb.Item active>{post.title}</Breadcrumb.Item>
         </Breadcrumb>
-        <h1 className="mt-5">{post.title}</h1>
+        <h1>{post.title}</h1>
         <CustomPostDate>{dateStr}</CustomPostDate>
         <PostContent html={post.content} />
     </Page>;

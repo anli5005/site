@@ -81,10 +81,6 @@
     color: lighten($dark-bg, 40%);
   }
 
-  .breadcrumb {
-    background-color: lighten($dark-bg, 5%);
-  }
-
   .breadcrumb-item + .breadcrumb-item::before, .breadcrumb-item.active {
     color: rgba($dark-text, 0.4);
   }

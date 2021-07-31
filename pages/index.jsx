@@ -90,7 +90,7 @@ const LinksList = styled.ul`
 function Links({icon, title, links, href, as, gradient}) {
     return <LinksContainer>
         <div>
-            <Link href={href} as={as} passHref><LinksTitle gradient={gradient}><FontAwesomeIcon className="mr-2" icon={icon} />{title}<FontAwesomeIcon className="ml-2" icon={faArrowRight} /></LinksTitle></Link>
+            <Link href={href} as={as} passHref><LinksTitle gradient={gradient}><FontAwesomeIcon className="me-2" icon={icon} />{title}<FontAwesomeIcon className="ms-2" icon={faArrowRight} /></LinksTitle></Link>
             {links && <LinksList>
                 {links.map(({content, href, as, type}, index) => {
                     const inner = <Fragment>{content}</Fragment>
@@ -116,7 +116,7 @@ export default function Home({posts, projects}) {
         <Container className="px-3 my-3 my-sm-5">
             <BigRoundedBox className="py-4 py-sm-5 px-3 px-md-5 px-lg-3 d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <Logo className="flex-grow-0 flex-shrink-0" size={150} circle />
-                <div className="ml-md-5 mt-3 mt-md-0 text-center text-md-left">
+                <div className="ms-md-5 mt-3 mt-md-0 text-center text-md-start">
                     <h1>
                         <NameHeader className="mb-0">Anthony Li</NameHeader>
                         <SomewhatDeemphasizedText className="h4 mb-4">anli5005</SomewhatDeemphasizedText>
@@ -124,13 +124,13 @@ export default function Home({posts, projects}) {
                     <p>I'm a maker, programmer, and entrepreneur. Some of my stuff might be helpful or entertaining. BCA ATCS '22</p>
                     <FooterList>
                         <li>
-                            <a href="https://github.com/anli5005">GitHub<FontAwesomeIcon className="ml-2" icon={faExternalLink} /></a>
+                            <a href="https://github.com/anli5005">GitHub<FontAwesomeIcon className="ms-2" icon={faExternalLink} /></a>
                         </li>
                         <li>
-                            <a href="https://twitter.com/anli5005">Twitter<FontAwesomeIcon className="ml-2" icon={faExternalLink} /></a>
+                            <a href="https://twitter.com/anli5005">Twitter<FontAwesomeIcon className="ms-2" icon={faExternalLink} /></a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/anlidev/">LinkedIn<FontAwesomeIcon className="ml-2" icon={faExternalLink} /></a>
+                            <a href="https://www.linkedin.com/in/anlidev/">LinkedIn<FontAwesomeIcon className="ms-2" icon={faExternalLink} /></a>
                         </li>
                     </FooterList>
                 </div>

@@ -2,6 +2,7 @@ import Router from 'next/router';
 import { Parser, ProcessNodeDefinitions } from 'html-to-react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import OneDark from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark';
+import React from 'react';
 
 const parser = new Parser();
 

@@ -1,5 +1,5 @@
 $bg: #edf4ff;
-$secondary: #737c98;
+$secondary: #697bb3;
 $light: #d0e1ff;
 $primary: #337bed;
 $text: #0f2d5b;
@@ -9,7 +9,7 @@ $dark-bg: #111c35;
 $dark-text: $light;
 $dark-link: #82b4ff;
 
-$theme-colors: (
+$custom-colors: (
   "bg": $bg,
   "text": $text,
   "dark-bg": $dark-bg,
@@ -39,5 +39,3 @@ $navbar-social-link-height: 30px;
 $box-shadow-lg: 0 0.6rem 1rem rgba(black, .33);
 
 $fancy-link-width: 250px;
-
-$breadcrumb-bg: darken($bg, 3%);

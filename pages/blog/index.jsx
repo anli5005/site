@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { lighten } from "polished";
 import { stringify } from 'querystring';
 import { Pagination } from 'react-bootstrap';
-import { PostDate } from 'components/ComponentVarients';
+import { PostDate } from 'components/ComponentVariants';
 import range from 'lodash.range';
 import PostContent from 'components/PostContent';
 import { ErrorComponent } from '../_error';
@@ -15,12 +15,13 @@ const Post = styled.article`
 `;
 
 const PostLink = styled.a`
+    text-decoration: none;
+
     @media (prefers-color-scheme: dark) {
         color: ${props => lighten(0.1, props.theme.colors.dark.link)};
 
         &:hover {
             color: ${props => props.theme.colors.dark.link};
-            text-decoration: none;
         }
     }
 `;

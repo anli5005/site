@@ -40,6 +40,14 @@ export const FooterList = styled.ul`
         padding-right: 0;
         border-right: 0;
     }
+
+    & a {
+        text-decoration: none;
+    }
+
+    & a:hover, & a:active, & a:focus {
+        text-decoration: underline;
+    }
 `;
 
 export default function Footer() {
