@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Logo from 'components/Logo';
 import styled, { useTheme, ThemeContext } from 'styled-components';
 import { NextSeo } from 'next-seo';
@@ -10,7 +10,11 @@ import Footer, { FooterList } from 'components/Footer';
 import QuickLinks from 'components/QuickLinks';
 
 const BigRoundedBox = styled.div`
-    border-radius: 32px;
+    @media (min-width: ${props => props.theme.breakpoints.md}px) {
+        border-radius: 32px;
+    }
+
+    border-radius: 16px;
     background-color: ${props => props.theme.colors.secondaryBackground};
     color: ${props => props.theme.colors.primary};
 
@@ -29,18 +33,17 @@ const SomewhatDeemphasizedText = styled.div`
     color: ${props => props.theme.colors.link};
 `;
 
-const LinksContainer = styled.div`
-    padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
-    width: 100%;
+const LinksRow = styled(Row)`
+    --bs-gutter-x: ${props => props.theme.spacing.md};
+    --bs-gutter-y: ${props => props.theme.spacing.md};
+`;
 
-    @media (min-width: ${props => props.theme.breakpoints.md}px) {
-        padding: ${props => props.theme.spacing.lg};
-        width: auto;
-        min-width: 280px;
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-    }
+const LinksContainer = styled.div`
+    padding: ${props => props.theme.spacing.md};
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    background-color: ${props => props.theme.colors.secondaryBackground};
 `;
 
 const LinksTitle = styled.a`
@@ -88,11 +91,11 @@ const LinksList = styled.ul`
 `;
 
 function Links({icon, title, links, href, as, gradient}) {
-    return <LinksContainer>
-        <div>
+    return <Col xs={12} md={6}>
+        <LinksContainer>
             <Link href={href} as={as} passHref><LinksTitle gradient={gradient}><FontAwesomeIcon className="me-2" icon={icon} />{title}<FontAwesomeIcon className="ms-2" icon={faArrowRight} /></LinksTitle></Link>
             {links && <LinksList>
-                {links.map(({content, href, as, type}, index) => {
+                {links.map(({ content, href, as, type }, index) => {
                     const inner = <Fragment>{content}</Fragment>
 
                     return <li key={index}>
@@ -100,8 +103,8 @@ function Links({icon, title, links, href, as, gradient}) {
                     </li>;
                 })}
             </LinksList>}
-        </div>
-    </LinksContainer>;
+        </LinksContainer>
+    </Col>;
 }
 
 export default function Home({posts, projects}) {
@@ -113,8 +116,8 @@ export default function Home({posts, projects}) {
             url: "https://anli.dev",
             description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22"
         }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22" />
-        <Container className="px-3 my-3 my-sm-5">
-            <BigRoundedBox className="py-4 py-sm-5 px-3 px-md-5 px-lg-3 d-flex flex-column flex-md-row align-items-center justify-content-center">
+        <Container className="px-3 my-3 mt-sm-5 mb-sm-4">
+            <BigRoundedBox className="py-4 py-sm-5 px-3 px-md-5 d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <Logo className="flex-grow-0 flex-shrink-0" size={150} circle />
                 <div className="ms-md-5 mt-3 mt-md-0 text-center text-md-start">
                     <h1>
@@ -136,8 +139,8 @@ export default function Home({posts, projects}) {
                 </div>
             </BigRoundedBox>
         </Container>
-        <Container className="mb-5 px-0">
-            <div className="d-flex w-100 flex-wrap justify-content-center">
+        <Container className="mb-5 px-3">
+            <LinksRow>
                 <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
                     {content: "Contact", href: "/[page]", as: "/about#contact"}
                 ]} gradient={[colors.aboutGradientStart, colors.aboutGradientEnd]} />
@@ -155,7 +158,7 @@ export default function Home({posts, projects}) {
                     {content: "Class Notes", href: "/classnotes"},
                     {content: "UNIX Timestamper", href: "/timestamper"}
                 ]} />
-            </div>
+            </LinksRow>
         </Container>
         <div className="mb-5">
             <QuickLinks />
