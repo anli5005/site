@@ -11,8 +11,12 @@ import 'nprogress/nprogress.css';
 import theme from '../theme';
 import { DefaultSeo } from 'next-seo';
 
-Router.events.on("routeChangeStart", () => NProgress.start());
-["routeChangeComplete", "routeChangeError"].forEach(event => Router.events.on(event, () => NProgress.done()));
+Router.events.on("routeChangeStart", (_, {shallow}) => {
+    if (!shallow) NProgress.start();
+});
+["routeChangeComplete", "routeChangeError"].forEach(event => Router.events.on(event, (_, {shallow}) => {
+    if (!shallow) NProgress.done();
+}));
 
 const GlobalStyle = createGlobalStyle`
 :root {

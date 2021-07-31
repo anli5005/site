@@ -1,7 +1,9 @@
 import { parseDate } from 'chrono-node';
 import Page from 'components/Page';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useDebounce } from 'use-debounce';
 
 const TimestampOutput = styled.code`
     background-color: ${({theme}) => theme.colors.secondaryBackground};
@@ -10,16 +12,33 @@ const TimestampOutput = styled.code`
     padding: 0 ${({theme}) => theme.spacing.xs};
 `;
 
-export default function Timestamper({initialInput}) {
-    const [input, setInput] = useState(initialInput || "now");
-    const date = parseDate(input);
+const defaultInput = "now";
+
+function Timestamper({initialInput}) {
+    const [input, setInput] = useState(initialInput || defaultInput);
+
+    const [debouncedInput] = useDebounce(input, 700);
+    const router = useRouter();
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const query = (debouncedInput === defaultInput) ? "" : `?date=${encodeURIComponent(debouncedInput)}`;
+            router.replace(query, query, {shallow: true});
+        }
+    }, [debouncedInput]);
+
+    // This prevents the timestamp from suddenly changing between renders
+    const dateRef = useRef({});
+    if (dateRef.current.input !== input) {
+        dateRef.current = {input, date: parseDate(input)};
+    }
+    const date = dateRef.current.date;
 
     return <Page title="UNIX Timestamper" logoAccent="moreAccent">
         <h1>UNIX Timestamper</h1>
         <p className="lead">A small utility</p>
 
         <div className="form-group mt-5">
-            <label for="timestamper-input">
+            <label htmlFor="timestamper-input">
                 <div>Enter a date:</div>
                 <div style={{opacity: 0.7}}><small><i>Examples: now, tomorrow, july 31, 8pm</i></small></div>
             </label>
@@ -34,6 +53,9 @@ export default function Timestamper({initialInput}) {
     </Page>
 }
 
-export function getInitialProps() {
-    return {}; // Force the page to render SSO every time.
-}
+Timestamper.getInitialProps = ({query}) => {
+    if (typeof query.date === "string") return {initialInput: query.date};
+    return {initialInput: defaultInput};
+};
+
+export default Timestamper;
