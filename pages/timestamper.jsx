@@ -44,6 +44,7 @@ function Timestamper({initialInput}) {
     return <Page title="UNIX Timestamper" logoAccent="moreAccent">
         <h1>UNIX Timestamper</h1>
         <p className="lead">A small utility</p>
+        <noscript><p><strong>Enable JavaScript to use your local time zone.</strong></p></noscript>
 
         <form className="form-group mt-5" method="get" onSubmit={e => e.preventDefault()}>
             <label htmlFor="timestamper-input">
