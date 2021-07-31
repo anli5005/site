@@ -19,7 +19,7 @@ const definedDates = new Map([
 ]);
 
 function getDate(string) {
-    return parseDate(definedDates.get(string) || string);
+    return parseDate(definedDates.get(string.toLowerCase()) || string);
 }
 
 function Timestamper({initialInput}) {
