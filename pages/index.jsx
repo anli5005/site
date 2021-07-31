@@ -39,41 +39,45 @@ const LinksRow = styled(Row)`
 `;
 
 const LinksContainer = styled.div`
-    padding: ${props => props.theme.spacing.md};
     border-radius: 16px;
     width: 100%;
     height: 100%;
     background-color: ${props => props.theme.colors.secondaryBackground};
+    overflow: hidden;
 `;
 
 const LinksTitle = styled.a`
-    font-size: 1.2em;
+    font-family: ${props => props.theme.fonts.heading};
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     display: block;
-    margin-bottom: ${props => props.theme.spacing.xs};
-    display: inline-block;
-    ${({gradient, theme}) => gradient ? `
-        color: ${theme.colors.text};
-        background-image: linear-gradient(to right, ${gradient.join(",")});
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    width: 100%;
+    text-decoration: none;
+    background-color: ${props => props.theme.colors.darkBackground};
+    color: white;
+    padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+    ${({gradient}) => gradient ? `
+        background: linear-gradient(to right, ${gradient.join(",")});
     ` : ""}
 
     & > svg:first-child {
         width: 1em;
-        ${props => props.gradient ? `color: ${props.gradient[0]};` : ""}
     }
 
     & > svg:last-child {
-        ${props => props.gradient ? `color: ${props.gradient[1]};` : ""}
+        position: relative;
+        left: 0;
+        transition: left 0.2s;
     }
 
-    &:hover {
-        ${props => props.gradient ? `
-            @media (prefers-color-scheme: dark) {
-                -webkit-text-fill-color: rgba(255, 255, 255, 0.4);
-            }
-
-            -webkit-text-fill-color: rgba(0, 0, 0, 0.2);
+    &:hover, &:active, &:focus {
+        color: white;
+        & > svg:last-child {
+            left: 4px;
+        }
+        ${({gradient}) => gradient ? `
+            background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(to right, ${gradient.join(",")});
         ` : ""}
     }
 `;
@@ -81,12 +85,14 @@ const LinksTitle = styled.a`
 const LinksList = styled.ul`
     margin-bottom: 0;
     list-style: none;
-    padding-left: 1.7em;
+    padding: ${props => props.theme.spacing.md};
 
-    @media (min-width: ${props => props.theme.breakpoints.md}px) {
-        & > li {
-            font-size: 0.9em;
-        }
+    & > li > a {
+        text-decoration: none;
+    }
+
+    & > li > a:hover, & > li > a:active, & > li > a:focus {
+        text-decoration: underline;
     }
 `;
 
@@ -143,18 +149,18 @@ export default function Home({posts, projects}) {
             <LinksRow>
                 <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
                     {content: "Contact", href: "/[page]", as: "/about#contact"}
-                ]} gradient={[colors.aboutGradientStart, colors.aboutGradientEnd]} />
-                <Links icon={faComment} title="Blog" href="/blog" gradient={[colors.blogGradientStart, colors.blogGradientEnd]} links={posts.map(post => ({
+                ]} gradient={colors.homepageGradients.about} />
+                <Links icon={faComment} title="Blog" href="/blog" gradient={colors.homepageGradients.blog} links={posts.map(post => ({
                     content: post.title,
                     href: "/blog/[id]/[slug]",
                     as: `/blog/${post.id}/${post.slug}`
                 }))} />
-                <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={[colors.portfolioGradientStart, colors.portfolioGradientEnd]} links={projects.map(project => ({
+                <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={colors.homepageGradients.portfolio} links={projects.map(project => ({
                     content: project.title,
                     href: "projects/[slug]",
                     as: `/projects/${project.slug}`
                 }))} />
-                <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={[colors.moreGradientStart, colors.moreGradientEnd]} links={[
+                <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={colors.homepageGradients.more} links={[
                     {content: "Class Notes", href: "/classnotes"},
                     {content: "UNIX Timestamper", href: "/timestamper"}
                 ]} />

@@ -16,8 +16,6 @@ const theme = {
             blogGradientEnd: "#911d32",
             portfolioGradientStart: "#0b82d6",
             portfolioGradientEnd: "#0367ad",
-            contactGradientStart: "#12945b",
-            contactGradientEnd: "#1b7d52",
             moreGradientStart: "#555555",
             moreGradientEnd: "#333333"
         },
@@ -37,8 +35,6 @@ const theme = {
             blogGradientEnd: "#ff4444",
             portfolioGradientStart: "#79beef",
             portfolioGradientEnd: "#3dafff",
-            contactGradientStart: "#0ee386",
-            contactGradientEnd: "#1db673",
             moreGradientStart: "#bbbbbb",
             moreGradientEnd: "#999999"
         },
@@ -56,15 +52,19 @@ const theme = {
             ["blogGradientEnd", "blog-1"],
             ["portfolioGradientStart", "projects-0"],
             ["portfolioGradientEnd", "projects-1"],
-            ["contactGradientStart", "contact-0"],
-            ["contactGradientEnd", "contact-1"],
             ["moreGradientStart", "more-0"],
             ["moreGradientEnd", "more-1"]
         ],
+        homepageGradients: {
+            about: ["#12945b", "#1b7d52"],
+            blog: ["#e64040", "#bf2844"],
+            portfolio: ["#0b82d6", "#0367ad"],
+            more: ["#777777", "#666666"]
+        },
         primary: "#337bed",
         secondary: "#737c98",
         darkBackground: "#25416c",
-        blogAccent: "#ed930c",
+        blogAccent: "#ff0000",
         moreAccent: "#aaaaaa",
         portfolioAccent: "#79beef"
     },
