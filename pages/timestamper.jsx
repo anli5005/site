@@ -13,6 +13,9 @@ const TimestampOutput = styled.code`
 `;
 
 const defaultInput = "now";
+const definedDates = new Map([
+    ["vampire time", "4:30am"]
+]);
 
 function Timestamper({initialInput}) {
     const [input, setInput] = useState(initialInput || defaultInput);
@@ -29,7 +32,7 @@ function Timestamper({initialInput}) {
     // This prevents the timestamp from suddenly changing between renders
     const dateRef = useRef({});
     if (dateRef.current.input !== input) {
-        dateRef.current = {input, date: parseDate(input)};
+        dateRef.current = {input, date: parseDate(definedDates.get(input) || input)};
     }
     const date = dateRef.current.date;
 
