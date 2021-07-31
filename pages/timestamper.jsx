@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap';
 import { parseDate } from 'chrono-node';
 import Page from 'components/Page';
 import { useRouter } from 'next/router';
@@ -17,8 +18,12 @@ const definedDates = new Map([
     ["vampire time", "4:30am"]
 ]);
 
+function getDate(string) {
+    return parseDate(definedDates.get(string) || string);
+}
+
 function Timestamper({initialInput}) {
-    const [input, setInput] = useState(initialInput || defaultInput);
+    const [input, setInput] = useState(initialInput);
 
     const [debouncedInput] = useDebounce(input, 700);
     const router = useRouter();
@@ -32,7 +37,7 @@ function Timestamper({initialInput}) {
     // This prevents the timestamp from suddenly changing between renders
     const dateRef = useRef({});
     if (dateRef.current.input !== input) {
-        dateRef.current = {input, date: parseDate(definedDates.get(input) || input)};
+        dateRef.current = {input, date: getDate(input)};
     }
     const date = dateRef.current.date;
 
@@ -40,18 +45,19 @@ function Timestamper({initialInput}) {
         <h1>UNIX Timestamper</h1>
         <p className="lead">A small utility</p>
 
-        <div className="form-group mt-5">
+        <form className="form-group mt-5" method="get" onSubmit={e => e.preventDefault()}>
             <label htmlFor="timestamper-input">
                 <div>Enter a date:</div>
                 <div style={{opacity: 0.7}}><small><i>Examples: now, tomorrow, july 31, 8pm</i></small></div>
             </label>
-            <input type="text" className="form-control" id="timestamper-input" value={input} onChange={e => setInput(e.target.value)} />
+            <input name="date" type="text" className="form-control" id="timestamper-input" value={input} onChange={e => setInput(e.target.value)} />
+            <noscript><Button variant="primary" type="submit">Submit</Button></noscript>
             <p className="mt-1"><small>{date?.toString() || "Unable to parse"}</small></p>
-        </div>
+        </form>
 
         <div className="mt-5">
             <div className="mb-2">Timestamp:</div>
-            <div>{date ? <TimestampOutput className="lead">{Math.floor(date.getTime() / 1000)}</TimestampOutput> : <span className="lead">???</span>}</div>
+            <div>{date ? <TimestampOutput id="timestamp" className="lead">{Math.floor(date.getTime() / 1000)}</TimestampOutput> : <span className="lead">???</span>}</div>
         </div>
     </Page>
 }
