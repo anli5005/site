@@ -51,7 +51,7 @@ function Timestamper({initialInput}) {
                 <div style={{opacity: 0.7}}><small><i>Examples: now, tomorrow, july 31, 8pm</i></small></div>
             </label>
             <input name="date" type="text" className="form-control" id="timestamper-input" value={input} onChange={e => setInput(e.target.value)} />
-            <noscript><Button variant="primary" type="submit">Submit</Button></noscript>
+            <noscript><div className="mt-1"><Button variant="primary" type="submit">Submit</Button></div></noscript>
             <p className="mt-1"><small>{date?.toString() || "Unable to parse"}</small></p>
         </form>
 
