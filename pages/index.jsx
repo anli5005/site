@@ -3,11 +3,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Logo from 'components/Logo';
 import styled, { useTheme, ThemeContext } from 'styled-components';
 import { NextSeo } from 'next-seo';
-import { faInfoCircle, faArrowRight, faComment, faBrowser, faAddressBook, faEllipsisH, faExternalLink } from '@fortawesome/pro-regular-svg-icons';
+import { faInfoCircle, faArrowRight, faComment, faBrowser, faEllipsisH, faExternalLink } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import Footer, { FooterList } from 'components/Footer';
 import QuickLinks from 'components/QuickLinks';
+import { transparentize } from 'polished';
 
 const BigRoundedBox = styled.div`
     @media (min-width: ${props => props.theme.breakpoints.md}px) {
@@ -57,9 +58,9 @@ const LinksTitle = styled.a`
     background-color: ${props => props.theme.colors.darkBackground};
     color: white;
     padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-    ${({gradient}) => gradient ? `
-        background: linear-gradient(to right, ${gradient.join(",")});
-    ` : ""}
+    ${({gradient}) => {
+        return gradient ? `background: linear-gradient(to right, ${gradient.map(color => transparentize(0.17, color)).join(",")});` : "";
+    }}
 
     & > svg:first-child {
         width: 1em;
@@ -77,7 +78,7 @@ const LinksTitle = styled.a`
             left: 4px;
         }
         ${({gradient}) => gradient ? `
-            background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(to right, ${gradient.join(",")});
+            background: linear-gradient(to right, ${gradient.join(",")});
         ` : ""}
     }
 `;

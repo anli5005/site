@@ -21,8 +21,8 @@ const theme = {
         },
         dark: {
             primaryBackground: "#111c35",
-            secondaryBackground: "#25416c",
-            cardBackground: "#0f2d5b",
+            secondaryBackground: "#162b4a",
+            cardBackground: "#162b4a",
             secondary: "#737c98",
             primary: "#337bed",
             link: "#82b4ff",
