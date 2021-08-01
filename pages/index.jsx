@@ -174,9 +174,9 @@ export default function Home({posts, projects}) {
     </Fragment>;
 }
 
-export async function getServerSideProps(ctx) {
-    const postURL = "https://wp.anli.dev/wp-json/wp/v2/posts?_fields=id,slug,title&per_page=3";
-    const projectURL = "https://wp.anli.dev/wp-json/wp/v2/project?_fields=slug,title&per_page=3"
+export async function getStaticProps(ctx) {
+    const postURL = "https://wp.anli.dev/wp-json/wp/v2/posts?_fields=id,slug,title&per_page=5";
+    const projectURL = "https://wp.anli.dev/wp-json/wp/v2/project?_fields=slug,title&per_page=5"
     const [postResponse, projectResponse] = await Promise.all([fetch(postURL), fetch(projectURL)]);
     const postData = await postResponse.json();
     const projectData = await projectResponse.json();
@@ -193,5 +193,5 @@ export async function getServerSideProps(ctx) {
         }))
     };
 
-    return {props};
+    return {props, revalidate: 10};
 }
