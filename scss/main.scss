@@ -143,3 +143,7 @@ h1 {
   object-fit: contain;
   max-width: 100%;
 }
+
+.page-content .wp-block-embed iframe {
+  max-width: 100%;
+}

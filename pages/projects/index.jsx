@@ -41,8 +41,8 @@ const Project = styled.a`
     ${({image, bg, theme}) => {
         if (image) {
             if (bg) {
-                const overlayColor = transparentize(0.4, bg);
-                const overlayColorHover = transparentize(0.3, bg);
+                const overlayColor = transparentize(0.3, bg);
+                const overlayColorHover = transparentize(0.2, bg);
                 return `
                 background-image: linear-gradient(${overlayColor}, ${overlayColor}), url(${image});
                 &:hover {
@@ -50,10 +50,10 @@ const Project = styled.a`
                 }
                 `;
             } else {
-                const lightOverlay = transparentize(0.4, theme.colors.light.cardBackground);
-                const lightOverlayHover = transparentize(0.3, theme.colors.light.cardBackground);
-                const darkOverlay = transparentize(0.4, theme.colors.dark.cardBackground);
-                const darkOverlayHover = transparentize(0.3, theme.colors.light.cardBackground);
+                const lightOverlay = transparentize(0.3, theme.colors.light.cardBackground);
+                const lightOverlayHover = transparentize(0.2, theme.colors.light.cardBackground);
+                const darkOverlay = transparentize(0.3, theme.colors.dark.cardBackground);
+                const darkOverlayHover = transparentize(0.2, theme.colors.light.cardBackground);
                 return `
                 background-image: linear-gradient(${lightOverlay}, ${lightOverlay}), url(${image});
                 @media (prefers-color-scheme: dark) {
