@@ -58,9 +58,7 @@ const QuickLinkA = styled.a`
         margin-right: 0;
     }
 
-    &:hover {
-        text-decoration: none;
-    }
+    text-decoration: none;
 
     &:hover ${QuickLinkIcon} {
         opacity: 0.3;

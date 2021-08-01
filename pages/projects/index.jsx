@@ -103,8 +103,19 @@ const Project = styled.a`
 
 const ProjectActionsContainer = styled.div`
     position: absolute;
-    left: ${props => props.theme.spacing.lg};
+    left: 0;
+    padding: 0 ${props => props.theme.spacing.lg};
     bottom: ${props => props.theme.spacing.lg};
+    width: 100%;
+
+    & a {
+        max-width: 100%;
+        overflow: hidden;
+        display: inline-block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 1rem;
+    }
 
     ${({bg}) => {
         return bg ? `
@@ -119,8 +130,8 @@ const ProjectActionsContainer = styled.div`
         ` : "";
     }}
 
-    & a:nth-child(2) {
-        margin-left: ${props => props.theme.spacing.md};
+    & a:first-child {
+        margin-right: ${props => props.theme.spacing.md};
     }
 `;
 
@@ -136,7 +147,7 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
         <Row>
             {projects.map(project => {
                 return <div className="col-12 col-md-6 mb-3" key={project.slug}>
-                    <div className="position-relative">
+                    <div className="position-relative h-100">
                         <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
                             <Project className="rounded px-4 pt-4" image={project.featuredImage} bg={project.brand.bg}>
                                 <h2>{project.title}{project.year && <> <small>{project.year}</small></>}</h2>

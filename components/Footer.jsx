@@ -9,8 +9,7 @@ const FooterContainer = styled(Container)`
     flex-direction: column;
     color: ${props => props.theme.colors.textMuted};
 
-    padding-top: ${props => props.theme.spacing.md};
-    padding-bottom: ${props => props.theme.spacing.md};
+    padding: ${props => props.theme.spacing.md};
 
     @media (min-width: ${props => props.theme.breakpoints.md}px) {
         flex-direction: row;

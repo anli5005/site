@@ -138,3 +138,8 @@ h1 {
   top: $anchor-offset;
   visibility: hidden;
 }
+
+.page-content img {
+  object-fit: contain;
+  max-width: 100%;
+}
