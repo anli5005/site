@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { BlogPaginationItem, CustomPagination } from '../blog/index';
 import { ErrorComponent } from '../_error';
-import ProjectButton from 'components/ProjectButton';
 import { decode } from 'he';
-import { lighten } from 'polished';
+import { lighten, transparentize, readableColor, darken, grayscale } from 'polished';
+import { faArrowRight, faLink } from "@fortawesome/pro-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function urlForPage(page) {
     if (page === 1) {
@@ -19,28 +20,108 @@ function urlForPage(page) {
 
 const Project = styled.a`
     display: block;
-    background-color: ${props => props.theme.colors.cardBackground};
+    background-color: ${props => props.bg || props.theme.colors.cardBackground};
     color: ${props => props.theme.colors.text};
     box-shadow: ${props => props.theme.shadows.md};
     height: 100%;
     padding-bottom: 4.75rem;
-    transition: background-color 0.2s, box-shadow 0.2s;
+    transition: box-shadow 0.2s;
     text-decoration: none;
 
     &:hover, &:active {
         color: ${props => props.theme.colors.text};
         box-shadow: ${props => props.theme.shadows.lg};
+        background-color: ${props => darken(0.02, props.bg || props.theme.colors.light.cardBackground)};
 
         @media (prefers-color-scheme: dark) {
-            background-color: ${props => lighten(0.02, props.theme.colors.dark.cardBackground)};
+            background-color: ${props => lighten(0.02, props.bg || props.theme.colors.dark.cardBackground)};
         }
     }
+
+    ${({image, bg, theme}) => {
+        if (image) {
+            if (bg) {
+                const overlayColor = transparentize(0.4, bg);
+                const overlayColorHover = transparentize(0.3, bg);
+                return `
+                background-image: linear-gradient(${overlayColor}, ${overlayColor}), url(${image});
+                &:hover {
+                    background-image: linear-gradient(${overlayColorHover}, ${overlayColorHover}), url(${image});
+                }
+                `;
+            } else {
+                const lightOverlay = transparentize(0.4, theme.colors.light.cardBackground);
+                const lightOverlayHover = transparentize(0.3, theme.colors.light.cardBackground);
+                const darkOverlay = transparentize(0.4, theme.colors.dark.cardBackground);
+                const darkOverlayHover = transparentize(0.3, theme.colors.light.cardBackground);
+                return `
+                background-image: linear-gradient(${lightOverlay}, ${lightOverlay}), url(${image});
+                @media (prefers-color-scheme: dark) {
+                    background-image: linear-gradient(${darkOverlay}, ${darkOverlay}), url(${image});
+                }
+                &:hover {
+                    background-image: linear-gradient(${lightOverlayHover}, ${lightOverlayHover}), url(${image});
+                    @media (prefers-color-scheme: dark) {
+                        background-image: linear-gradient(${darkOverlayHover}, ${darkOverlayHover}), url(${image});
+                    }
+                }
+                `;
+            }
+        } else {
+            return "";
+        }
+    }}
+    background-size: cover;
+    background-position: center;
+
+    ${({bg, theme}) => {
+        return bg ? `
+            color: ${readableColor(bg)};
+
+            &:hover {
+                color: ${readableColor(bg)}
+            }
+
+            h2 small {
+                opacity: 0.5;
+            }
+
+            .badge {
+                background-color: ${transparentize(0.6, grayscale(theme.colors.darkBackground))};
+            }
+        ` : `
+            h2 small {
+                color: ${theme.colors.secondary};
+            }
+
+            .badge {
+                background-color: ${theme.colors.darkBackground};
+            }
+        `;
+    }}
 `;
 
-const ProjectButtonContainer = styled.div`
+const ProjectActionsContainer = styled.div`
     position: absolute;
     left: ${props => props.theme.spacing.lg};
     bottom: ${props => props.theme.spacing.lg};
+
+    ${({bg}) => {
+        return bg ? `
+            & a {
+                color: ${transparentize(0.2, readableColor(bg))};
+                opacity: 0.9;
+            }
+
+            & a:hover {
+                color: ${transparentize(0.4, readableColor(bg))}
+            }
+        ` : "";
+    }}
+
+    & a:nth-child(2) {
+        margin-left: ${props => props.theme.spacing.md};
+    }
 `;
 
 export default function Portfolio({projects, page, errorCode, totalPages}) {
@@ -57,17 +138,18 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
                 return <div className="col-12 col-md-6 mb-3" key={project.slug}>
                     <div className="position-relative">
                         <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
-                            <Project className="rounded px-4 pt-4">
-                                <h2>{project.title}{project.year && <> <small className="text-secondary">{project.year}</small></>}</h2>
+                            <Project className="rounded px-4 pt-4" image={project.featuredImage} bg={project.brand.bg}>
+                                <h2>{project.title}{project.year && <> <small>{project.year}</small></>}</h2>
                                 {project.tags.length > 0 && <p>{project.tags.map(({ id, name }) =>
-                                    <Badge bg="dark" key={id} className="me-1">{decode(name)}</Badge>
+                                    <Badge key={id} className="me-1">{decode(name)}</Badge>
                                 )}</p>}
                                 <p>{project.shortDescription}</p>
                             </Project>
                         </Link>
-                        {project.url && <ProjectButtonContainer>
-                            <ProjectButton project={project} />
-                        </ProjectButtonContainer>}
+                        <ProjectActionsContainer bg={project.brand.bg}>
+                            {project.url && <a href={project.url}><FontAwesomeIcon className="me-1" icon={faLink} />{project.domain || project.url}</a>}
+                            <Link href="/projects/[slug]" as={`/projects/${project.slug}`}><a>Details<FontAwesomeIcon className="ms-1" icon={faArrowRight} /></a></Link>
+                        </ProjectActionsContainer>
                     </div>
                 </div>;
             })}
@@ -98,7 +180,8 @@ export async function getServerSideProps(ctx) {
     }
 
     const query = {
-        _fields: "slug,title,short_description,project_url,project_domain,brand_bg,brand_fg,tags,year",
+        _fields: "slug,title,short_description,project_url,project_domain,brand_bg,brand_fg,tags,year,_links,_embed",
+        _embed: "wp:featuredmedia",
         per_page: perPage,
         page
     };
@@ -128,19 +211,25 @@ export async function getServerSideProps(ctx) {
     }
 
     const props = {
-        projects: data.map(postData => ({
-            slug: postData.slug,
-            title: postData.title.rendered,
-            shortDescription: postData.short_description || null,
-            url: postData.project_url || null,
-            domain: postData.project_domain || null,
-            brand: {
-                bg: postData.brand_bg || null,
-                fg: postData.brand_fg || null
-            },
-            tags: (postData.tags || []).map(id => tags.get(id)).filter(tag => tag),
-            year: postData.year || null
-        })),
+        projects: data.map(postData => {
+            const media = postData._embedded && postData._embedded["wp:featuredmedia"];
+            const sizes = media && media.length > 0 && media[0].media_details.sizes;
+            const size = sizes && (sizes["post-thumbnail"] || sizes.full);
+            return {
+                slug: postData.slug,
+                title: postData.title.rendered,
+                shortDescription: postData.short_description || null,
+                url: postData.project_url || null,
+                domain: postData.project_domain || null,
+                brand: {
+                    bg: postData.brand_bg || null,
+                    fg: postData.brand_fg || null
+                },
+                tags: (postData.tags || []).map(id => tags.get(id)).filter(tag => tag),
+                year: postData.year || null,
+                featuredImage: size ? size.source_url : null
+            };
+        }),
         perPage,
         page
     };
