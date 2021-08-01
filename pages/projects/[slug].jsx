@@ -14,8 +14,9 @@ const ProjectHeader = styled.h1`
     ${({image, bg, theme}) => {
         if (image || bg) {
             return `
-            padding: ${theme.spacing.md};
+            padding: ${theme.spacing.lg};
             background-color: ${bg || theme.colors.secondaryBackground};
+            margin-bottom: ${theme.spacing.xl};
             `;
         } else {
             return "";
