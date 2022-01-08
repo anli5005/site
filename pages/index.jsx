@@ -38,15 +38,15 @@ export default function Home({posts, projects}) {
             url: "https://anli.dev",
             description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22"
         }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22" />
-        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 dark:bg-ocean-1000 h-full">
-            <h1 className="font-sans font-bold">
+        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 dark:bg-ocean-1000 h-full flex flex-col justify-center items-center">
+            <img src="/images/logo.png" className="md:h-32 xl:h-48 2xl:h-54 mb-4 block rounded-full overflow-hidden" />
+            <h1 className="font-sans font-bold text-center">
                 <span className="md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-tr from-grape-800 dark:from-grape-600 via-ocean-700 dark:via-ocean-400 to-sage-500 block pb-4">
-                    <img src="/images/logo.png" className="h-[0.7em] align-baseline mr-5 inline-block rounded-full overflow-hidden" />
                     Anthony Li
                 </span>
                 <span className="sr-only select-none">anli5005</span>
             </h1>
-            <div className="font-sans font-bold md:text-2xl xl:text-4xl text-grape-600 md:-mt-3 xl:-mt-2 mb-6">anli<span className="opacity-70">5005</span></div>
+            <div className="font-sans font-bold md:text-2xl xl:text-4xl text-grape-600 md:-mt-3 xl:-mt-2 mb-6 text-center">anli<span className="opacity-70">5005</span></div>
         </div>
         <div className="p-10 min-h-screen bg-ocean-50 dark:bg-transparent">
             <p className="font-sans text-2xl text-center w-full">I make things.</p>
