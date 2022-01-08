@@ -29,8 +29,8 @@ export default function Logo({className, style, angle, primary, primaryOpacity, 
     >
         <defs>
             <linearGradient id="background" gradientTransform={`rotate(${angle || -30})`}>
-                <stop offset="0%" stopColor={primary || `rgba(42, 122, 230, ${primaryOpacity || 0.8})`} />
-                <stop offset="100%" stopColor={accent || "rgba(29, 182, 115, 0.8)"} />
+                <stop offset="0%" stopColor={primary || `rgba(6, 95, 201, ${primaryOpacity || 1.0})`} />
+                <stop offset="100%" stopColor={accent || "rgba(29, 182, 115, 1.0)"} />
             </linearGradient>
         </defs>
         <rect width="2048" height="2048" fill="url(#background)" />

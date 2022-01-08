@@ -14,7 +14,6 @@
     "@fortawesome/pro-regular-svg-icons": "^5.15.2",
     "@fortawesome/pro-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "bootstrap": "^5.0.2",
     "chrono-node": "^2.3.1",
     "he": "^1.2.0",
     "html-to-react": "^1.4.5",
@@ -33,5 +32,10 @@
     "sass": "^1.32.4",
     "styled-components": "^5.3.0",
     "use-debounce": "^7.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.12"
   }
 }

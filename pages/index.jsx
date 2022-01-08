@@ -1,177 +1,90 @@
-import { Fragment } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import Logo from 'components/Logo';
-import styled, { useTheme, ThemeContext } from 'styled-components';
 import { NextSeo } from 'next-seo';
-import { faInfoCircle, faArrowRight, faComment, faBrowser, faEllipsisH, faExternalLink } from '@fortawesome/pro-regular-svg-icons';
+import Logo from 'components/Logo';
+import { faEnvelope } from '@fortawesome/pro-regular-svg-icons';
+import { faGithub, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
-import Footer, { FooterList } from 'components/Footer';
-import QuickLinks from 'components/QuickLinks';
-import { transparentize } from 'polished';
 
-const BigRoundedBox = styled.div`
-    @media (min-width: ${props => props.theme.breakpoints.md}px) {
-        border-radius: 32px;
+const socials = [
+    {
+        icon: faGithub,
+        label: "GitHub",
+        name: "anli5005",
+        url: "https://github.com/anli5005",
+    },
+    {
+        icon: faTwitter,
+        label: "Twitter",
+        name: "@anli5005",
+        url: "https://twitter.com/anli5005"
+    },
+    {
+        icon: faLinkedin,
+        label: "LinkedIn",
+        name: "anlidev",
+        url: "https://linkedin.com/in/anlidev"
+    },
+    {
+        icon: faEnvelope,
+        label: "Email",
+        name: "me@anli.dev",
+        url: "mailto:me@anli.dev",
     }
+];
 
-    border-radius: 16px;
-    background-color: ${props => props.theme.colors.secondaryBackground};
-    color: ${props => props.theme.colors.primary};
-
-    @media (prefers-color-scheme: dark) {
-        color: ${props => props.theme.colors.dark.text};
-    }
-`;
-
-const NameHeader = styled.div`
-    @media (max-width: ${props => props.theme.breakpoints.md - 1}px) {
-        font-size: 2.5rem;
-    }
-`;
-
-const SomewhatDeemphasizedText = styled.div`
-    color: ${props => props.theme.colors.link};
-`;
-
-const LinksRow = styled(Row)`
-    --bs-gutter-x: ${props => props.theme.spacing.md};
-    --bs-gutter-y: ${props => props.theme.spacing.md};
-`;
-
-const LinksContainer = styled.div`
-    border-radius: 16px;
-    width: 100%;
-    height: 100%;
-    background-color: ${props => props.theme.colors.secondaryBackground};
-    overflow: hidden;
-`;
-
-const LinksTitle = styled.a`
-    font-family: ${props => props.theme.fonts.heading};
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    background-color: ${props => props.theme.colors.darkBackground};
-    color: white;
-    padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-    ${({gradient}) => {
-        return gradient ? `background: linear-gradient(to right, ${gradient.map(color => transparentize(0.17, color)).join(",")});` : "";
-    }}
-
-    & > svg:first-child {
-        width: 1em;
-    }
-
-    & > svg:last-child {
-        position: relative;
-        left: 0;
-        transition: left 0.2s;
-    }
-
-    &:hover, &:active, &:focus {
-        color: white;
-        & > svg:last-child {
-            left: 4px;
-        }
-        ${({gradient}) => gradient ? `
-            background: linear-gradient(to right, ${gradient.join(",")});
-        ` : ""}
-    }
-`;
-
-const LinksList = styled.ul`
-    margin-bottom: 0;
-    list-style: none;
-    padding: ${props => props.theme.spacing.md};
-
-    & > li > a {
-        text-decoration: none;
-    }
-
-    & > li > a:hover, & > li > a:active, & > li > a:focus {
-        text-decoration: underline;
-    }
-`;
-
-function Links({icon, title, links, href, as, gradient}) {
-    return <Col xs={12} md={6}>
-        <LinksContainer>
-            <Link href={href} as={as} passHref><LinksTitle gradient={gradient}><FontAwesomeIcon className="me-2" icon={icon} />{title}<FontAwesomeIcon className="ms-2" icon={faArrowRight} /></LinksTitle></Link>
-            {links && <LinksList>
-                {links.map(({ content, href, as, type }, index) => {
-                    const inner = <Fragment>{content}</Fragment>
-
-                    return <li key={index}>
-                        {type === "external" ? <a href={href}>{inner}</a> : <Link href={href} as={as}><a>{inner}</a></Link>}
-                    </li>;
-                })}
-            </LinksList>}
-        </LinksContainer>
-    </Col>;
-}
-
-export default function Home({posts, projects}) {
-    const {colors} = useTheme(ThemeContext);
-    
-    return <Fragment>
+export default function Home({posts, projects}) {    
+    return <div className="md:ml-[50%]">
         <NextSeo title="Anthony Li • anli5005 - Developer, Designer, Entrepreneur" openGraph={{
             title: "Anthony Li (anli5005) - Developer, Designer, Entrepreneur",
             url: "https://anli.dev",
             description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22"
         }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22" />
-        <Container className="px-3 my-3 mt-sm-5 mb-sm-4">
-            <BigRoundedBox className="py-4 py-sm-5 px-3 px-md-5 d-flex flex-column flex-md-row align-items-center justify-content-center">
-                <Logo className="flex-grow-0 flex-shrink-0" size={150} circle />
-                <div className="ms-md-5 mt-3 mt-md-0 text-center text-md-start">
-                    <h1>
-                        <NameHeader className="mb-0">Anthony Li</NameHeader>
-                        <SomewhatDeemphasizedText className="h4 mb-4">anli5005</SomewhatDeemphasizedText>
-                    </h1>
-                    <p>I'm a maker, programmer, and entrepreneur. Some of my stuff might be helpful or entertaining. BCA ATCS '22</p>
-                    <FooterList>
-                        <li>
-                            <a href="https://github.com/anli5005">GitHub<FontAwesomeIcon className="ms-2" icon={faExternalLink} /></a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/anli5005">Twitter<FontAwesomeIcon className="ms-2" icon={faExternalLink} /></a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/anlidev/">LinkedIn<FontAwesomeIcon className="ms-2" icon={faExternalLink} /></a>
-                        </li>
-                    </FooterList>
-                </div>
-            </BigRoundedBox>
-        </Container>
-        <Container className="mb-5 px-3">
-            <LinksRow>
-                <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
-                    {content: "Contact", href: "/[page]", as: "/about#contact"}
-                ]} gradient={colors.homepageGradients.about} />
-                <Links icon={faComment} title="Blog" href="/blog" gradient={colors.homepageGradients.blog} links={posts.map(post => ({
-                    content: post.title,
-                    href: "/blog/[id]/[slug]",
-                    as: `/blog/${post.id}/${post.slug}`
-                }))} />
-                <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={colors.homepageGradients.portfolio} links={projects.map(project => ({
-                    content: project.title,
-                    href: "projects/[slug]",
-                    as: `/projects/${project.slug}`
-                }))} />
-                <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={colors.homepageGradients.more} links={[
-                    {content: "Class Notes", href: "/classnotes"},
-                    {content: "UNIX Timestamper", href: "/timestamper"}
-                ]} />
-            </LinksRow>
+        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 dark:bg-ocean-1000 h-full">
+            <h1 className="font-sans font-bold">
+                <span className="md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-tr from-grape-800 dark:from-grape-600 via-ocean-700 dark:via-ocean-400 to-sage-500 block pb-4">
+                    <img src="/images/logo.png" className="h-[0.7em] align-baseline mr-5 inline-block rounded-full overflow-hidden" />
+                    Anthony Li
+                </span>
+                <span className="sr-only select-none">anli5005</span>
+            </h1>
+            <div className="font-sans font-bold md:text-2xl xl:text-4xl text-grape-600 md:-mt-3 xl:-mt-2 mb-6">anli<span className="opacity-70">5005</span></div>
+        </div>
+        <div className="p-10 min-h-screen bg-ocean-50 dark:bg-transparent">
+            <p className="font-sans text-2xl text-center w-full">I make things.</p>
+        </div>
+        {/* <Container className="mb-5 px-3">
+            <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
+                {content: "Contact", href: "/[page]", as: "/about#contact"}
+            ]} gradient={colors.homepageGradients.about} />
+            <Links icon={faComment} title="Blog" href="/blog" gradient={colors.homepageGradients.blog} links={posts.map(post => ({
+                content: post.title,
+                href: "/blog/[id]/[slug]",
+                as: `/blog/${post.id}/${post.slug}`
+            }))} />
+            <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={colors.homepageGradients.portfolio} links={projects.map(project => ({
+                content: project.title,
+                href: "projects/[slug]",
+                as: `/projects/${project.slug}`
+            }))} />
+            <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={colors.homepageGradients.more} links={[
+                {content: "Class Notes", href: "/classnotes"},
+                {content: "UNIX Timestamper", href: "/timestamper"}
+            ]} />
         </Container>
         <div className="mb-5">
             <QuickLinks />
         </div>
-        <Footer />
-    </Fragment>;
+        <Footer /> */ }
+        <div className="md:fixed left-0 right-1/2 bottom-0 flex-col items-center justify-center p-10 bg-gradient-to-t from-white to-white/0 dark:from-ocean-1000 dark:to-ocean-1000/0">
+            <h3 className="font-sans uppercase text-lg tracking-wider text-center">Find me on</h3>
+            <div className="flex justify-center items-center mt-3">
+                {socials.map((social, index) => <a key={index} href={social.url} target="_blank" className="transition-colors relative mr-2 last:mr-0 rounded-full w-12 h-12 bg-ocean-950 hover:bg-ocean-900 active:bg-ocean-1000 shadow text-center flex justify-center items-center text-xl group" target="_blank" rel="noopener noreferrer">
+                    <FontAwesomeIcon className="text-ocean-100" icon={social.icon} />
+                    <span className="sr-only">{social.label}</span>
+                    <div className="transition-all ease-out mr-4 text-sm font-sans opacity-0 group-hover:-bottom-6 group-hover:opacity-100 group-focus:-bottom-5 group-focus:opacity-100 absolute -bottom-4 left-1/2 -translate-x-1/2">{social.name}</div>
+                </a>)}
+            </div>
+        </div>
+    </div>;
 }
 
 export async function getStaticProps(ctx) {
