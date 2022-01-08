@@ -38,18 +38,19 @@ export default function Home({posts, projects}) {
             url: "https://anli.dev",
             description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22"
         }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22" />
-        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 dark:bg-ocean-1000 h-full flex flex-col justify-center items-center">
-            <img src="/images/logo.png" className="md:h-32 xl:h-48 2xl:h-54 mb-4 block rounded-full overflow-hidden" />
+        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 bg-white dark:bg-ocean-1000 h-full flex flex-col justify-center items-center md:pb-32">
+            <img src="/images/logo.png" className="h-32 xl:h-48 2xl:h-54 mb-6 md:mb-4 block rounded-full overflow-hidden" />
             <h1 className="font-sans font-bold text-center">
-                <span className="md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-tr from-grape-800 dark:from-grape-600 via-ocean-700 dark:via-ocean-400 to-sage-500 block pb-4">
+                <span className="text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-tr from-grape-800 dark:from-grape-600 via-ocean-700 dark:via-ocean-400 to-sage-500 block pb-4">
                     Anthony Li
                 </span>
                 <span className="sr-only select-none">anli5005</span>
             </h1>
-            <div className="font-sans font-bold md:text-2xl xl:text-4xl text-ocean-500 md:-mt-3 xl:-mt-2 mb-6 text-center">anli<span className="opacity-70">5005</span></div>
-        </div>
-        <div className="p-10 min-h-screen bg-ocean-50 dark:bg-transparent">
+            <div className="font-sans font-bold text-2xl xl:text-4xl text-ocean-500 -mt-3 xl:-mt-2 mb-6 text-center">anli<span className="opacity-70">5005</span></div>
             <p className="font-sans text-2xl text-center w-full">I make things.</p>
+        </div>
+        <div className="p-10">
+            
         </div>
         {/* <Container className="mb-5 px-3">
             <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
@@ -74,10 +75,10 @@ export default function Home({posts, projects}) {
             <QuickLinks />
         </div>
         <Footer /> */ }
-        <div className="md:fixed left-0 right-1/2 bottom-0 flex-col items-center justify-center p-10 bg-gradient-to-t from-white to-white/0 dark:from-ocean-1000 dark:to-ocean-1000/0">
+        <div className="md:fixed left-0 right-1/2 bottom-0 flex-col items-center justify-center p-10 md:bg-gradient-to-t from-white to-white/0 dark:from-ocean-1000 dark:to-ocean-1000/0">
             <h3 className="font-sans uppercase text-lg tracking-wider text-center">Find me on</h3>
             <div className="flex justify-center items-center mt-3">
-                {socials.map((social, index) => <a key={index} href={social.url} target="_blank" className="transition-colors relative mr-2 last:mr-0 rounded-full w-12 h-12 bg-ocean-950 hover:bg-ocean-900 active:bg-ocean-1000 shadow text-center flex justify-center items-center text-xl group" target="_blank" rel="noopener noreferrer">
+                {socials.map((social, index) => <a key={index} href={social.url} target="_blank" className="transition-colors relative mr-2 last:mr-0 rounded-full w-12 h-12 bg-ocean-1000 md:bg-ocean-950 hover:bg-ocean-900 shadow text-center flex justify-center items-center text-xl group" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon className="text-ocean-100" icon={social.icon} />
                     <span className="sr-only">{social.label}</span>
                     <div className="transition-all ease-out mr-4 text-sm font-sans opacity-0 group-hover:-bottom-6 group-hover:opacity-100 group-focus:-bottom-5 group-focus:opacity-100 absolute -bottom-4 left-1/2 -translate-x-1/2">{social.name}</div>
