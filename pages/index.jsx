@@ -46,7 +46,7 @@ export default function Home({posts, projects}) {
                 </span>
                 <span className="sr-only select-none">anli5005</span>
             </h1>
-            <div className="font-sans font-bold md:text-2xl xl:text-4xl text-grape-600 md:-mt-3 xl:-mt-2 mb-6 text-center">anli<span className="opacity-70">5005</span></div>
+            <div className="font-sans font-bold md:text-2xl xl:text-4xl text-ocean-500 md:-mt-3 xl:-mt-2 mb-6 text-center">anli<span className="opacity-70">5005</span></div>
         </div>
         <div className="p-10 min-h-screen bg-ocean-50 dark:bg-transparent">
             <p className="font-sans text-2xl text-center w-full">I make things.</p>
