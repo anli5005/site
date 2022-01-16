@@ -1,7 +1,8 @@
 import { NextSeo } from 'next-seo';
-import Logo from 'components/Logo';
-import { faEnvelope } from '@fortawesome/pro-regular-svg-icons';
+import Link from 'next/link';
+import { faArrowRight, faEnvelope } from '@fortawesome/pro-regular-svg-icons';
 import { faGithub, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faBrowser, faComment, faEllipsisH } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const socials = [
@@ -31,6 +32,19 @@ const socials = [
     }
 ];
 
+function HomeHeading({children, href, className}) {
+    return <Link href={href}>
+        <a className={`font-sans uppercase tracking-wide text-xl flex items-center group transition-colors ${className}`}>
+            <hr className="grow mr-4 border-ocean-100 dark:border-gray-600" />
+            <h2>
+                {children}
+                <FontAwesomeIcon className="relative left-0 group-hover:left-1 transition-[left] ml-3" icon={faArrowRight} />
+            </h2>
+            <hr className="grow ml-4 border-ocean-100 dark:border-gray-600" />
+        </a>
+    </Link>
+}
+
 export default function Home({posts, projects}) {    
     return <div className="md:ml-[50%]">
         <NextSeo title="Anthony Li • anli5005 - Developer, Designer, Entrepreneur" openGraph={{
@@ -38,7 +52,7 @@ export default function Home({posts, projects}) {
             url: "https://anli.dev",
             description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22"
         }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22" />
-        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 bg-white dark:bg-ocean-1000 h-full flex flex-col justify-center items-center md:pb-32">
+        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 bg-ocean-50 dark:bg-ocean-1000 h-full flex flex-col justify-center items-center md:pb-32">
             <img src="/images/logo.png" className="h-32 xl:h-48 2xl:h-54 mb-6 md:mb-4 block rounded-full overflow-hidden" />
             <h1 className="font-sans font-bold text-center">
                 <span className="text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-tr from-grape-800 dark:from-grape-600 via-ocean-700 dark:via-ocean-400 to-sage-500 block pb-4">
@@ -50,8 +64,19 @@ export default function Home({posts, projects}) {
             <p className="font-sans text-2xl text-center w-full">I make things.</p>
             <p className="font-sans text-center opacity-80">BCA ATCS '22</p>
         </div>
-        <div className="p-10">
-            
+        <div className="p-10 flex flex-col justify-center h-screen">
+            <HomeHeading href="/blog" className="hover:text-sage-500 mb-6">
+                <FontAwesomeIcon className="text-sage-500 mr-3" icon={faComment} />
+                Blog
+            </HomeHeading>
+            <HomeHeading href="/projects" className="hover:text-ocean-500 mb-6">
+                <FontAwesomeIcon className="text-ocean-500 mr-3" icon={faBrowser} />
+                Portfolio
+            </HomeHeading>
+            <HomeHeading href="/misc" className="hover:text-grape-600">
+                <FontAwesomeIcon className="text-grape-600 mr-3" icon={faEllipsisH} />
+                Misc
+            </HomeHeading>
         </div>
         {/* <Container className="mb-5 px-3">
             <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[

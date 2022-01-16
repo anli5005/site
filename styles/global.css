@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-    @apply font-serif bg-ocean-50 text-ocean-950 dark:bg-ocean-950 dark:text-ocean-100;
+    @apply font-serif bg-white text-ocean-950 dark:bg-ocean-950 dark:text-ocean-100;
 }
 
 @import url("https://use.typekit.net/gmf2sso.css");
