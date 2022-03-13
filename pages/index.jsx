@@ -72,7 +72,7 @@ export default function Home({posts, projects}) {
             url: "https://anli.dev",
             description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22"
         }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22" />
-        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 bg-ocean-50 dark:bg-ocean-1000 h-full flex flex-col justify-center items-center md:pb-32">
+        <div className="p-10 md:fixed top-0 left-0 md:w-1/2 bg-ocean-50 dark:bg-ocean-950 h-full flex flex-col justify-center items-center md:pb-32">
             <img src="/images/logo.png" className="h-32 xl:h-48 2xl:h-54 mb-6 md:mb-4 block rounded-full overflow-hidden" />
             <h1 className="font-sans font-bold text-center">
                 <span className="text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-tr from-grape-800 dark:from-grape-600 via-ocean-700 dark:via-ocean-400 to-sage-500 block pb-4">
