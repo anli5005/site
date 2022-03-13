@@ -7,10 +7,6 @@ import { transparentize } from "polished";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 
-const CustomContainer = styled(Container)`
-    margin-top: 128px;
-`;
-
 const NavigationBox = styled.div`
     height: 88px;
     padding: 16px 0;
@@ -36,15 +32,15 @@ export default function Page({children, title, logoAccent, openGraph, noindex}) 
             url: "https://anli.dev" + (router.asPath || ""),
             ...openGraph
         }} noindex={noindex} />
-        <GradientBox className="fixed-top" />
-        <NavigationBox className="fixed-top">
-            <Container className="px-3">
+        <div className="fixed top-0 left-0 right-0 pointer-events-none h-32 z-30 bg-gradient-to-b from-white via-white/90 to-white/0 dark:from-ocean-1000 dark:via-ocean-1000/90 dark:to-ocean-1000/0" />
+        <div className="fixed top-0 left-0 right-0 z-40">
+            <div className="container mx-auto px-6 pt-4">
                 <Navigation accent={logoAccent} />
-            </Container>
-        </NavigationBox>
-        <CustomContainer className="px-3 mb-5">
+            </div>
+        </div>
+        <div className="px-6 mb-5 mt-32 container mx-auto">
             {children}
-        </CustomContainer>
+        </div>
         <Footer />
     </Fragment>
 };

@@ -9,6 +9,7 @@ import { decode } from 'he';
 import { lighten, transparentize, readableColor, darken, grayscale } from 'polished';
 import { faArrowRight, faLink } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TitleHeader } from 'components/TitleHeader';
 
 function urlForPage(page) {
     if (page === 1) {
@@ -141,12 +142,12 @@ export default function Portfolio({projects, page, errorCode, totalPages}) {
     return <Page title="Portfolio" logoAccent="portfolioAccent" openGraph={{
         description: "I've made many things. Here are some of them."
     }}>
-        <h1>Portfolio</h1>
+        <TitleHeader>Portfolio</TitleHeader>
         <p className="lead mb-5">I've made many things. Here are some of them.</p>
 
         <Row>
             {projects.map(project => {
-                return <div className="col-12 col-md-6 mb-3" key={project.slug}>
+                return <div className="col-12 col-md-6 mb-31" key={project.slug}>
                     <div className="position-relative h-100">
                         <Link href="/projects/[slug]" as={`/projects/${project.slug}`} passHref>
                             <Project className="rounded px-4 pt-4" image={project.featuredImage} bg={project.brand.bg}>

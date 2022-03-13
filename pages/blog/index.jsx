@@ -9,6 +9,7 @@ import range from 'lodash.range';
 import PostContent from 'components/PostContent';
 import { ErrorComponent } from '../_error';
 import { DateTime } from 'luxon';
+import { TitleHeader } from '../../components/TitleHeader';
 
 const Post = styled.article`
     margin-top: ${props => props.theme.spacing.xl};
@@ -53,7 +54,7 @@ export default function Blog({posts, errorCode, total, totalPages, page}) {
     if (errorCode) return <ErrorComponent statusCode={errorCode} />;
 
     return <Page title="Blog" logoAccent="blogAccent">
-        <h1>Blog</h1>
+        <TitleHeader>Blog</TitleHeader>
         {posts.map(({id, slug, date, title, content}) => {
             const dateStr = DateTime.fromISO(date, { zone: "utc" }).setZone(typeof window === "undefined" ? "America/New_York" : "local").toLocaleString({
                 month: "long",

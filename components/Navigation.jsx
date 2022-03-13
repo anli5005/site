@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Logo from './Logo';
 import styled, { ThemeContext } from 'styled-components';
 import { transparentize, darken } from "polished";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,35 +9,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
-const CustomNavbar = styled.nav`
-    background-color: ${props => transparentize(0.2, props.theme.colors.light.secondaryBackground)};
-    padding: 0;
-    border-radius: 6px;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    @media (prefers-color-scheme: dark) {
-        background-color: ${props => transparentize(0.2, props.theme.colors.dark.secondaryBackground)};
-    }
-`;
-
 const PrimaryNav = styled(Nav)`
     @media (min-width: ${props => props.theme.breakpoints.md}px) {
         padding-left: 0.75rem;
     }
-`;
-
-const BrandLink = styled.a`
-    text-decoration: none;
-
-    &:hover {
-        opacity: 0.6;
-    }
-
-    cursor: pointer;
 `;
 
 const LinkIcon = styled.span`
@@ -120,17 +94,8 @@ export default function Navigation({accent}) {
     const {query, pathname} = useRouter();
     const theme = useContext(ThemeContext);
 
-    let accentColor;
-    if (accent) {
-        if (typeof theme.colors[accent] === "string") {
-            accentColor = transparentize(0.2, theme.colors[accent]);
-        } else {
-            accentColor = accent;
-        }
-    }
-
-    return <CustomNavbar className="shadow">
-        <Link href="/" passHref><BrandLink><span className="sr-only">Anthony Li </span><Logo size={56} accent={accentColor} /></BrandLink></Link>
+    return <nav className="shadow-lg rounded-full overflow-hidden bg-ocean-200/20 dark:bg-ocean-900/20 w-full flex items-center backdrop-filter backdrop-blur h-14">
+        <Link href="/" passHref><a className="hover:opacity-60 transition-opacity"><span className="sr-only">Anthony Li </span><img className="rounded-full block h-14" src="/images/logo.png" /></a></Link>
         <PrimaryNav className="flex-grow-1 flex-sm-grow-0">
             <NavigationLink
                 icon={faInfoCircle}
@@ -174,5 +139,5 @@ export default function Navigation({accent}) {
                 Misc
             </NavigationLink>
         </PrimaryNav>
-    </CustomNavbar>
+    </nav>
 }

@@ -26,7 +26,7 @@ const processingInstructions = [
             if (content.endsWith("\n")) {
                 content = content.slice(0, -1);
             }
-            return <SyntaxHighlighter className="syntax-highlighted-code" style={OneDark} language={code.props.className.split(" ").find(c => c.startsWith("language-")).slice("language-".length)}>
+            return <SyntaxHighlighter className="syntax-highlighted-code border border-ocean-200 dark:border-gray-600" style={OneDark} language={code.props.className.split(" ").find(c => c.startsWith("language-")).slice("language-".length)}>
                 {content}
             </SyntaxHighlighter>
         }
@@ -43,7 +43,7 @@ function isValidNode() {
 
 export default function PostContent({html}) {
     const tree = parser.parseWithInstructions(html, isValidNode, processingInstructions);
-    return <div className="page-content" onClick={(e) => {
+    return <div className="prose prose-ocean dark:prose-invert hover:prose-a:text-ocean-600 hover:prose-a:dark:text-ocean-200 prose-a:transition-colors max-w-none" onClick={(e) => {
         const link = e.target.closest(".page-content a");
         if (link) {
             if (link.host === location.host) {

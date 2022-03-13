@@ -1,5 +1,6 @@
 import Page from 'components/Page';
 import PostContent from 'components/PostContent';
+import { TitleHeader } from 'components/TitleHeader';
 
 import { stringify } from 'querystring';
 import { ErrorComponent } from './_error';
@@ -10,7 +11,7 @@ export default function PagePage({title, errorCode, content, logoAccent}) {
     const html = content;
 
     return <Page title={title} logoAccent={logoAccent}>
-        <h1>{title}</h1>
+        <TitleHeader>{title}</TitleHeader>
         <PostContent html={html} />
     </Page>;
 }

@@ -116,29 +116,6 @@ export default function Home({posts, projects}) {
                 <HomeLink className="hover:text-grape-600 dark:hover:text-grape-400" href="/timestamper" title="UNIX Timestamper" />
             </HomeSection>
         </div>
-        {/* <Container className="mb-5 px-3">
-            <Links icon={faInfoCircle} title="About" href="/[page]" as="/about" links={[
-                {content: "Contact", href: "/[page]", as: "/about#contact"}
-            ]} gradient={colors.homepageGradients.about} />
-            <Links icon={faComment} title="Blog" href="/blog" gradient={colors.homepageGradients.blog} links={posts.map(post => ({
-                content: post.title,
-                href: "/blog/[id]/[slug]",
-                as: `/blog/${post.id}/${post.slug}`
-            }))} />
-            <Links icon={faBrowser} title="Portfolio" href="/projects" gradient={colors.homepageGradients.portfolio} links={projects.map(project => ({
-                content: project.title,
-                href: "projects/[slug]",
-                as: `/projects/${project.slug}`
-            }))} />
-            <Links icon={faEllipsisH} title="Misc" href="/misc" gradient={colors.homepageGradients.more} links={[
-                {content: "Class Notes", href: "/classnotes"},
-                {content: "UNIX Timestamper", href: "/timestamper"}
-            ]} />
-        </Container>
-        <div className="mb-5">
-            <QuickLinks />
-        </div>
-        <Footer /> */ }
         <div className="md:fixed left-0 right-1/2 bottom-0 flex-col items-center justify-center md:pt-10 px-10 pb-10 md:bg-gradient-to-t from-white to-white/0 dark:from-ocean-1000 dark:to-ocean-1000/0">
             <h3 className="font-sans uppercase text-lg tracking-wider text-center">Find me on</h3>
             <div className="flex justify-center items-center mt-3">
@@ -154,7 +131,7 @@ export default function Home({posts, projects}) {
 
 export async function getStaticProps(ctx) {
     const postURL = "https://wp.anli.dev/wp-json/wp/v2/posts?_fields=id,slug,title,date_gmt&per_page=5";
-    const projectURL = "https://wp.anli.dev/wp-json/wp/v2/project?_fields=slug,title&per_page=5"
+    const projectURL = "https://wp.anli.dev/wp-json/wp/v2/project?_fields=id,slug,title&per_page=5"
     const [postResponse, projectResponse] = await Promise.all([fetch(postURL), fetch(projectURL)]);
     const postData = await postResponse.json();
     const projectData = await projectResponse.json();
@@ -167,6 +144,7 @@ export async function getStaticProps(ctx) {
             title: post.title.rendered,
         })),
         projects: projectData.map(project => ({
+            id: project.id,
             slug: project.slug,
             title: project.title.rendered
         }))
