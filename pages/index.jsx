@@ -121,8 +121,8 @@ export default function Home({posts, projects}) {
         <NextSeo title="Anthony Li • anli5005 - Developer, Designer, Entrepreneur" openGraph={{
             title: "Anthony Li (anli5005) - Developer, Designer, Entrepreneur",
             url: "https://anli.dev",
-            description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22"
-        }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. BCA ATCS '22" />
+            description: "The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. UPenn M&T '26"
+        }} description="The homepage of Anthony Li, or anli5005. Making random stuff, some of which might be helpful or entertaining. UPenn M&T '26" />
         <Container className="px-3 my-3 mt-sm-5 mb-sm-4">
             <BigRoundedBox className="py-4 py-sm-5 px-3 px-md-5 d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <Logo className="flex-grow-0 flex-shrink-0" size={150} circle />
