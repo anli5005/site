@@ -5,6 +5,3 @@
 html {
     @apply font-serif bg-white text-ocean-950 dark:bg-ocean-1000 dark:text-ocean-100;
 }
-
-@import url("https://use.typekit.net/gmf2sso.css");
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
