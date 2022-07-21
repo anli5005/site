@@ -15,19 +15,21 @@ export default function DynamicPage({ title, content }: DynamicPageProps) {
 }
 
 export async function getStaticProps(ctx: GetStaticPropsContext<{ page: string }>): Promise<GetStaticPropsResult<DynamicPageProps>> {
-    if (!ctx.params) return { notFound: true };
+    const revalidate = 60;
+    
+    if (!ctx.params) return { notFound: true, revalidate };
     
     const api = getAPI();
     const pages = await api.pages().param("_fields", [ "title", "content" ]).slug(ctx.params.page);
     
-    if (pages.length === 0) return { notFound: true };
+    if (pages.length === 0) return { notFound: true, revalidate };
     
     return {
         props: {
             title: pages[0].title.rendered,
             content: pages[0].content.rendered,
         },
-        revalidate: 60,
+        revalidate,
     };
 }
 
