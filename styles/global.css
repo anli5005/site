@@ -5,3 +5,31 @@
 html {
     @apply font-serif bg-white text-ocean-950 dark:bg-ocean-1000 dark:text-ocean-100;
 }
+
+.prose {
+    @apply leading-relaxed;
+}
+
+.prose p {
+    @apply mb-4 sm:mb-6 last:mb-0;
+}
+
+.prose ul {
+    @apply mb-4 sm:mb-6 last:mb-0 list-disc pl-5 md:pl-0;
+}
+
+.prose li {
+    @apply mb-1;
+}
+
+.prose h1 {
+    @apply font-sans font-bold text-3xl sm:text-4xl md:text-6xl pt-2 first:pt-0 mb-4 sm:mb-6 md:mb-8 last:mb-0;
+}
+
+.prose h2 {
+    @apply font-sans font-bold text-2xl sm:text-3xl md:text-4xl pt-2 first:pt-0 mb-4 sm:mb-6 last:mb-0;
+}
+
+.link, .prose a {
+    @apply text-ocean-500 dark:text-ocean-300 underline decoration-ocean-200 dark:decoration-ocean-400 hover:text-ocean-700 dark:hover:text-ocean-400 hover:decoration-ocean-700 dark:hover:decoration-ocean-400 hover:bg-ocean-100 dark:hover:bg-transparent;
+}
