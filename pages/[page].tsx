@@ -7,10 +7,12 @@ interface DynamicPageProps {
     content: string;
 }
 
-export default function DynamicPage({ title, content }: DynamicPageProps) {
+export default function DynamicPage({ title, content }: DynamicPageProps) {    
     return <div>
-        <h1>{title}</h1>
-        <PostContent html={content} />
+        <h1 className="-mt-2 text-3xl sm:text-4xl md:text-6xl pb-4 font-sans font-bold bg-clip-text text-transparent bg-gradient-to-br from-grape-400 to-grape-800 dark:from-grape-300 dark:to-grape-600 w-fit">{title}</h1>
+        <main className="md:mt-4 prose">
+            <PostContent html={content} />
+        </main>
     </div>;
 }
 

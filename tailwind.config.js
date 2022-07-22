@@ -1,7 +1,7 @@
 module.exports = {
     content: [
-        "./pages/**/*.{js,jsx}",
-        "./components/**/*.{js,jsx}",
+        "./pages/**/*.{js,jsx,ts,tsx}",
+        "./components/**/*.{js,jsx,ts,tsx}",
     ],
     theme: {
         extend: {
@@ -23,6 +23,7 @@ module.exports = {
                     "1000": "#0a1224",
                 },
                 "grape": {
+                    "300": "#b06bff",
                     "400": "#9c45ff",
                     "600": "#8b24ff",
                     "800": "#7b10f3",
