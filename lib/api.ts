@@ -6,5 +6,6 @@ export function getAPI(): WPAPI {
     });
     api.courses = api.registerRoute("wp/v2", "courses");
     api.classnotes = api.registerRoute("wp/v2", "classnotes");
+    api.projects = api.registerRoute("wp/v2", "project");
     return api;
 }

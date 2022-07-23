@@ -15,6 +15,10 @@ html {
     @apply mb-4 sm:mb-6 last:mb-0;
 }
 
+.prose figure {
+    @apply mb-4 sm:mb-6 last:mb-0;
+}
+
 .prose ul {
     @apply mb-4 sm:mb-6 last:mb-0 list-disc pl-5 md:pl-0;
 }
@@ -41,4 +45,8 @@ html {
 
 .white-box {
     @apply dark:rounded dark:bg-white dark:w-fit dark:p-2 inline-block;
+}
+
+.prose iframe {
+    @apply max-w-full rounded;
 }
