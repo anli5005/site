@@ -7,6 +7,7 @@ import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 import { SiteContextProvider } from 'lib/SiteContext';
 import { Footer } from 'components/Footer';
+import { PageLoading } from 'components/PageLoading';
 
 export default function App({ Component, pageProps }: AppProps) {
     const siteContext = {};
@@ -42,5 +43,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Footer className="mt-12 md:mt-20 sm:mb-12 md:mb-24 lg:mb-28 xl:mb-36 2xl:mb-40" />
             </div>
         </div>
+        <PageLoading />
     </SiteContextProvider>;
 }
