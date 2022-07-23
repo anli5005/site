@@ -3,7 +3,7 @@ import { faEnvelope, faHeart } from "@fortawesome/pro-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import Link from "next/link";
-import { forwardRef, HTMLProps, PropsWithChildren, PropsWithRef } from "react";
+import { forwardRef, HTMLProps, PropsWithChildren, PropsWithRef, Ref } from "react";
 
 function FooterList({ children }: PropsWithChildren<{}>) {
     return <ul className="list-none block p-0">
@@ -17,8 +17,8 @@ function FooterListItem({ children }: PropsWithChildren<{}>) {
     </li>;
 }
 
-const FooterLink = forwardRef(({ children, ...props }: PropsWithRef<HTMLProps<HTMLAnchorElement>>) => {
-    return <a {...props} className="text-slate-500 underline decoration-slate-400 dark:decoration-slate-500 dark:text-slate-400 hover:text-slate-600 hover:decoration-slate-600 active:text-slate-700 dark:hover:text-slate-300 dark:hover:decoration-slate-300 dark:active:text-slate-200">
+const FooterLink = forwardRef(({ children, ...props }: HTMLProps<HTMLAnchorElement>, ref: Ref<HTMLAnchorElement>) => {
+    return <a {...props} ref={ref} className="text-slate-500 underline decoration-slate-400 dark:decoration-slate-500 dark:text-slate-400 hover:text-slate-600 hover:decoration-slate-600 active:text-slate-700 dark:hover:text-slate-300 dark:hover:decoration-slate-300 dark:active:text-slate-200">
         {children}
     </a>
 });

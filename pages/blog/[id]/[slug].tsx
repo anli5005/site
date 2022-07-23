@@ -42,7 +42,6 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ id: string, sl
     const api = getAPI();
     let post: any;
     try {
-        console.log(id);
         post = await api.posts().param("_fields", [
             "title",
             "slug",
