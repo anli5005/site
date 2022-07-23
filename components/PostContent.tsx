@@ -1,10 +1,34 @@
 import Router from 'next/router';
 import { Parser, ProcessNodeDefinitions } from 'html-to-react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import OneDark from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark';
-import React from 'react';
+import oneLight from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light';
+import nightOwl from 'react-syntax-highlighter/dist/cjs/styles/hljs/night-owl';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 const parser = new Parser();
+const lightModeMediaQuery = "(prefers-color-scheme: light)";
+
+function SyntaxHighlightedCode({ language, children }: { language: string, children: string }) {
+    const [isLight, setLight] = useState(typeof window !== "undefined" && window.matchMedia && window.matchMedia(lightModeMediaQuery).matches);
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && (window as { matchMedia?: Window["matchMedia"] }).matchMedia) {
+            const listener = (event: MediaQueryListEvent) => {
+                setLight(event.matches);
+            };
+            
+            const watcher = window.matchMedia(lightModeMediaQuery);
+            watcher.addEventListener("change", listener);
+            return () => watcher.removeEventListener("change", listener);
+        }
+    }, []);
+
+    const style = isLight ? oneLight : nightOwl;
+
+    return <SyntaxHighlighter className="syntax-highlighted-code border dark:border-gray-700 rounded w-fit" style={style} language={language}>
+        {children}
+    </SyntaxHighlighter>;
+}
 
 const processingInstructions = [
     {
@@ -26,9 +50,9 @@ const processingInstructions = [
             if (content.endsWith("\n")) {
                 content = content.slice(0, -1);
             }
-            return <SyntaxHighlighter className="syntax-highlighted-code" style={OneDark} language={code.props.className.split(" ").find((c: string) => c.startsWith("language-")).slice("language-".length)}>
+            return <SyntaxHighlightedCode language={code.props.className.split(" ").find((c: string) => c.startsWith("language-")).slice("language-".length)}>
                 {content}
-            </SyntaxHighlighter>
+            </SyntaxHighlightedCode>
         },
     },
     {

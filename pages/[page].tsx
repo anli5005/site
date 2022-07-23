@@ -1,6 +1,7 @@
+import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
-import { GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
 
 interface DynamicPageProps {
     title: string;
@@ -9,7 +10,9 @@ interface DynamicPageProps {
 
 export default function DynamicPage({ title, content }: DynamicPageProps) {    
     return <div>
-        <h1 className="-mt-2 text-3xl sm:text-4xl md:text-6xl pb-4 font-sans font-bold bg-clip-text text-transparent bg-gradient-to-br from-grape-400 to-grape-800 dark:from-grape-300 dark:to-grape-600 w-fit">{title}</h1>
+        <PageTitle bgClip={true} className="bg-gradient-to-br from-grape-400 to-grape-800 dark:from-grape-300 dark:to-grape-600">
+            {title}
+        </PageTitle>
         <main className="md:mt-4 prose">
             <PostContent html={content} />
         </main>
@@ -19,7 +22,7 @@ export default function DynamicPage({ title, content }: DynamicPageProps) {
 export async function getStaticProps(ctx: GetStaticPropsContext<{ page: string }>): Promise<GetStaticPropsResult<DynamicPageProps>> {
     const revalidate = 60;
     
-    if (!ctx.params) return { notFound: true, revalidate };
+    if (!ctx.params) return { notFound: true };
     
     const api = getAPI();
     const pages = await api.pages().param("_fields", [ "title", "content" ]).slug(ctx.params.page);
@@ -35,7 +38,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ page: string }
     };
 }
 
-export async function getStaticPaths(ctx: GetStaticPathsContext): Promise<GetStaticPathsResult> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
     const api = getAPI();
 
     let current = api.pages().perPage(100).param("_fields", "slug");
