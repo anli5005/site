@@ -80,7 +80,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 Nav
             </nav>
             <div className="flex-grow p-4 sm:p-0">
-                <AnimatePresence exitBeforeEnter>
+                <AnimatePresence initial={false} exitBeforeEnter>
                     <motion.div
                         key={router.asPath}
                         initial={{
