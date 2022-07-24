@@ -11,6 +11,7 @@ import { PageLoading } from 'components/PageLoading';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const loadingIndicatorDelay = 200;
 
@@ -79,11 +80,37 @@ export default function App({ Component, pageProps }: AppProps) {
                 Nav
             </nav>
             <div className="flex-grow p-4 sm:p-0">
-                <div className="sm:pt-4 pb-4 sm:h-12 md:h-24 lg:h-28 xl:h-36 2xl:h-40">
-                    {/* TODO: Breadcrumb content goes here */}
-                </div>
-                <Component {...pageProps} />
-                <Footer className="mt-12 md:mt-20 sm:mb-12 md:mb-24 lg:mb-28 xl:mb-36 2xl:mb-40" />
+                <AnimatePresence exitBeforeEnter>
+                    <motion.div
+                        key={router.asPath}
+                        initial={{
+                            opacity: 0,
+                            y: -16,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                                duration: 0.2,
+                                ease: "easeIn",
+                            },
+                        }}
+                        exit={{
+                            opacity: 0,
+                            y: 16,
+                            transition: {
+                                duration: 0.1,
+                                ease: "easeOut",
+                            },
+                        }}
+                    >
+                        <div className="sm:pt-4 pb-4 sm:h-12 md:h-24 lg:h-28 xl:h-36 2xl:h-40">
+                            {/* TODO: Breadcrumb content goes here */}
+                        </div>
+                        <Component {...pageProps} />
+                        <Footer className="mt-12 md:mt-20 sm:mb-12 md:mb-24 lg:mb-28 xl:mb-36 2xl:mb-40" />
+                    </motion.div>
+                </AnimatePresence>
             </div>
         </div>
         <PageLoading isLoading={isShowingLoadingIndicator} />
