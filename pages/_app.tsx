@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }: AppProps) {
                             opacity: 0,
                             y: 16,
                             transition: {
-                                duration: 0.1,
+                                duration: 0.15,
                                 ease: "easeOut",
                             },
                         }}
