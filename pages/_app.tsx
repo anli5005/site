@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { NavMenu } from 'components/NavMenu';
 
 const loadingIndicatorDelay = 200;
 
@@ -76,9 +77,7 @@ export default function App({ Component, pageProps }: AppProps) {
             }}
         />
         <div className="sm:flex sm:container mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-20">
-            <nav className="bg-blue-500 h-14 sm:h-fit sm:w-14 sm:mr-4 lg:mr-6 flex-shrink-0 sm:sticky top-4 lg:top-8 sm:mt-12 md:mt-24 lg:mt-28 xl:mt-36 2xl:mt-40">
-                Nav
-            </nav>
+            <NavMenu />
             <div className="flex-grow p-4 sm:p-0">
                 <AnimatePresence initial={false} exitBeforeEnter>
                     <motion.div
@@ -91,16 +90,16 @@ export default function App({ Component, pageProps }: AppProps) {
                             opacity: 1,
                             y: 0,
                             transition: {
-                                duration: 0.2,
-                                ease: "easeIn",
+                                duration: 0.25,
+                                ease: "easeOut",
                             },
                         }}
                         exit={{
                             opacity: 0,
                             y: 16,
                             transition: {
-                                duration: 0.15,
-                                ease: "easeOut",
+                                duration: 0.25,
+                                ease: "easeIn",
                             },
                         }}
                     >
