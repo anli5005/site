@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { motion, useTime, useTransform } from "framer-motion";
+import { Fragment, useState, useEffect } from "react";
+import { AnimatePresence, motion, MotionStyle, useTime, useTransform } from "framer-motion";
 import { easeOut } from "popmotion";
 
 const colors = [
@@ -11,27 +11,34 @@ const colors = [
 
 interface StripDirection {
     className: string;
-    animate: string;
+    animatePosition: keyof MotionStyle;
+    animateScale: keyof MotionStyle;
 }
 
-const directions = [
+const directions: StripDirection[] = [
     {
-        className: "top-0 bg-gradient-to-r w-full h-2 sm:h-3 lg:h-4",
-        animate: "left",
+        className: "top-0 bg-gradient-to-r w-full",
+        animatePosition: "left",
+        animateScale: "height",
     },
     {
-        className: "right-0 bg-gradient-to-b h-full w-2 sm:w-3 lg:w-4",
-        animate: "top",
+        className: "right-0 bg-gradient-to-b h-full",
+        animatePosition: "top",
+        animateScale: "width",
     },
     {
-        className: "bottom-0 bg-gradient-to-l w-full h-2 sm:h-3 lg:h-4",
-        animate: "right",
+        className: "bottom-0 bg-gradient-to-l w-full",
+        animatePosition: "right",
+        animateScale: "height",
     },
     {
-        className: "left-0 bg-gradient-to-t h-full w-2 sm:w-3 lg:w-4",
-        animate: "bottom",
+        className: "left-0 bg-gradient-to-t h-full",
+        animatePosition: "bottom",
+        animateScale: "width",
     },
 ];
+
+const loaderSize = "12px";
 
 const duration = 1000;
 
@@ -42,9 +49,15 @@ function PageLoadingStrip({ color, direction, offset }: { color: string, directi
     const opacity = useTransform(repeatingTime, [1.2 * duration, 2 * duration], [1, 0]);
     const position = useTransform(repeatingTime, [0, duration], ["-100%", "0%"], { ease: easeOut });
 
-    return <motion.div className={`absolute ${color} ${direction.className}`} style={{
+    return <motion.div className={`absolute ${color} ${direction.className}`} initial={{
+        [direction.animateScale]: 0,
+    }} animate={{
+        [direction.animateScale]: loaderSize,
+    }} exit={{
+        [direction.animateScale]: 0,
+    }} style={{
         opacity,
-        [direction.animate]: position,
+        [direction.animatePosition]: position,
     }} />;
 }
 
@@ -60,6 +73,8 @@ function PageLoadingContent() {
     </div>;
 }
 
-export function PageLoading() {
-    return <PageLoadingContent />;
+export function PageLoading({ isLoading }: { isLoading: boolean }) {
+    return <AnimatePresence>
+        {isLoading && <PageLoadingContent />}
+    </AnimatePresence>;
 }

@@ -8,8 +8,51 @@ import { AppProps } from 'next/app';
 import { SiteContextProvider } from 'lib/SiteContext';
 import { Footer } from 'components/Footer';
 import { PageLoading } from 'components/PageLoading';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+
+const loadingIndicatorDelay = 200;
 
 export default function App({ Component, pageProps }: AppProps) {
+    const [isLoading, setLoading] = useState(false);
+    const [isShowingLoadingIndicator, setShowingLoadingIndicator] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        const handleStart = (_url: string, { shallow }: { shallow: boolean }) => {
+            if (!shallow) setLoading(true);
+        };
+
+        const handleEnd = () => {
+            setLoading(false);
+        };
+
+        const handleError = handleEnd;
+
+        router.events.on("routeChangeStart", handleStart);
+        router.events.on("routeChangeError", handleError);
+        router.events.on("routeChangeComplete", handleEnd);
+
+        return () => {
+            router.events.on("routeChangeStart", handleStart);
+            router.events.on("routeChangeError", handleError);
+            router.events.on("routeChangeComplete", handleEnd);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isLoading) {
+            const timeout = setTimeout(() => {
+                setShowingLoadingIndicator(true);
+            }, loadingIndicatorDelay);
+
+            return () => clearTimeout(timeout);
+        } else {
+            setShowingLoadingIndicator(false);
+        }
+    }, [isLoading]);
+
     const siteContext = {};
 
     return <SiteContextProvider value={siteContext}>
@@ -43,6 +86,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Footer className="mt-12 md:mt-20 sm:mb-12 md:mb-24 lg:mb-28 xl:mb-36 2xl:mb-40" />
             </div>
         </div>
-        <PageLoading />
+        <PageLoading isLoading={isShowingLoadingIndicator} />
     </SiteContextProvider>;
 }
