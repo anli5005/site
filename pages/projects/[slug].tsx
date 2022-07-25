@@ -1,3 +1,5 @@
+import { faCube } from "@fortawesome/pro-regular-svg-icons";
+import { useBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
@@ -10,6 +12,17 @@ interface DynamicProjectProps {
 }
 
 export default function DynamicPage({ title, content, year }: DynamicProjectProps) {
+    useBreadcrumbConfiguration({
+        items: [
+            {
+                href: "/projects",
+                icon: faCube,
+                title: "Portfolio",
+            }
+        ],
+        trailing: true,
+    });
+
     return <div>
         <PageTitle bgClip={true} className="bg-gradient-to-br from-ocean-400 to-ocean-700 dark:from-ocean-300 dark:to-ocean-500">
             {title}

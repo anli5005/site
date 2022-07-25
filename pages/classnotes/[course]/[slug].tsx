@@ -1,5 +1,6 @@
 import { faCalendar } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
@@ -11,9 +12,26 @@ interface DynamicClassNoteProps {
     isoDate: string;
     content: string;
     hideDate: boolean;
+    courseSlug: string;
+    courseName: string;
 }
 
-export default function DynamicPage({ title, isoDate, content, hideDate }: DynamicClassNoteProps) {
+export default function DynamicClassNote({ title, isoDate, content, hideDate, courseSlug, courseName }: DynamicClassNoteProps) {
+    useBreadcrumbConfiguration({
+        items: [
+            {
+                href: "/classnotes",
+                title: "Notes for BCA Students",
+            },
+            {
+                href: "/classnotes/[course]",
+                as: `/classnotes/${encodeURIComponent(courseSlug)}`,
+                title: courseName,
+            }
+        ],
+        trailing: true,
+    });
+
     return <div>
         <PageTitle>
             {title}
@@ -74,6 +92,8 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ course: string
             isoDate: note.date_gmt,
             content: note.content.rendered,
             hideDate: note.hide_date === "1",
+            courseSlug: course.slug,
+            courseName: course.name,
         },
         revalidate,
     };

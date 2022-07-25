@@ -1,8 +1,10 @@
+import { BreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PropsWithChildren, useContext } from "react";
 import { createContext } from "react";
 
 export interface SiteContext {
-
+    breadcrumbConfiguration: BreadcrumbConfiguration;
+    setBreadcrumbConfiguration(breadcrumbs: BreadcrumbConfiguration): void;
 }
 
 const context = createContext<SiteContext | null>(null);

@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavMenu } from 'components/NavMenu';
 import { useReducedMotion } from 'lib/mediaQueries';
+import { BreadcrumbConfiguration, Breadcrumbs } from 'components/Breadcrumbs';
 
 const loadingIndicatorDelay = 200;
 
@@ -57,7 +58,15 @@ export default function App({ Component, pageProps }: AppProps) {
         }
     }, [isLoading]);
 
-    const siteContext = {};
+    const initialBreadcrumbs: BreadcrumbConfiguration = {
+        items: [],
+        trailing: false,
+    };
+    const [breadcrumbConfiguration, setBreadcrumbConfiguration] = useState(initialBreadcrumbs);
+    const siteContext = {
+        breadcrumbConfiguration,
+        setBreadcrumbConfiguration,
+    };
 
     return <SiteContextProvider value={siteContext}>
         <DefaultSeo
@@ -81,7 +90,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className="sm:flex sm:container mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-20">
             <NavMenu />
             <div className="flex-grow p-4 sm:p-0">
-                <AnimatePresence initial={false} exitBeforeEnter>
+                <AnimatePresence initial={false} exitBeforeEnter onExitComplete={() => setBreadcrumbConfiguration(initialBreadcrumbs)}>
                     <motion.div
                         key={router.asPath}
                         initial={{
@@ -105,8 +114,8 @@ export default function App({ Component, pageProps }: AppProps) {
                             },
                         }}
                     >
-                        <div className="sm:pt-4 pb-4 sm:h-12 md:h-24 lg:h-28 xl:h-36 2xl:h-40">
-                            {/* TODO: Breadcrumb content goes here */}
+                        <div className="sm:pt-4 pb-4 sm:h-12 md:h-24 lg:h-28 xl:h-36 2xl:h-40 flex flex-col justify-end" >
+                            <Breadcrumbs />
                         </div>
                         <Component {...pageProps} />
                         <Footer className="mt-12 md:mt-20 sm:mb-12 md:mb-24 lg:mb-28 xl:mb-36 2xl:mb-40" />
