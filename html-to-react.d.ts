@@ -12,6 +12,7 @@ declare module 'html-to-react' {
     }
 
     class Parser {
+        parse(html: string): ReactNode;
         parseWithInstructions(html: string, isValidNode: (node: any) => boolean, processingInstructions: ProcessingInstruction[]): ReactNode;
     }
 }

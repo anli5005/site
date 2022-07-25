@@ -14,7 +14,7 @@ interface DynamicPostProps {
 
 export default function DynamicPage({ title, isoDate, content }: DynamicPostProps) {
     return <div>
-        <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-400 to-sage-500 dark:from-sage-400 dark:to-sage-500">
+        <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-500 to-sage-600 dark:from-sage-400 dark:to-sage-500">
             {title}
         </PageTitle>
         <div className="pb-4 text-lg md:text-xl font-sans font-bold text-slate-700 dark:text-slate-300">
@@ -33,6 +33,10 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ id: string, sl
     const revalidate = 60;
 
     if (!ctx.params) return { notFound: true };
+
+    if (!/^[1-9][0-9]*$/.test(ctx.params.id)) {
+        return { notFound: true };
+    }
 
     const id = parseInt(ctx.params.id);
     if (Number.isNaN(id) || id < 1) {
@@ -71,7 +75,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ id: string, sl
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
     const api = getAPI();
 
-    const posts: any[] = await api.posts().perPage(10).param("_fields", [ "id", "slug" ]);
+    const posts: any[] = await api.posts().param("_fields", [ "id", "slug" ]);
 
     return {
         paths: posts.map(post => ({

@@ -1,6 +1,17 @@
 module.exports = {
     async redirects() {
+        const paged = [
+            "/blog",
+        ];
+
         return [
+            ...paged.map(path => {
+                return {
+                    source: `${path}/page/1`,
+                    destination: path,
+                    permanent: true,
+                };
+            }),
             {
                 source: "/Sorts",
                 destination: "/Sorts/index.html",
