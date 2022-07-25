@@ -44,14 +44,19 @@ export default function BlogPage({ ...pagedContentProps }: PagedContentProps<any
 export async function getBlogProps(page: number) {
     const api = getAPI();
     return await getProps(page, async page => {
-        const posts = await api.posts().page(page).param("_fields", [
-            "id",
-            "date_gmt",
-            "slug",
-            "title",
-            "excerpt",
-        ]);
-        return posts;
+        try {
+            const posts = await api.posts().page(page).param("_fields", [
+                "id",
+                "date_gmt",
+                "slug",
+                "title",
+                "excerpt",
+            ]);
+            return posts;
+        } catch (e: any) {
+            if (e.code === "rest_post_invalid_page_number") return [];
+            throw e;
+        }
     }, post => {
         return {
             id: post.id,
@@ -74,5 +79,10 @@ export async function getServerSideProps(ctx: GetStaticPropsContext<{ page: stri
 
     const page = parseInt(ctx.params.page);
     
-    return await getBlogProps(page);
+    const result = await getBlogProps(page);
+    if ("notFound" in result) {
+        return { notFound: true };
+    } else {
+        return result;
+    }
 }
