@@ -3,26 +3,13 @@ import { Parser, ProcessNodeDefinitions } from 'html-to-react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import oneLight from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light';
 import nightOwl from 'react-syntax-highlighter/dist/cjs/styles/hljs/night-owl';
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React from 'react';
+import { useLightMode } from 'lib/mediaQueries';
 
 const parser = new Parser();
-const lightModeMediaQuery = "(prefers-color-scheme: light)";
 
 function SyntaxHighlightedCode({ language, children }: { language: string, children: string }) {
-    const [isLight, setLight] = useState(typeof window !== "undefined" && window.matchMedia && window.matchMedia(lightModeMediaQuery).matches);
-
-    useEffect(() => {
-        if (typeof window !== "undefined" && (window as { matchMedia?: Window["matchMedia"] }).matchMedia) {
-            const listener = (event: MediaQueryListEvent) => {
-                setLight(event.matches);
-            };
-            
-            const watcher = window.matchMedia(lightModeMediaQuery);
-            watcher.addEventListener("change", listener);
-            return () => watcher.removeEventListener("change", listener);
-        }
-    }, []);
-
+    const isLight = useLightMode();
     const style = isLight ? oneLight : nightOwl;
 
     return <SyntaxHighlighter className="syntax-highlighted-code border dark:border-gray-700 rounded w-fit" style={style} language={language}>

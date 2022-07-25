@@ -25,7 +25,8 @@ export function NavMenu() {
         "h-14 sm:h-fit sm:w-14 sm:mr-6 md:mr-8 flex-shrink-0 sm:sticky top-4 lg:top-8 sm:mt-12 md:mt-24 lg:mt-28 xl:mt-36 2xl:mt-40",
         "bg-ocean-100 dark:bg-ocean-900",
         "p-2 flex",
-        "sm:p-0 sm:shadow sm:dark:shadow-lg sm:rounded-full sm:flex-col"
+        "sm:p-0 sm:shadow sm:dark:shadow-lg sm:rounded-full sm:flex-col",
+        "contrast-more:border-black dark:contrast-more:border-white contrast-more:border-2 contrast-more:shadow-none contrast-more:bg-white dark:contrast-more:bg-black"
     )}>
         <NavbarItem href="/">
             <img src="/images/logo.png" className="block rounded-full sm:w-full h-full sm:h-auto transition-opacity group-hover:opacity-80 group-active:opacity-60" />

@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavMenu } from 'components/NavMenu';
+import { useReducedMotion } from 'lib/mediaQueries';
 
 const loadingIndicatorDelay = 200;
 
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const [isLoading, setLoading] = useState(false);
     const [isShowingLoadingIndicator, setShowingLoadingIndicator] = useState(false);
     const router = useRouter();
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
         const handleStart = (_url: string, { shallow }: { shallow: boolean }) => {
@@ -84,7 +86,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         key={router.asPath}
                         initial={{
                             opacity: 0,
-                            y: -16,
+                            y: shouldReduceMotion ? 0 : -16,
                         }}
                         animate={{
                             opacity: 1,
@@ -96,7 +98,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         }}
                         exit={{
                             opacity: 0,
-                            y: 16,
+                            y: shouldReduceMotion ? 0 : 16,
                             transition: {
                                 duration: 0.25,
                                 ease: "easeIn",
