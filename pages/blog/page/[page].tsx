@@ -4,6 +4,7 @@ import { Parser } from "html-to-react";
 import { getAPI } from "lib/api";
 import { formatISODate } from "lib/dates";
 import { GetStaticPropsContext } from "next";
+import { NextSeo } from "next-seo";
 import Link from "next/link";
 
 const parser = new Parser();
@@ -17,6 +18,7 @@ function PostExcerpt({ html }: { html: string }) {
 
 export default function BlogPage({ ...pagedContentProps }: PagedContentProps<any>) {
     return <>
+        <NextSeo title="Blog" />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-500 to-sage-600 dark:from-sage-400 dark:to-sage-500">
             Blog
         </PageTitle>

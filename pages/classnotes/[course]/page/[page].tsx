@@ -4,6 +4,7 @@ import { PageTitle } from "components/PageTitle";
 import { getAPI } from "lib/api";
 import { formatISODate } from "lib/dates";
 import { GetStaticPropsContext } from "next";
+import { NextSeo } from "next-seo";
 import Link from "next/link";
 
 interface CoursePageProps extends PagedContentProps<any> {
@@ -23,6 +24,7 @@ export default function CoursePage({ slug, name, ...pagedContentProps }: CourseP
     });
 
     return <>
+        <NextSeo title={name} />
         <PageTitle>
             {name}
         </PageTitle>
@@ -36,7 +38,7 @@ export default function CoursePage({ slug, name, ...pagedContentProps }: CourseP
             {notes => notes.map(note => <p className="first-of-type:mt-4 mb-4" key={note.id}>
                 <Link href="/classnotes/[course]/[slug]" as={`/classnotes/${encodeURIComponent(slug)}/${encodeURIComponent(note.slug)}`}>
                     <a className="link">
-                        {note.title}
+                        {note.title}{!note.hideDate && ` • ${formatISODate(note.isoDate)}`}
                     </a>
                 </Link>
             </p>)}

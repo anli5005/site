@@ -6,6 +6,7 @@ import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
 import { formatISODate } from "lib/dates";
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 
 interface DynamicClassNoteProps {
     title: string;
@@ -33,6 +34,7 @@ export default function DynamicClassNote({ title, isoDate, content, hideDate, co
     });
 
     return <div>
+        <NextSeo title={title} />
         <PageTitle>
             {title}
         </PageTitle>

@@ -6,6 +6,7 @@ import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
 import { formatISODate } from "lib/dates";
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 
 interface DynamicPostProps {
     title: string;
@@ -26,6 +27,7 @@ export default function DynamicPage({ title, isoDate, content }: DynamicPostProp
     });
 
     return <div>
+        <NextSeo title={title} />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-500 to-sage-600 dark:from-sage-400 dark:to-sage-500">
             {title}
         </PageTitle>

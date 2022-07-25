@@ -70,6 +70,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return <SiteContextProvider value={siteContext}>
         <DefaultSeo
+            titleTemplate="%s • Anthony Li"
+            defaultTitle="Anthony Li"
             openGraph={{
                 type: "website",
                 locale: "en_US",

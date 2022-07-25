@@ -4,6 +4,7 @@ import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 
 interface DynamicProjectProps {
     title: string;
@@ -24,6 +25,7 @@ export default function DynamicPage({ title, content, year }: DynamicProjectProp
     });
 
     return <div>
+        <NextSeo title={title} />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-ocean-400 to-ocean-700 dark:from-ocean-300 dark:to-ocean-500">
             {title}
             {year && <small className="ml-2 sm:ml-3 md:ml-4 sm:text-2xl md:text-4xl">{year}</small>}
