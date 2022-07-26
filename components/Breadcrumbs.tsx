@@ -49,7 +49,7 @@ export function Breadcrumbs() {
         separator: true,
     });
 
-    return <div className="text-lg space-x-2">
+    return <div className="sm:text-lg space-x-2">
         {items.map((item, index) => {
             if (item.separator) {
                 return <FontAwesomeIcon key={index} className="text-slate-400 dark:text-slate-500" icon={faChevronRight} />;
