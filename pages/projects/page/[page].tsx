@@ -85,7 +85,7 @@ export default function ProjectsPage({ tags, ...pagedContentProps }: PagedConten
                 as: `/projects/page/${page}`,
             };
         }}>
-            {projects => <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {projects => <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
                 {projects.map(project => <Project project={{
                     ...project,
                     tags: project.tags.map((tagID: number) => tagMap.get(tagID)).filter((tag: { id: number, name: string } | undefined) => tag),
