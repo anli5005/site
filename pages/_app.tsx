@@ -94,7 +94,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <div className="flex-grow p-4 sm:p-0">
                 <AnimatePresence initial={false} exitBeforeEnter onExitComplete={() => setBreadcrumbConfiguration(initialBreadcrumbs)}>
                     <motion.div
-                        key={router.asPath}
+                        key={router.asPath.split("?")[0]}
                         initial={{
                             opacity: 0,
                             y: shouldReduceMotion ? 0 : -16,
