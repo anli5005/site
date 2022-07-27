@@ -9,6 +9,7 @@ import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } fro
 import { NextSeo } from "next-seo";
 import { readableColor, transparentize } from "polished";
 import { decode } from "he";
+import { TagList } from "components/TagList";
 
 interface DynamicProjectProps {
     title: string;
@@ -23,7 +24,7 @@ interface DynamicProjectProps {
     image?: string;
 }
 
-export default function DynamicPage({ title, content, year, shortDescription, tags, bg, fg, url, domain, image }: DynamicProjectProps) {
+export default function DynamicProject({ title, content, year, shortDescription, tags, bg, fg, url, domain, image }: DynamicProjectProps) {
     useBreadcrumbConfiguration({
         items: [
             {
@@ -67,9 +68,7 @@ export default function DynamicPage({ title, content, year, shortDescription, ta
                 </div>}
             </div>}
         </div>
-        {tags.length > 0 && <div className="mb-8 text-sm space-x-2 font-sans font-bold">
-            {tags.map(tag => <span className="inline-block rounded-full px-2 border border-slate-400 dark:border-slate-600" key={tag.id}>{tag.name}</span>)}
-        </div>}
+        {tags.length > 0 && <TagList className="mb-8 gap-2" tags={tags} />}
         <main className="prose">
             <PostContent html={content} />
         </main>
@@ -102,7 +101,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ slug: string }
     const project = projects[0];
 
     let imageURL;
-    if (project._embedded["wp:featuredmedia"]?.length > 0) {
+    if (project._embedded?.["wp:featuredmedia"]?.length > 0) {
         imageURL = project._embedded["wp:featuredmedia"][0].source_url;
     }
 
@@ -112,10 +111,10 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ slug: string }
             content: project.content.rendered,
             year: project.year,
             shortDescription: project.short_description,
-            tags: project._embedded["wp:term"][0].map(({ id, name }: { id: number, name: string }) => ({
+            tags: project._embedded?.["wp:term"][0].map(({ id, name }: { id: number, name: string }) => ({
                 id,
                 name: decode(name),
-            })),
+            })) ?? [],
             url: project.project_url || null,
             domain: project.project_domain || null,
             bg: project.brand_bg || null,
@@ -128,7 +127,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ slug: string }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
     const api = getAPI();
-    const projects: { slug: string }[] = await api.projects().perPage(10).param("_fields", "slug");
+    const projects: { slug: string }[] = await api.projects().perPage(12).param("_fields", "slug");
 
     return {
         paths: projects.map(project => ({

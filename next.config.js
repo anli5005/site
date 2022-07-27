@@ -2,6 +2,7 @@ module.exports = {
     async redirects() {
         const paged = [
             "/blog",
+            "/projects",
         ];
 
         return [
