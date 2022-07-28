@@ -17,7 +17,7 @@ function NavbarTooltip({ activeClassName, active, children, responsiveMode }: Pr
     return <span className={
         classNames(
             responsiveMode === "show" ? "block text-xs sm:text-base text-center w-full sm:w-auto" : "hidden",
-            "sm:inline-block sm:absolute z-30 left-full top-1/2 sm:-translate-y-1/2 sm:ml-3 sm:rounded-full sm:backdrop-blur sm:px-2 sm:py-1",
+            "sm:inline-block sm:absolute z-30 left-full top-1/2 sm:-translate-y-1/2 sm:ml-3 sm:rounded-full sm:backdrop-blur sm:px-2 sm:py-1 sm:pointer-events-none",
             "sm:shadow sm:transition-all sm:opacity-0 sm:-translate-x-2 sm:group-hover:translate-x-0 sm:group-focus:translate-x-0 sm:group-hover:opacity-100 sm:group-focus:opacity-100",
             !active && "sm:bg-ocean-200/50 sm:dark:bg-ocean-900/50",
             active && activeClassName,
