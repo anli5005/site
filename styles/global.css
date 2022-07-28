@@ -27,6 +27,14 @@ html {
     @apply mb-4 sm:mb-6 last:mb-0;
 }
 
+.prose pre {
+    @apply mb-4 sm:mb-6 last:mb-0 max-w-full;
+}
+
+.prose .wp-block-jetpack-markdown {
+    @apply mb-4 sm:mb-6 last:mb-0;
+}
+
 .prose ul {
     @apply mb-4 sm:mb-6 last:mb-0 list-disc pl-5 md:pl-0;
 }
