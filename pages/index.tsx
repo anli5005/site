@@ -53,14 +53,14 @@ export default function Home({ introBlurb, projects, posts, misc }: HomeProps) {
             <div className="text-6xl sm:text-7xl md:text-8xl 2xl:text-9xl">Hi! I'm Anthony Li.</div>
             <div className="text-3xl md:text-4xl mt-1 md:mt-2">(aka anli5005)</div>
         </h1>
-        {introBlurb && <div className="prose text-lg mb-8 sm:mb-12">
+        {introBlurb && <div className="prose text-lg mb-8 less-margins">
             <PostContent html={introBlurb} />
         </div>}
         <h2 className="font-sans font-bold text-4xl mb-4">Some of the things I've done</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr mb-4">
             {projects.map(project => <HomeProject project={project} key={project.slug} />)}
         </div>
-        <div className="text-lg mb-12 sm:mb-16">
+        <div className="text-lg mb-12">
             <Link href="/projects">
                 <a className="link font-bold group">Even bigger list of things<FontAwesomeIcon icon={faArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" /></a>
             </Link>
@@ -78,7 +78,7 @@ export default function Home({ introBlurb, projects, posts, misc }: HomeProps) {
                 </Link>
             </p>)}
         </div>
-        <div className="text-lg mb-12 sm:mb-16">
+        <div className="text-lg mb-12">
             <Link href="/blog">
                 <a className="link font-bold group">Wander through the archives<FontAwesomeIcon icon={faArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" /></a>
             </Link>
