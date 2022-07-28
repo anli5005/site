@@ -1,6 +1,22 @@
 module.exports = {
+    i18n: {
+        locales: ["en"],
+        defaultLocale: "en",
+    },
     async redirects() {
+        const paged = [
+            "/blog",
+            "/projects",
+        ];
+
         return [
+            ...paged.map(path => {
+                return {
+                    source: `${path}/page/1`,
+                    destination: path,
+                    permanent: true,
+                };
+            }),
             {
                 source: "/Sorts",
                 destination: "/Sorts/index.html",
@@ -30,7 +46,7 @@ module.exports = {
                 source: "/contact",
                 destination: "/about#contact",
                 permanent: true
-            }
+            },
         ];
-    }
+    },
 };
