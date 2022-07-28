@@ -20,7 +20,9 @@ function PostExcerpt({ html }: { html: string }) {
 export default function BlogPage({ ...pagedContentProps }: PagedContentProps<any>) {
     useTopLevelBreadcrumbConfiguration();
     return <>
-        <NextSeo title="Blog" />
+        <NextSeo title="Blog" openGraph={{
+            title: "Blog",
+        }} />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-500 to-sage-600 dark:from-sage-400 dark:to-sage-500">
             Blog
         </PageTitle>

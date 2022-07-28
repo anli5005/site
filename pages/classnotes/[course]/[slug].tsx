@@ -37,7 +37,9 @@ export default function DynamicClassNote({ title, isoDate, content, hideDate, co
     });
 
     return <div>
-        <NextSeo title={title} />
+        <NextSeo title={title} openGraph={{
+            title,
+        }} />
         <PageTitle>
             {title}
         </PageTitle>

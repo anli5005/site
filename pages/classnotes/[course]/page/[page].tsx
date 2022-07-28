@@ -27,7 +27,9 @@ export default function CoursePage({ slug, name, ...pagedContentProps }: CourseP
     });
 
     return <>
-        <NextSeo title={name} />
+        <NextSeo title={name} openGraph={{
+            title: name,
+        }} />
         <PageTitle>
             {name}
         </PageTitle>

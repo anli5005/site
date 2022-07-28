@@ -38,7 +38,9 @@ function Timestamper({ initialInput }: { initialInput: string }) {
     const date = dateRef.current.date;
 
     return <>
-        <NextSeo title="UNIX Timestamper" />
+        <NextSeo title="UNIX Timestamper" openGraph={{
+            title: "UNIX Timestamper",
+        }} />
 
         <PageTitle bgClip={true} className="bg-gradient-to-br from-grape-400 to-grape-800 dark:from-grape-300 dark:to-grape-600">
             UNIX Timestamper

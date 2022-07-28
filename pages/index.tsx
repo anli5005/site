@@ -48,7 +48,9 @@ function HomeProject({ project }: { project: HomeProjectData }) {
 
 export default function Home({ introBlurb, projects, posts, misc }: HomeProps) {
     return <main>
-        <NextSeo title="Anthony Li • anli5005 - Developer, Designer, Entrepreneur" titleTemplate="%s" />
+        <NextSeo title="Anthony Li • anli5005 - Developer, Designer, Entrepreneur" openGraph={{
+            title: "Anthony Li • anli5005 - Developer, Designer, Entrepreneur",
+        }} titleTemplate="%s" />
         <h1 className="font-sans font-bold -mt-2 md:-mt-4 2xl:-mt-6 pb-4 sm:pb-8 bg-clip-text text-transparent w-fit bg-gradient-to-br from-sage-500 via-ocean-500 to-grape-600 dark:from-sage-400 dark:via-ocean-400 dark:to-grape-400">
             <div className="text-6xl sm:text-7xl md:text-8xl 2xl:text-9xl">Hi! I'm Anthony Li.</div>
             <div className="text-3xl md:text-4xl mt-1 md:mt-2">(aka anli5005)</div>

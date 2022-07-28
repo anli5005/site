@@ -12,9 +12,10 @@ interface DynamicPostProps {
     title: string;
     isoDate: string;
     content: string;
+    excerpt: string;
 }
 
-export default function DynamicPage({ title, isoDate, content }: DynamicPostProps) {
+export default function DynamicPage({ title, isoDate, content, excerpt }: DynamicPostProps) {
     useBreadcrumbConfiguration({
         items: [
             homeBreadcrumbItem,
@@ -28,7 +29,15 @@ export default function DynamicPage({ title, isoDate, content }: DynamicPostProp
     });
 
     return <div>
-        <NextSeo title={title} />
+        <NextSeo title={title} openGraph={{
+            type: "article",
+            title,
+            description: excerpt,
+            article: {
+                publishedTime: isoDate,
+                section: "Blog",
+            },
+        }} />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-500 to-sage-600 dark:from-sage-400 dark:to-sage-500">
             {title}
         </PageTitle>
@@ -65,6 +74,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ id: string, sl
             "title",
             "slug",
             "content",
+            "excerpt",
             "date_gmt",
         ]).id(id);
     } catch (e: any) {
@@ -81,6 +91,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{ id: string, sl
         props: {
             title: post.title.rendered,
             isoDate: post.date_gmt,
+            excerpt: post.excerpt.rendered,
             content: post.content.rendered,
         },
         revalidate,

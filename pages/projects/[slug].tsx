@@ -43,7 +43,9 @@ export default function DynamicProject({ title, content, year, shortDescription,
     const actualFG = bg && (fg ?? readableColor(bg));
 
     return <div>
-        <NextSeo title={title} />
+        <NextSeo title={title} openGraph={{
+            title,
+        }} />
         <div className={classNames(
             "mb-8",
             showTitleInBox && "w-full rounded-lg pt-32 px-4 pb-4 sm:px-6 sm:pb-6 bg-cover bg-center",

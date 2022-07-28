@@ -76,7 +76,9 @@ export default function ProjectsPage({ tags, ...pagedContentProps }: PagedConten
     }, [tags]);
 
     return <>
-        <NextSeo title="Portfolio" />
+        <NextSeo title="Portfolio" openGraph={{
+            title: "Portfolio",
+        }} />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-ocean-400 to-ocean-700 dark:from-ocean-300 dark:to-ocean-500">
             Portfolio
         </PageTitle>
