@@ -8,6 +8,8 @@ import { GetStaticPropsContext } from "next";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 
+const description = "The blog of Anthony Li. Musings on programming, design, and an otherwise random assortment of topics.";
+
 const parser = new Parser();
 
 function PostExcerpt({ html }: { html: string }) {
@@ -20,8 +22,9 @@ function PostExcerpt({ html }: { html: string }) {
 export default function BlogPage({ ...pagedContentProps }: PagedContentProps<any>) {
     useTopLevelBreadcrumbConfiguration();
     return <>
-        <NextSeo title="Blog" openGraph={{
+        <NextSeo title="Blog" description={pagedContentProps.pageIndex === 1 ? description : undefined} openGraph={{
             title: "Blog",
+            description,
         }} />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-500 to-sage-600 dark:from-sage-400 dark:to-sage-500">
             Blog

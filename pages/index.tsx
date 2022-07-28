@@ -9,6 +9,8 @@ import { faArrowRight } from "@fortawesome/pro-regular-svg-icons";
 import { readableColor, transparentize } from "polished";
 import { formatISODate } from "lib/dates";
 
+const description = "The homepage of Anthony Li (aka anli5005.) Maker of computer things, programmer of arcane symbols. UPenn M&T '26";
+
 interface HomeProjectData {
     slug: string;
     title: string;
@@ -48,8 +50,9 @@ function HomeProject({ project }: { project: HomeProjectData }) {
 
 export default function Home({ introBlurb, projects, posts, misc }: HomeProps) {
     return <main>
-        <NextSeo title="Anthony Li • anli5005 - Developer, Designer, Entrepreneur" openGraph={{
+        <NextSeo title="Anthony Li • anli5005 - Developer, Designer, Entrepreneur" description={description} openGraph={{
             title: "Anthony Li • anli5005 - Developer, Designer, Entrepreneur",
+            description,
         }} titleTemplate="%s" />
         <h1 className="font-sans font-bold -mt-2 md:-mt-4 2xl:-mt-6 pb-4 sm:pb-8 bg-clip-text text-transparent w-fit bg-gradient-to-br from-sage-500 via-ocean-500 to-grape-600 dark:from-sage-400 dark:via-ocean-400 dark:to-grape-400">
             <div className="text-6xl sm:text-7xl md:text-8xl 2xl:text-9xl">Hi! I'm Anthony Li.</div>
