@@ -34,13 +34,14 @@ function HomeProject({ project }: { project: HomeProjectData }) {
     const fg = bg && readableColor(bg);
 
     return <Link href="/projects/[slug]" as={`/projects/${encodeURIComponent(project.slug)}`}>
-        <a className="p-3 sm:p-4 rounded-lg font-sans font-bold bg-ocean-500 text-white flex flex-col justify-end transition-opacity hover:opacity-80 active:opacity-60 group border border-black/20 dark:border-white/20 bg-cover bg-center" style={{
+        <a className="p-3 sm:p-4 rounded-lg bg-ocean-500 text-white flex flex-col justify-end transition-opacity hover:opacity-80 active:opacity-60 group border border-black/20 dark:border-white/20 bg-cover bg-center" style={{
             backgroundColor: bg,
             color: fg,
             backgroundImage: project.image && `linear-gradient(to right, ${transparentize(0.1, bg!)}, ${transparentize(0.3, bg!)}), url("${project.image}")`
         }}>
-            <h5 className="uppercase flex-grow mb-4">{project.title} <FontAwesomeIcon className="transform group-hover:translate-x-1 transition-transform" icon={faArrowRight} /></h5>
-            <p className="text-2xl">{project.description}</p>
+            <h5 className="uppercase flex-grow mb-4 font-sans font-bold">{project.title}</h5>
+            <p className="text-2xl font-sans font-bold">{project.description}</p>
+            <div className="italic text-sm mt-1">More info<FontAwesomeIcon className="ml-2 transform group-hover:translate-x-1 transition-transform" icon={faArrowRight} /></div>
         </a>
     </Link>;
 }

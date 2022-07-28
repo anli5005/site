@@ -3,7 +3,7 @@ import { faEnvelope, faHeart } from "@fortawesome/pro-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import Link from "next/link";
-import { forwardRef, HTMLProps, PropsWithChildren, PropsWithRef, Ref } from "react";
+import { forwardRef, HTMLProps, PropsWithChildren, Ref } from "react";
 
 function FooterList({ children }: PropsWithChildren<{}>) {
     return <ul className="list-none block p-0">
@@ -28,7 +28,11 @@ const FooterLink = forwardRef(({ children, ...props }: HTMLProps<HTMLAnchorEleme
 
 function FooterSocial({ children, className, ...props }: HTMLProps<HTMLAnchorElement>) {
     return <a {...props} className={
-        classNames("text-xl text-slate-500 dark:text-slate-400 contrast-more:text-ocean-700 dark:contrast-more:text-ocean-100 mr-2 last:mr-0", className)
+        classNames(
+            "text-xl text-slate-500 dark:text-slate-400 contrast-more:text-ocean-700 dark:contrast-more:text-ocean-100 px-2 sm:px-0 mr-1 sm:mr-2 last:mr-0",
+            "rounded-full border sm:border-0 border-slate-400 dark:border-slate-600 text-center",
+            className
+        )
     }>
         {children}
     </a>;
@@ -45,7 +49,6 @@ export function Footer({ className }: { className?: string }) {
         <FooterList>
             <FooterListItem><Link href="/[page]" as="/attribution" passHref><FooterLink>Attribution</FooterLink></Link></FooterListItem>
             <FooterListItem>
-                {/* TODO: Make tap targets larger on mobile */}
                 <FooterSocial href="https://github.com/anli5005" className="hover:text-[#333] dark:hover:text-[#f5f5f5]"><FontAwesomeIcon icon={faGithub} /><span className="sr-only">GitHub: @anli5005</span></FooterSocial>
                 <FooterSocial href="https://linkedin.com/in/anlidev" className="hover:text-[#0077b5]"><FontAwesomeIcon icon={faLinkedin} /><span className="sr-only">LinkedIn</span></FooterSocial>
                 <FooterSocial href="https://twitter.com/anli5005" className="hover:text-[#1da1f2]"><FontAwesomeIcon icon={faTwitter} /><span className="sr-only">Twitter: @anli5005</span></FooterSocial>

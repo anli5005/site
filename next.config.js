@@ -1,4 +1,8 @@
 module.exports = {
+    i18n: {
+        locales: ["en"],
+        defaultLocale: "en",
+    },
     async redirects() {
         const paged = [
             "/blog",
@@ -42,7 +46,7 @@ module.exports = {
                 source: "/contact",
                 destination: "/about#contact",
                 permanent: true
-            }
+            },
         ];
-    }
+    },
 };
