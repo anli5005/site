@@ -45,6 +45,7 @@ export function Footer({ className }: { className?: string }) {
         <FooterList>
             <FooterListItem><Link href="/[page]" as="/attribution" passHref><FooterLink>Attribution</FooterLink></Link></FooterListItem>
             <FooterListItem>
+                {/* TODO: Make tap targets larger on mobile */}
                 <FooterSocial href="https://github.com/anli5005" className="hover:text-[#333] dark:hover:text-[#f5f5f5]"><FontAwesomeIcon icon={faGithub} /><span className="sr-only">GitHub: @anli5005</span></FooterSocial>
                 <FooterSocial href="https://linkedin.com/in/anlidev" className="hover:text-[#0077b5]"><FontAwesomeIcon icon={faLinkedin} /><span className="sr-only">LinkedIn</span></FooterSocial>
                 <FooterSocial href="https://twitter.com/anli5005" className="hover:text-[#1da1f2]"><FontAwesomeIcon icon={faTwitter} /><span className="sr-only">Twitter: @anli5005</span></FooterSocial>
