@@ -7,12 +7,20 @@ html {
     @apply font-serif bg-white text-ocean-950 dark:bg-ocean-1000 dark:text-ocean-100 contrast-more:text-black dark:contrast-more:bg-black dark:contrast-more:text-white;
 }
 
+.text-default {
+    @apply text-ocean-950 dark:text-ocean-100 contrast-more:text-black dark:contrast-more:bg-black dark:contrast-more:text-white;
+}
+
 .prose {
     @apply leading-relaxed;
 }
 
 .prose p {
     @apply mb-4 sm:mb-6 last:mb-0;
+}
+
+.prose.less-margins p {
+    @apply mb-3;
 }
 
 .prose figure {
