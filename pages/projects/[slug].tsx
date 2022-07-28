@@ -1,6 +1,6 @@
 import { faCube } from "@fortawesome/pro-regular-svg-icons";
 import classNames from "classnames";
-import { useBreadcrumbConfiguration } from "components/Breadcrumbs";
+import { homeBreadcrumbItem, useBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { ProjectLink } from "components/ProjectLink";
@@ -27,6 +27,7 @@ interface DynamicProjectProps {
 export default function DynamicProject({ title, content, year, shortDescription, tags, bg, fg, url, domain, image }: DynamicProjectProps) {
     useBreadcrumbConfiguration({
         items: [
+            homeBreadcrumbItem,
             {
                 href: "/projects",
                 icon: faCube,
