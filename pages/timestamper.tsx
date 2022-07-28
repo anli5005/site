@@ -1,4 +1,5 @@
 import { parseDate } from "chrono-node";
+import { useTopLevelBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import { NextSeo } from "next-seo";
 import { BaseContext } from "next/dist/shared/lib/utils";
@@ -16,6 +17,8 @@ function getDate(string: string) {
 }
 
 function Timestamper({ initialInput }: { initialInput: string }) {
+    useTopLevelBreadcrumbConfiguration();
+
     const [input, setInput] = useState(initialInput);
 
     const [debouncedInput] = useDebounce(input, 700);

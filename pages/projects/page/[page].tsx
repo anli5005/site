@@ -1,5 +1,6 @@
 import { faArrowRight, faInfoCircle } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTopLevelBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { getProps, PagedContent, PagedContentProps } from "components/PagedContent";
 import { PageTitle } from "components/PageTitle";
 import { ProjectLink } from "components/ProjectLink";
@@ -66,6 +67,8 @@ function Project({ project }: {
 }
 
 export default function ProjectsPage({ tags, ...pagedContentProps }: PagedContentProps<any> & { tags: { id: number, name: string }[] }) {
+    useTopLevelBreadcrumbConfiguration();
+    
     const tagMap = useMemo(() => {
         const map = new Map<number, { id: number, name: string }>();
         tags.forEach(tag => map.set(tag.id, tag));

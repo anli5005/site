@@ -1,6 +1,6 @@
 import { faCalendar, faNewspaper } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useBreadcrumbConfiguration } from "components/Breadcrumbs";
+import { homeBreadcrumbItem, useBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
@@ -17,6 +17,7 @@ interface DynamicPostProps {
 export default function DynamicPage({ title, isoDate, content }: DynamicPostProps) {
     useBreadcrumbConfiguration({
         items: [
+            homeBreadcrumbItem,
             {
                 href: "/blog",
                 icon: faNewspaper,

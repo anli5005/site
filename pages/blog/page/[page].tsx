@@ -1,3 +1,4 @@
+import { useTopLevelBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { getProps, PagedContent, PagedContentProps } from "components/PagedContent";
 import { PageTitle } from "components/PageTitle";
 import { Parser } from "html-to-react";
@@ -17,6 +18,7 @@ function PostExcerpt({ html }: { html: string }) {
 }
 
 export default function BlogPage({ ...pagedContentProps }: PagedContentProps<any>) {
+    useTopLevelBreadcrumbConfiguration();
     return <>
         <NextSeo title="Blog" />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-sage-500 to-sage-600 dark:from-sage-400 dark:to-sage-500">

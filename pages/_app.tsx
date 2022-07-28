@@ -116,7 +116,7 @@ export default function App({ Component, pageProps }: AppProps) {
                             },
                         }}
                     >
-                        <div className="sm:pt-4 pb-4 sm:h-12 md:h-24 lg:h-28 xl:h-36 2xl:h-40 flex flex-col justify-end" >
+                        <div className="sm:pt-4 pb-4 sm:h-20 md:h-24 lg:h-28 xl:h-36 2xl:h-40 flex flex-col justify-end" >
                             <Breadcrumbs />
                         </div>
                         <Component {...pageProps} />

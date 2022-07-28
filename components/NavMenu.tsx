@@ -22,7 +22,7 @@ function NavbarIcon({ className, icon, title, sizing = "sm:py-2", ...props }: Li
 
 export function NavMenu() {
     return <nav className={classNames(
-        "h-14 sm:h-fit sm:w-14 sm:mr-6 md:mr-8 flex-shrink-0 sm:sticky top-4 lg:top-8 sm:mt-12 md:mt-24 lg:mt-28 xl:mt-36 2xl:mt-40",
+        "h-14 sm:h-fit sm:w-14 sm:mr-6 md:mr-8 flex-shrink-0 sm:sticky top-4 lg:top-8 sm:mt-20 md:mt-24 lg:mt-28 xl:mt-36 2xl:mt-40",
         "bg-ocean-100 dark:bg-ocean-900",
         "p-2 flex",
         "sm:p-0 sm:shadow sm:dark:shadow-lg sm:rounded-full sm:flex-col",

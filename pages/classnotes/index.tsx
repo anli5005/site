@@ -1,5 +1,6 @@
 import { faArrowRight } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTopLevelBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import { getAPI } from "lib/api";
 import { NextSeo } from "next-seo";
@@ -16,6 +17,8 @@ interface ClassNotesProps {
 }
 
 export default function ClassNotes({ courses }: ClassNotesProps) {
+    useTopLevelBreadcrumbConfiguration();
+
     return <>
         <NextSeo title="Notes for BCA Students" />
         <PageTitle>Notes for BCA Students</PageTitle>

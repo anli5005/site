@@ -1,4 +1,5 @@
-import { useBreadcrumbConfiguration } from "components/Breadcrumbs";
+import { faNotebook } from "@fortawesome/pro-regular-svg-icons";
+import { homeBreadcrumbItem, useBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { getProps, PagedContent, PagedContentProps } from "components/PagedContent";
 import { PageTitle } from "components/PageTitle";
 import { getAPI } from "lib/api";
@@ -15,7 +16,9 @@ interface CoursePageProps extends PagedContentProps<any> {
 export default function CoursePage({ slug, name, ...pagedContentProps }: CoursePageProps) {
     useBreadcrumbConfiguration({
         items: [
+            homeBreadcrumbItem,
             {
+                icon: faNotebook,
                 href: "/classnotes",
                 title: "Notes for BCA Students",
             },

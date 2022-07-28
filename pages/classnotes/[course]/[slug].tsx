@@ -1,6 +1,6 @@
-import { faCalendar } from "@fortawesome/pro-regular-svg-icons";
+import { faCalendar, faGlobeStand, faNotebook } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useBreadcrumbConfiguration } from "components/Breadcrumbs";
+import { homeBreadcrumbItem, useBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
@@ -20,11 +20,14 @@ interface DynamicClassNoteProps {
 export default function DynamicClassNote({ title, isoDate, content, hideDate, courseSlug, courseName }: DynamicClassNoteProps) {
     useBreadcrumbConfiguration({
         items: [
+            homeBreadcrumbItem,
             {
+                icon: faNotebook,
                 href: "/classnotes",
                 title: "Notes for BCA Students",
             },
             {
+                icon: faGlobeStand,
                 href: "/classnotes/[course]",
                 as: `/classnotes/${encodeURIComponent(courseSlug)}`,
                 title: courseName,

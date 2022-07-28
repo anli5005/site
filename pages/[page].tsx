@@ -1,3 +1,4 @@
+import { useTopLevelBreadcrumbConfiguration } from "components/Breadcrumbs";
 import { PageTitle } from "components/PageTitle";
 import PostContent from "components/PostContent";
 import { getAPI } from "lib/api";
@@ -9,7 +10,9 @@ interface DynamicPageProps {
     content: string;
 }
 
-export default function DynamicPage({ title, content }: DynamicPageProps) {    
+export default function DynamicPage({ title, content }: DynamicPageProps) {
+    useTopLevelBreadcrumbConfiguration();
+    
     return <div>
         <NextSeo title={title} />
         <PageTitle bgClip={true} className="bg-gradient-to-br from-grape-400 to-grape-800 dark:from-grape-300 dark:to-grape-600">
