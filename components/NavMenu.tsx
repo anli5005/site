@@ -66,7 +66,7 @@ export function NavMenu() {
         "contrast-more:border-black dark:contrast-more:border-white contrast-more:border-2 contrast-more:shadow-none contrast-more:bg-white dark:contrast-more:bg-black"
     )}>
         <NavbarItem href="/">
-            <img src="/images/logo.png" className="block rounded-full sm:w-full h-full sm:h-auto transition-opacity group-hover:opacity-80 group-active:opacity-60" alt="Anthony Li (anli5005) - Home" />
+            <img src="/images/logo.jpg" className="block rounded-full sm:w-full h-full sm:h-auto transition-opacity group-hover:opacity-80 group-active:opacity-60" alt="Anthony Li (anli5005) - Home" />
             <span className="sr-only">Anthony Li (anli5005) - Home</span>
             <NavbarTooltip responsiveMode="hide" activeClassName="bg-gradient-to-br from-sage-500 via-ocean-500 to-grape-600 text-white" active={router.pathname === "/"}>Home</NavbarTooltip>
         </NavbarItem>

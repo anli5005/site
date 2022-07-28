@@ -78,7 +78,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 site_name: "Anthony Li (anli5005)",
                 images: [
                     {
-                        url: "https://anli.dev/images/logo.png",
+                        url: "https://anli.dev/images/logo-circle.png",
                         width: 128,
                         height: 128
                     }

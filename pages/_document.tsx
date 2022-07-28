@@ -6,6 +6,7 @@ class SiteDocument extends Document {
             <Head>
                 <link rel="stylesheet" href="https://use.typekit.net/gmf2sso.css" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" />
+                <link rel="shortcut icon" href="/favicon.ico" />
             </Head>
             <body>
                 <Main />
