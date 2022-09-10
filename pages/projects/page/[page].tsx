@@ -49,7 +49,7 @@ function Project({ project }: {
                 {project.tags.length > 0 && <TagList className="mt-3 gap-1" tagAppearance={`border ${borderClass}`} tags={project.tags} />}
             </a>
         </Link>
-        <div className="flex items-center justify-center p-4 space-x-4 border-x border-b border-slate-400 dark:border-slate-600 rounded-b-lg">
+        <div className="flex items-center justify-center px-4 h-14 space-x-4 border-x border-b border-slate-400 dark:border-slate-600 rounded-b-lg">
             {project.url && <ProjectLink {...{
                 url: project.url,
                 domain: project.domain,
@@ -57,7 +57,7 @@ function Project({ project }: {
                 fg: project.fg,
             }} className="px-3 py-1 rounded-full border border-black/20 dark:border-white/20" newTab />}
             <Link href="/projects/[slug]" as={as}>
-                <a className="link">
+                <a className="link flex justify-center items-center">
                     <FontAwesomeIcon className="text-xl align-middle" icon={faInfoCircle} />
                     <span className={project.url ? "sr-only" : "ml-2"}>View details<FontAwesomeIcon className="ml-2" icon={faArrowRight} /></span>
                 </a>

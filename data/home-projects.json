@@ -1,11 +1,15 @@
 [
     {
-        "slug": "baikely",
-        "description": "Making bikes safer"
+        "slug": "feta",
+        "description": "Facilitating free food"
     },
     {
-        "slug": "csfvs",
-        "description": "Simplifying feedback"
+        "slug": "expodite",
+        "description": "Expediting research expos"
+    },
+    {
+        "slug": "baikely",
+        "description": "Making bikes safer"
     },
     {
         "slug": "bcactf-2-0",
@@ -13,6 +17,6 @@
     },
     {
         "slug": "yourbcabus",
-        "description": "Making school buses easier"
+        "description": "Demystifying school buses"
     }
 ]
