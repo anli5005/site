@@ -8,7 +8,7 @@ export default function NotFound() {
         items: [
             {
                 icon: faShrimp,
-                title: "???",
+                title: "?",
                 href: "https://www.youtube.com/watch?v=oHg5SJYRHA0",
             }
         ],
