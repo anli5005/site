@@ -45,6 +45,7 @@ export default function DynamicProject({ title, content, year, shortDescription,
     return <div>
         <NextSeo title={title} openGraph={{
             title,
+            description: shortDescription,
         }} />
         <div className={classNames(
             "mb-8",
