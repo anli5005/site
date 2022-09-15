@@ -11,6 +11,9 @@ const defaultInput = "now";
 const definedDates = new Map([
     ["vampire time", "4:30am"],
 ]);
+const messageDates = new Map([
+    ["tomorrow and tomorrow and tomorrow creeps in this petty pace from day to day; to the last syllable of recorded time", "Screw you, Julian."],
+]);
 
 function getDate(string: string) {
     return parseDate(definedDates.get(string.toLowerCase()) || string);
@@ -60,7 +63,7 @@ function Timestamper({ initialInput }: { initialInput: string }) {
 
         <div className="mt-5">
             <div className="mb-1">Timestamp:</div>
-            <div>{date ? <code className="text-lg px-1 rounded bg-ocean-100 dark:bg-ocean-900" id="timestamp">{Math.floor(date.getTime() / 1000)}</code> : <span className="text-lg">???</span>}</div>
+            <div>{date ? <code className="text-lg px-1 rounded bg-ocean-100 dark:bg-ocean-900" id="timestamp">{Math.floor(date.getTime() / 1000)}</code> : <span className="text-lg">{messageDates.get(input.trim().toLowerCase()) ?? "???"}</span>}</div>
         </div>
     </>
 }
