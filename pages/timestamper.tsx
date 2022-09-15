@@ -39,6 +39,7 @@ function Timestamper({ initialInput }: { initialInput: string }) {
         dateRef.current = { input, date: getDate(input) };
     }
     const date = dateRef.current.date;
+    const message = messageDates.get(input.trim().toLowerCase());
 
     return <>
         <NextSeo title="UNIX Timestamper" openGraph={{
@@ -63,7 +64,8 @@ function Timestamper({ initialInput }: { initialInput: string }) {
 
         <div className="mt-5">
             <div className="mb-1">Timestamp:</div>
-            <div>{date ? <code className="text-lg px-1 rounded bg-ocean-100 dark:bg-ocean-900" id="timestamp">{Math.floor(date.getTime() / 1000)}</code> : <span className="text-lg">{messageDates.get(input.trim().toLowerCase()) ?? "???"}</span>}</div>
+            <div>{date ? <code className="text-lg px-1 rounded bg-ocean-100 dark:bg-ocean-900" id="timestamp">{Math.floor(date.getTime() / 1000)}</code> : <span className="text-lg">???</span>}</div>
+            {message && <div>{message}</div>}
         </div>
     </>
 }
