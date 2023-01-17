@@ -59,7 +59,7 @@ export function NavMenu() {
     const router = useRouter();
 
     return <nav className={classNames(
-        "h-16 sm:h-fit sm:w-14 sm:mr-6 md:mr-8 flex-shrink-0 sm:sticky top-4 lg:top-8 sm:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32",
+        "h-16 sm:h-fit sm:w-14 sm:mr-6 md:mr-8 flex-shrink-0 sm:sticky top-4 lg:top-8 sm:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32 z-20",
         "bg-ocean-100 dark:bg-ocean-900",
         "p-2 flex",
         "sm:p-0 sm:shadow sm:dark:shadow-lg sm:rounded-full sm:flex-col",
