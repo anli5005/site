@@ -92,7 +92,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className="sm:flex sm:container mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-20">
             <NavMenu />
             <div className="flex-grow p-4 sm:p-0">
-                <AnimatePresence initial={false} exitBeforeEnter onExitComplete={() => setBreadcrumbConfiguration(initialBreadcrumbs)}>
+                <AnimatePresence initial={false} mode="wait" onExitComplete={() => setBreadcrumbConfiguration(initialBreadcrumbs)}>
                     <motion.div
                         key={router.asPath.split("?")[0]}
                         initial={{

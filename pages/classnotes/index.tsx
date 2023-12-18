@@ -32,11 +32,9 @@ export default function ClassNotes({ courses }: ClassNotesProps) {
                     color: readableColor(course.color),
                 } : {};
 
-                return <Link href="/classnotes/[course]" as={`/classnotes/${encodeURIComponent(course.slug)}`}>
-                    <a className="block rounded p-4 group hover:opacity-80 active:opacity-60 transition-opacity" style={style}>
-                        {course.name}
-                        <FontAwesomeIcon className="ml-2 transform group-hover:translate-x-1 transition-transform" icon={faArrowRight} />
-                    </a>
+                return <Link href="/classnotes/[course]" as={`/classnotes/${encodeURIComponent(course.slug)}`} className="block rounded p-4 group hover:opacity-80 active:opacity-60 transition-opacity" style={style}>
+                    {course.name}
+                    <FontAwesomeIcon className="ml-2 transform group-hover:translate-x-1 transition-transform" icon={faArrowRight} />
                 </Link>;
             })}
         </div>

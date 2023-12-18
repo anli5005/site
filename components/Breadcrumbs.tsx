@@ -68,8 +68,8 @@ export function Breadcrumbs() {
             if (item.separator) {
                 return <FontAwesomeIcon key={index} className="text-slate-400 dark:text-slate-500" icon={faChevronRight} />;
             } else {
-                return <Link key={index} href={item.href} as={item.as}>
-                    <a className="link">{item.icon && <FontAwesomeIcon icon={item.icon} className="mr-2" />}{item.title}</a>
+                return <Link key={index} href={item.href} as={item.as} className="link">
+                    {item.icon && <FontAwesomeIcon icon={item.icon} className="mr-2" />}{item.title}
                 </Link>
             }
         })}

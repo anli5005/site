@@ -35,16 +35,19 @@ function HomeProject({ project }: { project: HomeProjectData }) {
     const bg = project.bg || (project.image && "black");
     const fg = bg && readableColor(bg);
 
-    return <Link href="/projects/[slug]" as={`/projects/${encodeURIComponent(project.slug)}`}>
-        <a className="p-3 sm:p-4 rounded-lg bg-ocean-500 text-white flex flex-col justify-end transition-opacity hover:opacity-80 active:opacity-60 group border border-black/20 dark:border-white/20 bg-cover bg-center" style={{
+    return <Link
+        href="/projects/[slug]"
+        as={`/projects/${encodeURIComponent(project.slug)}`}
+        className="p-3 sm:p-4 rounded-lg bg-ocean-500 text-white flex flex-col justify-end transition-opacity hover:opacity-80 active:opacity-60 group border border-black/20 dark:border-white/20 bg-cover bg-center"
+        style={{
             backgroundColor: bg,
             color: fg,
             backgroundImage: project.image && `linear-gradient(to right, ${transparentize(0.1, bg!)}, ${transparentize(0.3, bg!)}), url("${project.image}")`
-        }}>
-            <h5 className="uppercase flex-grow mb-4 font-sans font-bold">{project.title}</h5>
-            <p className="text-2xl font-sans font-bold">{project.description}</p>
-            <div className="italic text-sm mt-1">More info<FontAwesomeIcon className="ml-2 transform group-hover:translate-x-1 transition-transform" icon={faArrowRight} /></div>
-        </a>
+        }}
+    >
+        <h5 className="uppercase flex-grow mb-4 font-sans font-bold">{project.title}</h5>
+        <p className="text-2xl font-sans font-bold">{project.description}</p>
+        <div className="italic text-sm mt-1">More info<FontAwesomeIcon className="ml-2 transform group-hover:translate-x-1 transition-transform" icon={faArrowRight} /></div>
     </Link>;
 }
 
@@ -66,26 +69,24 @@ export default function Home({ introBlurb, projects, posts, misc }: HomeProps) {
             {projects.map(project => <HomeProject project={project} key={project.slug} />)}
         </div>
         <div className="text-lg mb-12">
-            <Link href="/projects">
-                <a className="link font-bold group">Even bigger list of things<FontAwesomeIcon icon={faArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" /></a>
+            <Link href="/projects" className="link font-bold group">
+                Even bigger list of things<FontAwesomeIcon icon={faArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
             </Link>
         </div>
         <h2 className="font-sans font-bold text-4xl mb-4">Fresh (enough) off the blog</h2>
         <div className="text-lg mb-6">
             {posts.map(post => <p className="mb-3 last:mb-0" key={post.id}>
-                <Link href="/blog/[id]/[slug]" as={`/blog/${post.id}/${encodeURIComponent(post.slug)}`}>
-                    <a className="link group">
-                        {formatISODate(post.isoDate)}
-                        {" • "}
-                        <span className="text-default transition-colors group-hover:text-ocean-500 dark:group-hover:text-ocean-300">{post.title}</span>
-                        <FontAwesomeIcon icon={faArrowRight} className="ml-1 transform group-hover:translate-x-1 transition-transform" />
-                    </a>
+                <Link href="/blog/[id]/[slug]" as={`/blog/${post.id}/${encodeURIComponent(post.slug)}`} className="link group">
+                    {formatISODate(post.isoDate)}
+                    {" • "}
+                    <span className="text-default transition-colors group-hover:text-ocean-500 dark:group-hover:text-ocean-300">{post.title}</span>
+                    <FontAwesomeIcon icon={faArrowRight} className="ml-1 transform group-hover:translate-x-1 transition-transform" />
                 </Link>
             </p>)}
         </div>
         <div className="text-lg mb-12">
-            <Link href="/blog">
-                <a className="link font-bold group">Wander through the archives<FontAwesomeIcon icon={faArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" /></a>
+            <Link href="/blog" className="link font-bold group">
+                Wander through the archives<FontAwesomeIcon icon={faArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
             </Link>
         </div>
         {misc && <>

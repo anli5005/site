@@ -6,10 +6,8 @@ import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 
 function NavbarItem({ children, ...props }: PropsWithChildren<LinkProps>) {
-    return <Link {...props}>
-        <a className="group w-full h-full sm:h-auto flex flex-col items-center justify-center relative">
-            {children}
-        </a>
+    return <Link {...props} className="group w-full h-full sm:h-auto flex flex-col items-center justify-center relative">
+        {children}
     </Link>
 }
 

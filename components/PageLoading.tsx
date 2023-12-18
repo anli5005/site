@@ -1,6 +1,5 @@
 import { Fragment } from "react";
-import { AnimatePresence, motion, MotionStyle, useTime, useTransform } from "framer-motion";
-import { easeOut } from "popmotion";
+import { AnimatePresence, motion, MotionStyle, useTime, useTransform, easeOut } from "framer-motion";
 import { useReducedMotion } from "lib/mediaQueries";
 
 const colors = [

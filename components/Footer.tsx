@@ -47,7 +47,7 @@ export function Footer({ className }: { className?: string }) {
             <FooterListItem>&copy; 2023 Anthony Li</FooterListItem>
         </FooterList>
         <FooterList>
-            <FooterListItem><Link href="/[page]" as="/attribution" passHref><FooterLink>Attribution</FooterLink></Link></FooterListItem>
+            <FooterListItem><Link href="/[page]" as="/attribution" passHref legacyBehavior><FooterLink>Attribution</FooterLink></Link></FooterListItem>
             <FooterListItem>
                 <FooterSocial href="https://github.com/anli5005" className="hover:text-[#333] dark:hover:text-[#f5f5f5]"><FontAwesomeIcon icon={faGithub} /><span className="sr-only">GitHub: @anli5005</span></FooterSocial>
                 <FooterSocial href="https://linkedin.com/in/anlidev" className="hover:text-[#0077b5]"><FontAwesomeIcon icon={faLinkedin} /><span className="sr-only">LinkedIn</span></FooterSocial>

@@ -38,12 +38,10 @@ export default function BlogPage({ ...pagedContentProps }: PagedContentProps<any
             };
         }}>
             {posts => posts.map(post => <article className="first-of-type:mt-8 mb-8" key={post.id}>
-                <Link href="/blog/[id]/[slug]" as={`/blog/${post.id}/${encodeURIComponent(post.slug)}`}>
-                    <a className="group">
-                        <div className="font-sans text-lg group-hover:opacity-60 dark:group-hover:opacity-80 transition-opacity">{formatISODate(post.isoDate)}</div>
-                        <h4 className="font-sans font-bold text-2xl mb-1 underline text-sage-600 dark:text-sage-400 decoration-sage-600/50 dark:decoration-sage-400/50 group-hover:decoration-sage-500 group-hover:text-sage-500 transition-colors">{post.title}</h4>
-                        <PostExcerpt html={post.excerpt} />
-                    </a>
+                <Link href="/blog/[id]/[slug]" as={`/blog/${post.id}/${encodeURIComponent(post.slug)}`} className="group">
+                    <div className="font-sans text-lg group-hover:opacity-60 dark:group-hover:opacity-80 transition-opacity">{formatISODate(post.isoDate)}</div>
+                    <h4 className="font-sans font-bold text-2xl mb-1 underline text-sage-600 dark:text-sage-400 decoration-sage-600/50 dark:decoration-sage-400/50 group-hover:decoration-sage-500 group-hover:text-sage-500 transition-colors">{post.title}</h4>
+                    <PostExcerpt html={post.excerpt} />
                 </Link>
             </article>)}
         </PagedContent>

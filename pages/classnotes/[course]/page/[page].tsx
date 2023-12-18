@@ -41,10 +41,8 @@ export default function CoursePage({ slug, name, ...pagedContentProps }: CourseP
             };
         }}>
             {notes => notes.map(note => <p className="first-of-type:mt-4 mb-4" key={note.id}>
-                <Link href="/classnotes/[course]/[slug]" as={`/classnotes/${encodeURIComponent(slug)}/${encodeURIComponent(note.slug)}`}>
-                    <a className="link">
-                        {note.title}{!note.hideDate && ` • ${formatISODate(note.isoDate)}`}
-                    </a>
+                <Link href="/classnotes/[course]/[slug]" as={`/classnotes/${encodeURIComponent(slug)}/${encodeURIComponent(note.slug)}`} className="link">
+                    {note.title}{!note.hideDate && ` • ${formatISODate(note.isoDate)}`}
                 </Link>
             </p>)}
         </PagedContent>

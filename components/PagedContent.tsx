@@ -47,15 +47,15 @@ export function Pagination({ className, pageIndex, totalPages, getPagePath }: { 
         "w-full p-2 bg-ocean-50 dark:bg-ocean-950 rounded-lg font-sans flex justify-center items-center space-x-3 sm:space-x-4",
         className
     )}>
-        {(1 < minPage) && <Link {...getPagePath(1)} passHref><PaginationButton>{(1).toLocaleString()}</PaginationButton></Link>}
+        {(1 < minPage) && <Link {...getPagePath(1)} passHref legacyBehavior><PaginationButton>{(1).toLocaleString()}</PaginationButton></Link>}
         {(1 < minPage - 1) && <PaginationEllipsis />}
         {pages.map(page => {
-            return <Link {...getPagePath(page)} key={page} passHref>
+            return <Link {...getPagePath(page)} key={page} passHref legacyBehavior>
                 <PaginationButton active={page === pageIndex}>{page.toLocaleString()}</PaginationButton>
             </Link>;
         })}
         {(maxPage + 1 < totalPages) && <PaginationEllipsis />}
-        {(maxPage < totalPages) && <Link {...getPagePath(totalPages)} passHref><PaginationButton>{(totalPages).toLocaleString()}</PaginationButton></Link>}
+        {(maxPage < totalPages) && <Link {...getPagePath(totalPages)} passHref legacyBehavior><PaginationButton>{(totalPages).toLocaleString()}</PaginationButton></Link>}
     </nav>;
 }
 

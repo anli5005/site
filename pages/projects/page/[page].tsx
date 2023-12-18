@@ -38,16 +38,14 @@ function Project({ project }: {
     }
 
     return <article className="flex flex-col">
-        <Link href="/projects/[slug]" as={as}>
-            <a className="block border border-slate-400 dark:border-slate-600 p-3 flex-grow hover:opacity-80 active:opacity-60 transition-opacity rounded-t-lg bg-cover bg-center" style={{
-                backgroundColor: project.bg,
-                backgroundImage: project.image && `linear-gradient(to bottom, ${transparentize(0.2, bg!)}, ${transparentize(0.2, bg!)}), url("${project.image}")`,
-                color: fg,
-            }}>
-                <h4 className="font-sans font-bold text-2xl sm:text-3xl">{project.title}{project.year && <small className="ml-2 font-normal">{project.year}</small>}</h4>
-                {project.shortDescription && <p className="text-sm mt-2 italic">{project.shortDescription}</p>}
-                {project.tags.length > 0 && <TagList className="mt-3 gap-1" tagAppearance={`border ${borderClass}`} tags={project.tags} />}
-            </a>
+        <Link href="/projects/[slug]" as={as} className="block border border-slate-400 dark:border-slate-600 p-3 flex-grow hover:opacity-80 active:opacity-60 transition-opacity rounded-t-lg bg-cover bg-center" style={{
+            backgroundColor: project.bg,
+            backgroundImage: project.image && `linear-gradient(to bottom, ${transparentize(0.2, bg!)}, ${transparentize(0.2, bg!)}), url("${project.image}")`,
+            color: fg,
+        }}>
+            <h4 className="font-sans font-bold text-2xl sm:text-3xl">{project.title}{project.year && <small className="ml-2 font-normal">{project.year}</small>}</h4>
+            {project.shortDescription && <p className="text-sm mt-2 italic">{project.shortDescription}</p>}
+            {project.tags.length > 0 && <TagList className="mt-3 gap-1" tagAppearance={`border ${borderClass}`} tags={project.tags} />}
         </Link>
         <div className="flex items-center justify-center px-4 h-14 space-x-4 border-x border-b border-slate-400 dark:border-slate-600 rounded-b-lg">
             {project.url && <ProjectLink {...{
@@ -56,11 +54,9 @@ function Project({ project }: {
                 bg: project.bg,
                 fg: project.fg,
             }} className="px-3 py-1 rounded-full border border-black/20 dark:border-white/20" newTab />}
-            <Link href="/projects/[slug]" as={as}>
-                <a className="link flex justify-center items-center">
-                    <FontAwesomeIcon className="text-xl align-middle" icon={faInfoCircle} />
-                    <span className={project.url ? "sr-only" : "ml-2"}>View details<FontAwesomeIcon className="ml-2" icon={faArrowRight} /></span>
-                </a>
+            <Link href="/projects/[slug]" as={as} className="link flex justify-center items-center">
+                <FontAwesomeIcon className="text-xl align-middle" icon={faInfoCircle} />
+                <span className={project.url ? "sr-only" : "ml-2"}>View details<FontAwesomeIcon className="ml-2" icon={faArrowRight} /></span>
             </Link>
         </div>
     </article>;
