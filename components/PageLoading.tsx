@@ -1,6 +1,9 @@
-import { Fragment } from "react";
+"use client";
+
+import { Fragment, useEffect, useState } from "react";
 import { AnimatePresence, motion, MotionStyle, useTime, useTransform, easeOut } from "framer-motion";
 import { useReducedMotion } from "lib/mediaQueries";
+import { useAppContext } from "./AppContext";
 
 const colors = [
     "from-sage-500/0 to-sage-500",
@@ -103,4 +106,22 @@ export function PageLoading({ isLoading }: { isLoading: boolean }) {
     return <AnimatePresence>
         {isLoading && <PageLoadingReducedMotionArbiter />}
     </AnimatePresence>;
+}
+
+export function PageLoadingIndicator() {
+    const { isLoading } = useAppContext();
+
+    const [isShowingLoadingIndicator, setShowingLoadingIndicator] = useState(false);
+    useEffect(() => {
+        if (isLoading) {
+            const timeout = setTimeout(() => {
+                setShowingLoadingIndicator(true);
+            }, 200);
+            return () => clearTimeout(timeout);
+        } else {
+            setShowingLoadingIndicator(false);
+        }
+    }, [isLoading]);
+
+    return <PageLoading isLoading={isShowingLoadingIndicator} />;
 }
