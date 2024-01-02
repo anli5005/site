@@ -44,7 +44,7 @@ export function Footer({ className }: { className?: string }) {
     }>
         <FooterList>
             <FooterListItem><FooterLink href="https://github.com/anli5005/site">Made with<FontAwesomeIcon className="ml-1" icon={faHeart} /></FooterLink></FooterListItem>
-            <FooterListItem>&copy; 2023 Anthony Li</FooterListItem>
+            <FooterListItem>&copy; 2024 Anthony Li</FooterListItem>
         </FooterList>
         <FooterList>
             <FooterListItem><Link href="/[page]" as="/attribution" passHref legacyBehavior><FooterLink>Attribution</FooterLink></Link></FooterListItem>
